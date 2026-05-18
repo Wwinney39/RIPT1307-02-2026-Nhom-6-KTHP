@@ -1,0 +1,103 @@
+// ------------------------------------------------------------------------------------
+// ĐỊNH NGHĨA CÁC THỰC THỂ (Các bảng có bo góc, màu sắc và Icon trực quan)
+// ------------------------------------------------------------------------------------
+
+users [icon: user, color: blue] {
+  user_id int [pk, increment]
+  name varchar
+  phone varchar [unique]
+  email varchar
+  password_hash varchar
+  role varchar // CUSTOMER, MERCHANT, ADMIN
+  created_at datetime
+}
+
+restaurants [icon: home, color: orange] {
+  restaurant_id int [pk, increment]
+  name varchar
+  address varchar
+  latitude decimal
+  longitude decimal
+  status varchar // OPEN, CLOSED
+}
+
+menu_items [icon: shopping-bag, color: green] {
+  item_id int [pk, increment]
+  restaurant_id int
+  name varchar
+  price decimal
+  image_url varchar
+  is_available boolean
+}
+
+vouchers [icon: mail, color: purple] {
+  voucher_id int [pk, increment]
+  code varchar [unique]
+  discount_percent int
+  max_discount_amount decimal
+  min_order_amount decimal
+  expiry_date datetime
+}
+
+orders [icon: shopping-cart, color: red] {
+  order_id int [pk, increment]
+  user_id int
+  restaurant_id int
+  voucher_id int
+  total_price decimal
+  status varchar // PENDING, PREPARING, SHIPPING, DONE, CANCELLED
+  created_at datetime
+}
+
+order_details [icon: file-text, color: gray] {
+  detail_id int [pk, increment]
+  order_id int
+  item_id int
+  quantity int
+  note varchar
+}
+
+reviews [icon: star, color: yellow] {
+  review_id int [pk, increment]
+  user_id int
+  restaurant_id int
+  rating int
+  comment text
+  created_at datetime
+}
+
+cart [icon: layers, color: teal] {
+  cart_id int [pk, increment]
+  user_id int
+  item_id int
+  quantity int
+}
+
+// ------------------------------------------------------------------------------------
+// ĐẶC TẢ CHI TIẾT CÁC MỐI QUAN HỆ (Tự động căn khoảng cách thông thoáng)
+// ------------------------------------------------------------------------------------
+
+// 1. Nhà hàng - Món ăn: Mối quan hệ 1 - Nhiều (1 Nhà hàng có Nhiều Món ăn)
+restaurants.restaurant_id < menu_items.restaurant_id
+
+// 2. Người dùng - Đơn hàng: Mối quan hệ 1 - Nhiều (1 Người dùng đặt Nhiều Đơn hàng)
+users.user_id < orders.user_id
+
+// 3. Nhà hàng - Đơn hàng: Mối quan hệ 1 - Nhiều (1 Nhà hàng nhận Nhiều Đơn hàng)
+restaurants.restaurant_id < orders.restaurant_id
+
+// 4. Mã giảm giá - Đơn hàng: Mối quan hệ 1 - Nhiều (1 Voucher áp dụng cho Nhiều Đơn hàng)
+vouchers.voucher_id < orders.voucher_id
+
+// 5. Giải quyết mối quan hệ Nhiều - Nhiều giữa Đơn hàng (Orders) và Món ăn (Menu_Items)
+// Thông qua bảng trung gian Chi tiết đơn hàng (Order_Details)
+orders.order_id < order_details.order_id
+menu_items.item_id < order_details.item_id
+
+// 6. Mối quan hệ tương tác Đánh giá (Reviews)
+users.user_id < reviews.user_id
+restaurants.restaurant_id < reviews.restaurant_id
+
+// 7. Mối quan hệ tương tác Giỏ hàng (Cart)
+users.user_id < cart.user_id
+menu_items.item_id < cart.item_id
