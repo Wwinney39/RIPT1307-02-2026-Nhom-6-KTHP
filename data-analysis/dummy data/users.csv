@@ -1,0 +1,101 @@
+user_id,name,phone,email,password_hash,role,created_at
+1,Chị Hải Hoàng,053979617,jane88@example.org,hash_password_123,CUSTOMER,2026-02-20 17:49:01.287646
+2,Cô Khoa Trần,+847244889,janetran@example.org,hash_password_123,CUSTOMER,2026-03-04 17:49:01.288131
+3,Phương Trần,048475222,janenguyen@example.net,hash_password_123,CUSTOMER,2026-03-16 17:49:01.288201
+4,Quý cô Mai Đặng,+848947476,lejane@example.net,hash_password_123,CUSTOMER,2026-03-02 17:49:01.288333
+5,Mai Mai,+845188597,janepham@example.org,hash_password_123,CUSTOMER,2026-03-12 17:49:01.288457
+6,Ông Quang Dương,+847554105,vvu@example.net,hash_password_123,CUSTOMER,2026-03-10 17:49:01.288553
+7,Hải Bảo Trần,+847830297,tnguyen@example.org,hash_password_123,CUSTOMER,2026-02-24 17:49:01.288709
+8,Thành Tấn Hoàng,038335914,adang@example.org,hash_password_123,CUSTOMER,2026-03-14 17:49:01.288803
+9,Nhật Thế Vũ,+849154359,maijane@example.com,hash_password_123,CUSTOMER,2026-02-26 17:49:01.288884
+10,Chị Duyên Dương,(04)852615,janeduong@example.org,hash_password_123,CUSTOMER,2026-03-04 17:49:01.288996
+11,Anh Châu Trần,(04)438043,mdang@example.org,hash_password_123,CUSTOMER,2026-02-28 17:49:01.289066
+12,Dũng Mai Bảo Lê,+841209397,vhoang@example.com,hash_password_123,CUSTOMER,2026-03-05 17:49:01.289179
+13,Quý ông Minh Bùi,+846450437,john65@example.net,hash_password_123,CUSTOMER,2026-02-18 17:49:01.289239
+14,Thành Mai Bảo Lê,(06)772771,jane89@example.net,hash_password_123,CUSTOMER,2026-03-04 17:49:01.289274
+15,Bác Quang Trần,087595580,nguyenjane@example.com,hash_password_123,CUSTOMER,2026-02-22 17:49:01.289312
+16,Tùng Hoàng,+847907926,idang@example.org,hash_password_123,CUSTOMER,2026-03-17 17:49:01.289340
+17,Thành Hải Mai,+843714360,johntran@example.net,hash_password_123,CUSTOMER,2026-03-01 17:49:01.289369
+18,Quý ông Vũ Trần,+847060687,rle@example.com,hash_password_123,CUSTOMER,2026-03-02 17:49:01.289399
+19,Quang Vũ,0538686068,phamjane@example.org,hash_password_123,CUSTOMER,2026-02-25 17:49:01.289437
+20,Bảo Đặng,(09)594885,john14@example.org,hash_password_123,CUSTOMER,2026-03-02 17:49:01.289467
+21,Nam Đức Vũ,059432804,nvu@example.org,hash_password_123,CUSTOMER,2026-03-20 17:49:01.289498
+22,Chi Phạm,+844535116,johnpham@example.net,hash_password_123,CUSTOMER,2026-03-08 17:49:01.289527
+23,Cô Vân Hoàng,+843398369,zmai@example.com,hash_password_123,CUSTOMER,2026-03-06 17:49:01.289558
+24,Thành Phạm,+841440305,johntran@example.org,hash_password_123,CUSTOMER,2026-03-17 17:49:01.289585
+25,Chi Mai,+847909446,johnbui@example.org,hash_password_123,CUSTOMER,2026-03-04 17:49:01.289624
+26,Bảo Bảo Lê,(04)912456,dangjane@example.org,hash_password_123,CUSTOMER,2026-03-16 17:49:01.289659
+27,Bà Khoa Đặng,(02)752419,johnvu@example.com,hash_password_123,CUSTOMER,2026-03-13 17:49:01.289697
+28,Bà Linh Vũ,(03)217004,duongjohn@example.com,hash_password_123,CUSTOMER,2026-03-20 17:49:01.289726
+29,Khoa Bảo Phạm,(04)987724,tranjohn@example.com,hash_password_123,CUSTOMER,2026-02-19 17:49:01.289756
+30,Thành Đặng,+843332452,hoangjohn@example.net,hash_password_123,CUSTOMER,2026-03-05 17:49:01.289783
+31,Nhật Nguyễn,053631003,lle@example.net,hash_password_123,CUSTOMER,2026-02-22 17:49:01.289811
+32,Bà Hải Hoàng,0623737217,john48@example.net,hash_password_123,CUSTOMER,2026-03-20 17:49:01.289839
+33,Quý cô Ngọc Phạm,0410329393,john52@example.net,hash_password_123,CUSTOMER,2026-02-27 17:49:01.289866
+34,Ông Quang Trần,+845615064,jane65@example.org,hash_password_123,CUSTOMER,2026-03-03 17:49:01.289894
+35,Vi Mai,(00)327667,jane05@example.org,hash_password_123,CUSTOMER,2026-03-03 17:49:01.289921
+36,Ông Bảo Vũ,016667046,lejohn@example.org,hash_password_123,CUSTOMER,2026-03-03 17:49:01.289951
+37,Chi Phạm,(02)635838,jane50@example.com,hash_password_123,CUSTOMER,2026-03-18 17:49:01.289977
+38,Thành Đặng,017985593,john01@example.org,hash_password_123,CUSTOMER,2026-03-15 17:49:01.290002
+39,Lan Đặng,+849862590,johnmai@example.org,hash_password_123,CUSTOMER,2026-02-28 17:49:01.290034
+40,Anh Dương,007788439,john49@example.org,hash_password_123,CUSTOMER,2026-02-23 17:49:01.290094
+41,Mai Bùi,010812757,johnhoang@example.com,hash_password_123,CUSTOMER,2026-03-03 17:49:01.290196
+42,Bà Hải Lê,+845277706,nguyenjohn@example.com,hash_password_123,CUSTOMER,2026-02-20 17:49:01.290234
+43,Duyên Lê,(06)112129,janevu@example.org,hash_password_123,CUSTOMER,2026-03-16 17:49:01.290264
+44,Bác Quang Đặng,+840400800,ydang@example.net,hash_password_123,CUSTOMER,2026-03-17 17:49:01.290305
+45,Bà Xuân Phạm,+849282669,vdang@example.com,hash_password_123,CUSTOMER,2026-02-27 17:49:01.290335
+46,Yến Phạm,(00)028922,john39@example.net,hash_password_123,CUSTOMER,2026-03-14 17:49:01.290364
+47,Ông Huy Mai,+843535037,qpham@example.org,hash_password_123,CUSTOMER,2026-02-22 17:49:01.290394
+48,Quý cô Khoa Nguyễn,+841461727,ptran@example.net,hash_password_123,CUSTOMER,2026-03-08 17:49:01.290433
+49,Bà An Dương,(07)863157,jane10@example.net,hash_password_123,CUSTOMER,2026-02-23 17:49:01.290461
+50,Hưng Xuân Hoàng,0131185814,jane07@example.com,hash_password_123,CUSTOMER,2026-02-19 17:49:01.290491
+51,Ngọc Bùi,+844099921,duongjohn@example.net,hash_password_123,CUSTOMER,2026-02-18 17:49:01.290521
+52,Ánh Vũ,067219813,janemai@example.net,hash_password_123,CUSTOMER,2026-03-18 17:49:01.290548
+53,Quý ông Quang Bùi,0252680763,hoangjane@example.net,hash_password_123,CUSTOMER,2026-02-21 17:49:01.290577
+54,Chị Yến Vũ,+849055895,janedang@example.org,hash_password_123,CUSTOMER,2026-02-28 17:49:01.290614
+55,Nhật Hoàng,(05)462907,gpham@example.org,hash_password_123,CUSTOMER,2026-02-18 17:49:01.290650
+56,Hà Phạm,(07)161077,john42@example.net,hash_password_123,CUSTOMER,2026-03-16 17:49:01.290675
+57,Mai Dương,(05)353133,qtran@example.com,hash_password_123,CUSTOMER,2026-02-28 17:49:01.290710
+58,Tú Lê,0004389775,jane34@example.org,hash_password_123,CUSTOMER,2026-03-15 17:49:01.290735
+59,Cô Vi Vũ,(07)058134,cbui@example.net,hash_password_123,CUSTOMER,2026-03-15 17:49:01.290779
+60,Hải Vũ,0270324057,john45@example.net,hash_password_123,CUSTOMER,2026-02-20 17:49:01.290806
+61,Quý ông Hưng Dương,+847607773,john26@example.org,hash_password_123,CUSTOMER,2026-02-20 17:49:01.290882
+62,Cô Nhật Vũ,0732657552,john86@example.net,hash_password_123,CUSTOMER,2026-03-20 17:49:01.290920
+63,Hưng Trí Trần,0705228959,johndang@example.org,hash_password_123,CUSTOMER,2026-03-16 17:49:01.290955
+64,Hà Đặng,0707177492,jane33@example.com,hash_password_123,CUSTOMER,2026-02-20 17:49:01.290983
+65,Quý cô An Nguyễn,0948945729,janepham@example.com,hash_password_123,CUSTOMER,2026-03-02 17:49:01.291014
+66,Hải Văn Bùi,+842884195,sle@example.com,hash_password_123,CUSTOMER,2026-03-03 17:49:01.291046
+67,Cô Nhật Phạm,+847273927,onguyen@example.com,hash_password_123,CUSTOMER,2026-03-20 17:49:01.291075
+68,Bác Hưng Hoàng,097336264,janemai@example.com,hash_password_123,CUSTOMER,2026-03-08 17:49:01.291105
+69,Chị Kim Mai,(07)415215,vujane@example.net,hash_password_123,CUSTOMER,2026-03-13 17:49:01.291139
+70,Vân Hoàng,(00)858116,jane86@example.net,hash_password_123,CUSTOMER,2026-03-15 17:49:01.291165
+71,Quý cô Vi Vũ,+845235562,jane83@example.com,hash_password_123,CUSTOMER,2026-02-23 17:49:01.291193
+72,Anh Nhiên Mai,0241600097,zbui@example.com,hash_password_123,CUSTOMER,2026-02-25 17:49:01.291232
+73,An Trần,0238141164,janehoang@example.com,hash_password_123,CUSTOMER,2026-02-28 17:49:01.291260
+74,Quý cô Hải Mai,(02)255686,hoangjohn@example.org,hash_password_123,CUSTOMER,2026-03-15 17:49:01.291291
+75,Ông Nam Đặng,(09)416319,omai@example.net,hash_password_123,CUSTOMER,2026-03-20 17:49:01.291319
+76,Hà Bùi,0893850483,jane95@example.com,hash_password_123,CUSTOMER,2026-03-05 17:49:01.291358
+77,Nhiên Vũ,+848594804,johnnguyen@example.org,hash_password_123,CUSTOMER,2026-02-24 17:49:01.291387
+78,Quý cô Hồng Đặng,+847311902,maijohn@example.com,hash_password_123,CUSTOMER,2026-03-05 17:49:01.291417
+79,Nhật Đức Dương,(08)873583,johnle@example.net,hash_password_123,CUSTOMER,2026-02-19 17:49:01.291446
+80,Khoa Hoàng,+848165231,lejohn@example.com,hash_password_123,CUSTOMER,2026-02-22 17:49:01.291472
+81,Lâm Xuân Hoàng,053700954,duongjane@example.net,hash_password_123,CUSTOMER,2026-03-05 17:49:01.291502
+82,Anh Phúc Đặng,081795497,ndang@example.com,hash_password_123,CUSTOMER,2026-03-01 17:49:01.291530
+83,Hưng Quang Bùi,+846869160,johnhoang@example.org,hash_password_123,CUSTOMER,2026-03-14 17:49:01.291569
+84,Hưng Mai Vũ,088517603,ele@example.com,hash_password_123,CUSTOMER,2026-03-06 17:49:01.291606
+85,Ngọc Bùi,+844565045,john04@example.org,hash_password_123,CUSTOMER,2026-03-04 17:49:01.291641
+86,Trọng Bùi,(06)776518,john76@example.com,hash_password_123,CUSTOMER,2026-02-22 17:49:01.291666
+87,Chi Vũ,(02)145228,jane44@example.net,hash_password_123,CUSTOMER,2026-02-20 17:49:01.291691
+88,Thảo Vũ,(00)924390,john83@example.net,hash_password_123,CUSTOMER,2026-03-13 17:49:01.291716
+89,Ông Bảo Trần,0982945352,janele@example.com,hash_password_123,CUSTOMER,2026-03-17 17:49:01.291781
+90,Trọng Văn Đặng,0937167696,john28@example.net,hash_password_123,CUSTOMER,2026-03-06 17:49:01.291811
+91,Hải Bùi,017105676,avu@example.org,hash_password_123,CUSTOMER,2026-03-06 17:49:01.291838
+92,Hà Trần,+841566977,fpham@example.net,hash_password_123,CUSTOMER,2026-02-25 17:49:01.291893
+93,An Lê,009526904,buijane@example.org,hash_password_123,CUSTOMER,2026-02-26 17:49:01.291934
+94,Lâm Văn Trần,0831163015,john70@example.com,hash_password_123,CUSTOMER,2026-03-04 17:49:01.291996
+95,Quý cô Lan Vũ,+846611372,oduong@example.com,hash_password_123,CUSTOMER,2026-02-25 17:49:01.292039
+96,Quang Xuân Dương,+846881295,lejane@example.org,hash_password_123,CUSTOMER,2026-03-07 17:49:01.292081
+97,Anh Nam Mai,0377804234,nguyenjohn@example.net,hash_password_123,CUSTOMER,2026-02-19 17:49:01.292113
+98,Bác Thành Vũ,+843954982,hoangjohn@example.com,hash_password_123,CUSTOMER,2026-03-18 17:49:01.292379
+99,Bà Nhật Hoàng,+845958740,janebui@example.com,hash_password_123,CUSTOMER,2026-03-19 17:49:01.292488
+100,Trọng Phạm,022410485,jduong@example.net,hash_password_123,CUSTOMER,2026-03-16 17:49:01.292557

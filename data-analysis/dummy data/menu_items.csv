@@ -1,0 +1,31 @@
+item_id,restaurant_id,name,price,image_url,is_available
+1,1,Phở Tái Lăn,65000,pho_tai.jpg,True
+2,1,Phở Chín Trứng,70000,pho_chin.jpg,True
+3,1,Quẩy Giòn (Cái),5000,quay.jpg,True
+4,2,Combo Gà Rán A,89000,kfc_a.jpg,True
+5,2,Khoai Tây Chiên M,29000,kfc_fries.jpg,True
+6,2,Pepsi Lon,19000,pepsi.jpg,True
+7,3,Suất Bún Chả Đầy Đủ,60000,buncha.jpg,True
+8,3,Nem Hải Sản (Cái),20000,nem.jpg,True
+9,3,Trà Đá,5000,trada.jpg,True
+10,4,Pizza Hải Sản Đào M,219000,pizza.jpg,True
+11,4,Mỳ Ý Sốt Bò Bằm,99000,spaghetti.jpg,True
+12,4,Bánh Tỏi,49000,garlic_bread.jpg,True
+13,5,Trà Sữa Trân Châu Đen,55000,milktea.jpg,True
+14,5,Trà Xanh Đào Alisan,52000,peach_tea.jpg,True
+15,5,Kem Béo Oolong,60000,oolong_ice.jpg,True
+16,6,Bánh Mì Thập Cẩm Dân Tổ,35000,bm_danto.jpg,True
+17,6,Sữa Đậu Nành,12000,suadau.jpg,True
+18,6,Bánh Mì Thêm Sốt,5000,bmsot.jpg,True
+19,7,Cơm Tấm Sườn Bì Chả,55000,comtam.jpg,True
+20,7,Canh Khổ Qua Nhồi Thịt,15000,canhkhoqua.jpg,True
+21,7,Trứng Ốp La Thêm,7000,opla.jpg,True
+22,8,Mì Vằn Thắn Sủi Cảo Chín,50000,mivanthan.jpg,True
+23,8,Sủi Cảo Chiên Khay,40000,suicaochien.jpg,True
+24,8,Nước Sâm Sữa,15000,nuocsam.jpg,True
+25,9,Suất Nem Nướng Đặc Biệt,65000,nemnuong.jpg,True
+26,9,Chả Ram Chiên Thêm,25000,charam.jpg,True
+27,9,Nước Ngô Ủ Lạnh,15000,nuocngo.jpg,True
+28,10,Set Thịt Bò Haidilao M,189000,hdl_bo.jpg,True
+29,10,Múa Mì Tươi Biểu Diễn,40000,muami.jpg,True
+30,10,Nước Lẩu Uyên Ương Song Vị,90000,nuoclau.jpg,True

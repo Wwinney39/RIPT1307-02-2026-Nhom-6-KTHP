@@ -1,0 +1,11 @@
+restaurant_id,name,address,latitude,longitude,status
+1,Phở Thìn Bờ Hồ,"61 Đinh Tiên Hoàng, Hoàn Kiếm, Hà Nội",21.0285,105.8522,OPEN
+2,Gà Rán KFC - Bà Triệu,"292 Bà Triệu, Hai Ba Trưng, Hà Nội",21.0123,105.8456,OPEN
+3,Bún Chả Hương Liên,"24 Lê Văn Hưu, Hai Ba Trưng, Hà Nội",21.0194,105.8547,OPEN
+4,The Pizza Company - Cầu Giấy,"302 Cầu Giấy, Cầu Giấy, Hà Nội",21.0362,105.7908,OPEN
+5,Trà Sữa Gong Cha - Hàng Khay,"25 Hàng Khay, Hoàn Kiếm, Hà Nội",21.0264,105.8515,OPEN
+6,Bánh Mì Dân Tổ,"32 Trần Nhật Duật, Hoàn Kiếm, Hà Nội",21.0385,105.857,OPEN
+7,Cơm Tấm Phương Anh,"119A Đại La, Hai Bà Trưng, Hà Nội",21.0012,105.849,OPEN
+8,Mì Vằn Thắn Đinh Liệt,"9 Đinh Liệt, Hoàn Kiếm, Hà Nội",21.0322,105.8531,OPEN
+9,Nem Nướng Nha Trang Hỷ Tước,"14 Ngõ 34 Hoàng Cầu, Đống Đa, Hà Nội",21.0188,105.8234,OPEN
+10,Haidalao Hotpot - Vincom Phạm Ngọc Thạch,"2 Phạm Ngọc Thạch, Đống Đa, Hà Nội",21.0065,105.8322,OPEN
