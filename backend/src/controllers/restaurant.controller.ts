@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import db from '../config/db'; // Kết nối MySQL đã làm ở Task 14
+import db from '../config/db'; 
 import { calculateDistance } from '../utils/distance.util'; // Import hàm tính khoảng cách vừa tạo
 
 export const getNearbyRestaurants = async (req: Request, res: Response): Promise<any> => {

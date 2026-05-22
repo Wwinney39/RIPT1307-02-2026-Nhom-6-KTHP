@@ -119,4 +119,6 @@ INSERT INTO Vouchers (code, discount_percent, max_discount_amount, min_order_amo
 
 
 INSERT INTO Menu_Items (restaurant_id, name, price, is_available) 
-VALUES (1, 'Trà sữa trân châu', 30000, 1);
+VALUES (1, 'Trà sữa trân châu', 30000, 1),
+       (2, 'Cơm tấm sườn bì chả', 50000, 1);
+       (3, 'Phở bò tái', 45000, 1);

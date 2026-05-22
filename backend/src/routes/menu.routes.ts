@@ -3,7 +3,7 @@ import { getMenuByRestaurant, createMenuItem } from '../controllers/menu.control
 
 const router = Router();
 
-// Đường dẫn API lấy menu của 1 nhà hàng cụ thể:
+// API lấy danh sách món ăn theo nhà hàng (Có thể lọc theo danh mục nếu muốn)
 // GET /api/menu/restaurant/:restaurantId -> GET /api/menu/restaurant/1?category=Cơm
 router.get('/restaurant/:restaurantId', getMenuByRestaurant);
 

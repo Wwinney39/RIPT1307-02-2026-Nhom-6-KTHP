@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 
-// Middleware để Express đọc được dữ liệu JSON từ Body Request gửi lên
+// Middleware để parse JSON body từ các request gửi lên
 app.use(express.json());
 
 // Khai báo Base URL cho cụm API Auth

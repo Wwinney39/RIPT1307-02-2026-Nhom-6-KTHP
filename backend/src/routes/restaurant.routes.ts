@@ -4,7 +4,7 @@ import { authenticateToken } from '../middlewares/auth.middleware';
 
 const router = Router();
 
-// Lấy danh sách quán gần nhất (Yêu cầu đăng nhập & truyền lat, lng trên URL)
+// API lấy danh sách nhà hàng gần vị trí người dùng (có thể thêm tham số lọc nếu muốn)
 router.get('/', authenticateToken, getNearbyRestaurants);
 
 export default router;

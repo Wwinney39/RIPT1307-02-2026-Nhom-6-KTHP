@@ -53,7 +53,7 @@ export const createMenuItem = async (req: Request, res: Response): Promise<any> 
             return res.status(400).json({ message: "Vui lòng nhập đầy đủ thông tin món ăn!" });
         }
 
-        // Thực hiện câu lệnh INSERT vào database MySQL của bạn
+        
         const [result] = await db.execute(
             'INSERT INTO Menu_items (restaurant_id, name, price, is_available) VALUES (?, ?, ?, 1)',
             [restaurantId, name, price]
