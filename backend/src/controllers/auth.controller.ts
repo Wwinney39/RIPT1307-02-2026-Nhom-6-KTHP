@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import db from '../config/db.js'; // Đảm bảo file db.ts của bạn export dạng pool hỗ trợ query/execute
-import { RegisterBody, LoginBody } from '../interfaces/auth.interface.js';
+import db from '../config/db'; // Đảm bảo file db.ts của bạn export dạng pool hỗ trợ query/execute
+import { RegisterBody, LoginBody } from '../interfaces/auth.interface';
 
 // ==================== 1. API ĐĂNG KÝ ====================
 export const register = async (req: Request<{}, {}, RegisterBody>, res: Response): Promise<any> => {
