@@ -1,44 +1,33 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
+    /* File Layout */
+    "rootDir": "./src",
+    "outDir": "./dist",
 
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
-    "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
+    /* Environment Settings */
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",  // <-- Thêm dòng này để TS tự động tìm module thông minh hơn
+    "target": "ES2022",
+    "lib": ["esnext"],
 
-    // Other Outputs
+    /* Other Outputs */
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
 
-    // Stricter Typechecking Options
+    /* Stricter Typechecking Options */
+    "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
 
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
+    /* Interop Constraints */
+    "esModuleInterop": true,         // <-- Thêm dòng này để import các thư viện CommonJS mượt mà
+    "forceConsistentCasingInFileNames": true,
 
-    // Recommended Options
-    "strict": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
-  }
+    /* Recommended Options */
+    "skipLibCheck": true
+    
+    // Tạm thời tắt hoặc xóa dòng "verbatimModuleSyntax": true đi để ts-node không bị bắt bẻ cú pháp import
+  },
+  "include": ["src/**/*"]            // <-- Thêm dòng này ở ngoài compilerOptions để TS quét đúng thư mục code
 }
