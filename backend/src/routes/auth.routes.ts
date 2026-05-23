@@ -1,5 +1,4 @@
 import { Router } from 'express';
-// Import chính xác các hàm xử lý từ auth.controller
 import { register, login } from '../controllers/auth.controller';
 
 const router = Router();

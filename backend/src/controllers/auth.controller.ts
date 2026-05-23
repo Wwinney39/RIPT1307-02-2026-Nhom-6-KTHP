@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import db from '../config/db'; // Đảm bảo file db.ts của bạn export dạng pool hỗ trợ query/execute
+import db from '../config/db';
 import { RegisterBody, LoginBody } from '../interfaces/auth.interface';
 
 // ==================== 1. API ĐĂNG KÝ ====================
