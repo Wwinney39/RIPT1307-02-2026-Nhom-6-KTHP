@@ -54,7 +54,8 @@ export const login = async (req: Request<{}, {}, LoginBody>, res: Response): Pro
     const user = users[0];
 
     // Kiểm tra mật khẩu
-    const isMatch = await bcrypt.compare(password, user.password_hash);
+    //const isMatch = await bcrypt.compare(password, user.password_hash);
+    const isMatch = (password === user.password_hash);
     if (!isMatch) {
       return res.status(400).json({ message: "Số điện thoại hoặc mật khẩu không đúng!" });
     }
@@ -81,4 +82,26 @@ export const login = async (req: Request<{}, {}, LoginBody>, res: Response): Pro
     console.error("Lỗi đăng nhập:", error);
     return res.status(500).json({ message: "Lỗi máy chủ, vui lòng thử lại sau!" });
   }
+};
+
+// ==================== 3. API CẤP LẠI MẬT KHẨU ====================
+export const resetPassword = async (req: Request, res: Response) => {
+    // Lấy số điện thoại và mật khẩu mới do Admin nhập
+    const { phone, newPassword } = req.body; 
+
+    try {
+        // Băm mật khẩu mới
+        const saltRounds = 10;
+        const password_hash = await bcrypt.hash(newPassword, saltRounds);
+
+        // Chạy lệnh cập nhật vào MySQL
+        await db.execute(
+            'UPDATE Users SET password_hash = ? WHERE phone = ?',
+            [password_hash, phone] 
+        );
+        
+        return res.status(200).json({ message: "Đã cấp lại mật khẩu mới cho user!" });
+    } catch (error) {
+        return res.status(500).json({ message: "Lỗi khi đổi mật khẩu" });
+    }
 };

@@ -1,5 +1,5 @@
 // ------------------------------------------------------------------------------------
-// ĐỊNH NGHĨA CÁC THỰC THỂ (Các bảng có bo góc, màu sắc và Icon trực quan)
+// ĐỊNH NGHĨA CÁC THỰC THỂ (Hệ thống 11 bảng với màu sắc và Icon trực quan)
 // ------------------------------------------------------------------------------------
 
 users [icon: user, color: blue] {
@@ -8,8 +8,15 @@ users [icon: user, color: blue] {
   phone varchar [unique]
   email varchar
   password_hash varchar
-  role varchar // CUSTOMER, MERCHANT, ADMIN
+  role varchar // CUSTOMER, MERCHANT, ADMIN,STAFF
   created_at datetime
+}
+
+user_addresses [icon: map-pin, color: blue] {
+  address_id int [pk, increment]
+  user_id int
+  address_text varchar
+  is_default boolean
 }
 
 restaurants [icon: home, color: orange] {
@@ -37,12 +44,22 @@ vouchers [icon: mail, color: purple] {
   max_discount_amount decimal
   min_order_amount decimal
   expiry_date datetime
+  max_uses int
+  used_count int
+}
+
+cart [icon: layers, color: teal] {
+  cart_id int [pk, increment]
+  user_id int
+  item_id int
+  quantity int
 }
 
 orders [icon: shopping-cart, color: red] {
   order_id int [pk, increment]
   user_id int
   restaurant_id int
+  address_id int
   voucher_id int
   total_price decimal
   status varchar // PENDING, PREPARING, SHIPPING, DONE, CANCELLED
@@ -57,7 +74,23 @@ order_details [icon: file-text, color: gray] {
   note varchar
 }
 
-reviews [icon: star, color: black] {
+payments [icon: credit-card, color: red] {
+  payment_id int [pk, increment]
+  order_id int
+  amount decimal
+  method varchar // COD, VNPAY, MOMO
+  status varchar // PENDING, SUCCESS, FAILED
+}
+
+delivery_logs [icon: truck, color: red] {
+  log_id int [pk, increment]
+  order_id int
+  status varchar
+  updated_at datetime
+}
+
+
+reviews [icon: star, color: yellow] {
   review_id int [pk, increment]
   user_id int
   restaurant_id int
@@ -66,19 +99,6 @@ reviews [icon: star, color: black] {
   created_at datetime
 }
 
-cart [icon: layers, color: teal] {
-  cart_id int [pk, increment]
-  user_id int
-  item_id int
-  quantity int
-}
-
-delivery_logs [icon: truck, color: brown] {
-  log_id int [pk, increment]
-  order_id int
-  status varchar
-  updated_at datetime
-}
 
 // ------------------------------------------------------------------------------------
 // ĐẶC TẢ CHI TIẾT CÁC MỐI QUAN HỆ (Tự động căn khoảng cách thông thoáng)
@@ -109,5 +129,14 @@ restaurants.restaurant_id < reviews.restaurant_id
 users.user_id < cart.user_id
 menu_items.item_id < cart.item_id
 
-// 8. Đơn hàng - Nhật ký giao hàng: Mối quan hệ 1 - Nhiều (1 Đơn hàng có Nhiều trạng thái cập nhật giao hàng)
+// 8. Đơn hàng - Nhật ký giao hàng: (1 Đơn hàng có Nhiều trạng thái cập nhật giao hàng)
 orders.order_id < delivery_logs.order_id
+
+// 9. Người dùng - Địa chỉ: (1 Người dùng có Nhiều Địa chỉ lưu sẵn)
+users.user_id < user_addresses.user_id
+
+// 10. Địa chỉ - Đơn hàng: (1 Địa chỉ cụ thể được gán vào Nhiều Đơn hàng)
+user_addresses.address_id < orders.address_id
+
+// 11. Đơn hàng - Thanh toán: (1 Đơn hàng có lịch sử/trạng thái Thanh toán tương ứng)
+orders.order_id < payments.order_id
