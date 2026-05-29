@@ -14,7 +14,7 @@ export const register = async (req: Request<{}, {}, RegisterBody>, res: Response
 
   try {
     // Kiểm tra trùng số điện thoại
-    const [existingUser]: any = await db.execute('SELECT * FROM users WHERE phone = ?', [phone]);
+    const [existingUser]: any = await db.execute('SELECT * FROM Users WHERE phone = ?', [phone]);
     if (existingUser.length > 0) {
       return res.status(400).json({ message: "Số điện thoại này đã được sử dụng!" });
     }
@@ -26,7 +26,7 @@ export const register = async (req: Request<{}, {}, RegisterBody>, res: Response
     const userRole = role || 'customer'; // Mặc định role là 'customer' nếu không được cung cấp
 
     // Lưu vào database
-    const query = `INSERT INTO users (name, phone, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?, NOW())`;
+    const query = `INSERT INTO Users (name, phone, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?, NOW())`;
     await db.execute(query, [name, phone, email || null, passwordHash, userRole]);
 
     return res.status(201).json({ message: "Đăng ký tài khoản thành công!" });
@@ -46,7 +46,7 @@ export const login = async (req: Request<{}, {}, LoginBody>, res: Response): Pro
 
   try {
     // Tìm user theo số điện thoại
-    const [users]: any = await db.execute('SELECT * FROM users WHERE phone = ?', [phone]);
+    const [users]: any = await db.execute('SELECT * FROM Users WHERE phone = ?', [phone]);
     if (users.length === 0) {
       return res.status(400).json({ message: "Số điện thoại hoặc mật khẩu không đúng!" });
     }

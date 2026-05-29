@@ -218,7 +218,7 @@ INSERT INTO cart (user_id, item_id, quantity) VALUES
 (5, 6, 1);	-- User 5 thêm 1 phần bánh mì thịt nướng vào giỏ
 
 -- Thêm nhật ký giao hàng mẫu để test logic
-INSERT INTO delivery_logs (order_id, status) VALUES
+INSERT INTO delivery_Logs (order_id, status) VALUES
 (1, 'Đang chuẩn bị'),	-- Đơn hàng 1 đang chuẩn bị
 (2, 'Đang giao'),		-- Đơn hàng 2 đang giao
 (3, 'Đã giao'),		    -- Đơn hàng 3 đã giao

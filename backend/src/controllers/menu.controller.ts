@@ -16,7 +16,7 @@ export const getMenuByRestaurant = async (req: Request, res: Response): Promise<
     }
 
     // Mặc định lấy tất cả món ăn thuộc về nhà hàng này và nhà hàng phải đang hoạt động và những món ăn còn bán
-    let sql = 'SELECT * FROM Menu_items WHERE restaurant_id = ? AND is_available = 1' ;
+    let sql = 'SELECT * FROM Menu_Items WHERE restaurant_id = ? AND is_available = 1' ;
     const queryParams: any[] = [restaurantId];
 
     // Nếu khách hàng có bấm chọn lọc theo danh mục (Cơm, Trà sữa...) 
