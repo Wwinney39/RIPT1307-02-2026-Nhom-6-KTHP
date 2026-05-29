@@ -17,7 +17,7 @@ export const getNearbyRestaurants = async (req: Request, res: Response): Promise
 
     // Truy vấn lấy toàn bộ danh sách nhà hàng hiện có trong Database
     const [restaurants]: any = await db.execute(
-      'SELECT id, name, address, latitude, longitude, image_url FROM restaurants'
+      'SELECT id, name, address, latitude, longitude, image_url FROM Restaurants'
     );
 
     // Duyệt qua từng nhà hàng và áp dụng công thức Haversine để tính khoảng cách

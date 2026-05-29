@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes';
 import restaurantRoutes from './routes/restaurant.routes';
 import menuRoutes from './routes/menu.routes';
+import orderRoutes from './routes/order.routes';
+import voucherRoutes from './routes/voucher.routes';
 
 // Nạp biến môi trường từ file .env
 dotenv.config();
@@ -16,6 +18,8 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/restaurants', restaurantRoutes);
 app.use('/api/menu', menuRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/vouchers', voucherRoutes);
 
 // Cấu hình Port chạy Server
 const PORT = process.env.PORT || 3000;
