@@ -10,6 +10,8 @@ users [icon: user, color: blue] {
   password_hash varchar
   role varchar // CUSTOMER, MERCHANT, ADMIN,STAFF
   created_at datetime
+  otp_code varchar(6)
+  otp_expires datetime
 }
 
 user_addresses [icon: map-pin, color: blue] {

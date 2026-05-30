@@ -85,23 +85,120 @@ export const login = async (req: Request<{}, {}, LoginBody>, res: Response): Pro
 };
 
 // ==================== 3. API CẤP LẠI MẬT KHẨU ====================
-export const resetPassword = async (req: Request, res: Response) => {
-    // Lấy số điện thoại và mật khẩu mới do Admin nhập
-    const { phone, newPassword } = req.body; 
-
-    try {
-        // Băm mật khẩu mới
-        const saltRounds = 10;
-        const password_hash = await bcrypt.hash(newPassword, saltRounds);
-
-        // Chạy lệnh cập nhật vào MySQL
-        await db.execute(
-            'UPDATE Users SET password_hash = ? WHERE phone = ?',
-            [password_hash, phone] 
-        );
-        
-        return res.status(200).json({ message: "Đã cấp lại mật khẩu mới cho user!" });
-    } catch (error) {
-        return res.status(500).json({ message: "Lỗi khi đổi mật khẩu" });
+//Nhập SĐT → sinh OTP → lưu DB
+export const forgotPassword = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { phone } = req.body;
+    if (!phone) {
+      return res.status(400).json({ message: 'Vui lòng nhập số điện thoại!' });
     }
+
+    const [users]: any = await db.execute(
+      'SELECT user_id FROM Users WHERE phone = ?',
+      [phone]
+    );
+    if (users.length === 0) {
+      return res.status(404).json({ message: 'Số điện thoại không tồn tại trong hệ thống!' });
+    }
+
+    // Sinh OTP 6 số ngẫu nhiên
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Hết hạn sau 5 phút
+    const otpExpires = new Date(Date.now() + 5 * 60 * 1000);
+
+    await db.execute(
+      'UPDATE Users SET otp_code = ?, otp_expires = ? WHERE phone = ?',
+      [otp, otpExpires, phone]
+    );
+
+    // Thực tế gửi SMS, ở đây giả lập trả về console
+    console.log(`OTP cho ${phone}: ${otp}`);
+
+    return res.status(200).json({ message: 'Đã gửi OTP về số điện thoại!' });
+  } catch (error: any) {
+    return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};
+
+//Nhập OTP → trả về reset token
+export const verifyOtp = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { phone, otp } = req.body;
+    if (!phone || !otp) {
+      return res.status(400).json({ message: 'Vui lòng điền đầy đủ thông tin!' });
+    }
+
+    const [users]: any = await db.execute(
+      'SELECT user_id, otp_code, otp_expires FROM Users WHERE phone = ?',
+      [phone]
+    );
+    if (users.length === 0) {
+      return res.status(404).json({ message: 'Số điện thoại không tồn tại!' });
+    }
+
+    const user = users[0];
+
+    if (user.otp_code !== otp) {
+      return res.status(400).json({ message: 'OTP không chính xác!' });
+    }
+
+    if (new Date() > new Date(user.otp_expires)) {
+      return res.status(400).json({ message: 'OTP đã hết hạn!' });
+    }
+
+    // Xóa OTP sau khi xác minh xong
+    await db.execute(
+      'UPDATE Users SET otp_code = NULL, otp_expires = NULL WHERE user_id = ?',
+      [user.user_id]
+    );
+
+    const secretKey = process.env.JWT_SECRET || 'secret_fallback_key';
+    const resetToken = jwt.sign(
+      { user_id: user.user_id, type: 'reset_password' },
+      secretKey,
+      { expiresIn: '15m' }
+    );
+
+    return res.status(200).json({
+      message: 'Xác minh OTP thành công!',
+      reset_token: resetToken
+    });
+  } catch (error: any) {
+    return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};
+
+//Dùng reset token → đổi mật khẩu mới
+export const resetPassword = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { reset_token, new_password } = req.body;
+    if (!reset_token || !new_password) {
+      return res.status(400).json({ message: 'Vui lòng điền đầy đủ thông tin!' });
+    }
+
+    const secretKey = process.env.JWT_SECRET || 'secret_fallback_key';
+
+    let decoded: any;
+    try {
+      decoded = jwt.verify(reset_token, secretKey) as { user_id: number; type: string };
+    } catch {
+      return res.status(403).json({ message: 'Token không hợp lệ hoặc đã hết hạn!' });
+    }
+
+    if (decoded.type !== 'reset_password') {
+      return res.status(403).json({ message: 'Token không hợp lệ!' });
+    }
+
+    const hashedPassword = await bcrypt.hash(new_password, 10);
+
+    await db.execute(
+      'UPDATE Users SET password_hash = ? WHERE user_id = ?',
+      [hashedPassword, decoded.user_id]
+    );
+
+    return res.status(200).json({ message: 'Đổi mật khẩu thành công!' });
+  } catch (error: any) {
+    return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
 };
