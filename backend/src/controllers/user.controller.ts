@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { userService } from '../services/user.service';
+import db from '../config/db';
 
 // Controller xử lý các yêu cầu liên quan đến người dùng
 export const getProfile = async (req: Request, res: Response): Promise<any> => {
@@ -74,5 +75,16 @@ export const setDefaultAddress = async (req: Request, res: Response): Promise<an
     return res.status(200).json({ message: 'Đặt địa chỉ mặc định thành công!' });
   } catch (error: any) {
     return res.status(400).json({ message: error.message || 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};
+
+export const getAllUsers = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const [rows]: any = await db.execute(
+      'SELECT user_id, name, phone, email, role, created_at FROM Users'
+    );
+    return res.status(200).json({ data: rows });
+  } catch (error: any) {
+    return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
   }
 };
