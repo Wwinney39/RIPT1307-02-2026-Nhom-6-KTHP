@@ -67,4 +67,11 @@ export const userService = {
       [addressId, userId]
     );
   },
+
+  getAllUsers: async () => {
+    const [rows]: any = await db.execute(
+      'SELECT user_id, name, phone, email, role, created_at FROM Users'
+    );
+    return rows;
+  },
 };

@@ -79,7 +79,7 @@ payments [icon: credit-card, color: red] {
   order_id int
   amount decimal
   method varchar // COD, VNPAY, MOMO
-  status varchar // PENDING, SUCCESS, FAILED
+  status varchar // PENDING, COMPLETED, FAILED
 }
 
 delivery_logs [icon: truck, color: red] {
