@@ -5,6 +5,8 @@ import restaurantRoutes from './routes/restaurant.routes';
 import menuRoutes from './routes/menu.routes';
 import orderRoutes from './routes/order.routes';
 import voucherRoutes from './routes/voucher.routes';
+import cartRoutes from './routes/cart.routes';
+import userRoutes from './routes/user.routes';
 
 // Nạp biến môi trường từ file .env
 dotenv.config();
@@ -20,6 +22,8 @@ app.use('/api/restaurants', restaurantRoutes);
 app.use('/api/menu', menuRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/vouchers', voucherRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/user', userRoutes);
 
 // Cấu hình Port chạy Server
 const PORT = process.env.PORT || 3000;
