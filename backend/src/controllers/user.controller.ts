@@ -88,3 +88,31 @@ export const getAllUsers = async (req: Request, res: Response): Promise<any> => 
     return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
   }
 };
+
+export const updateUser = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { name, email, role } = req.body;
+    await userService.updateUser(Number(req.params.id), name, email, role);
+    return res.status(200).json({ message: 'Cập nhật người dùng thành công!' });
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message || 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response): Promise<any> => {
+  try {
+    await userService.deleteUser(Number(req.params.id));
+    return res.status(200).json({ message: 'Xóa người dùng thành công!' });
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message || 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};
+
+export const getDashboard = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const data = await userService.getDashboard();
+    return res.status(200).json({ data });
+  } catch (error: any) {
+    return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};

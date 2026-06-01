@@ -44,3 +44,15 @@ export const deleteReview = async (req: Request, res: Response): Promise<any> =>
     return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
   }
 };
+
+export const updateReview = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const userId = (req as any).user?.user_id;
+    const { id } = req.params;
+    const { rating, comment } = req.body;
+    await reviewService.update(Number(id), Number(userId), Number(rating), comment);
+    return res.status(200).json({ message: 'Cập nhật đánh giá thành công!' });
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message || 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};

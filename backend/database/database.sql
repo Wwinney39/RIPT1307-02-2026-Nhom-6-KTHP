@@ -119,7 +119,45 @@ CREATE TABLE delivery_Logs (
     FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE
 );
 
+ALTER TABLE Users ADD COLUMN otp_code VARCHAR(6);
+ALTER TABLE Users ADD COLUMN otp_expires DATETIME;
 
+-- Tối ưu tìm kiếm theo user
+CREATE INDEX idx_orders_user_id ON Orders(user_id);
+CREATE INDEX idx_cart_user_id ON cart(user_id);
+CREATE INDEX idx_user_addresses_user_id ON User_Addresses(user_id);
+
+-- Tối ưu tìm kiếm nhà hàng theo trạng thái
+CREATE INDEX idx_restaurants_status ON Restaurants(status);
+
+-- Tối ưu tìm kiếm theo tọa độ
+CREATE INDEX idx_restaurants_latitude ON Restaurants(latitude);
+CREATE INDEX idx_restaurants_longitude ON Restaurants(longitude);
+
+-- Tối ưu tìm kiếm món theo nhà hàng
+CREATE INDEX idx_menu_items_restaurant_id ON Menu_Items(restaurant_id);
+
+-- Tối ưu tìm kiếm đơn hàng theo trạng thái
+CREATE INDEX idx_orders_status ON Orders(status);
+
+-- Tối ưu delivery logs
+CREATE INDEX idx_delivery_logs_order_id ON delivery_Logs(order_id);
+
+-- Tối ưu payments
+CREATE INDEX idx_payments_order_id ON Payments(order_id);
+
+-- Tối ưu reviews
+CREATE INDEX idx_reviews_restaurant_id ON Reviews(restaurant_id);
+
+-- Tối ưu voucher
+CREATE INDEX idx_vouchers_code ON Vouchers(code);
+
+-- Tối ưu order details
+CREATE INDEX idx_order_details_order_id ON Order_Details(order_id);
+CREATE INDEX idx_order_details_item_id ON Order_Details(item_id);
+
+-- Tối ưu otp
+CREATE INDEX idx_users_phone ON Users(phone);
 
 USE restaurant_db;
 

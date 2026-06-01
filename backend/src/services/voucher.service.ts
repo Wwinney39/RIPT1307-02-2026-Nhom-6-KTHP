@@ -73,5 +73,21 @@ export const voucherService = {
         // Thực hiện xóa (Vì bảng Orders dùng ON DELETE SET NULL nên xóa voucher thoải mái không sợ gãy đơn cũ)
         await db.execute('DELETE FROM Vouchers WHERE voucher_id = ?', [voucherId]);
         return true;
-    }
+    },
+
+    updateVoucher: async (voucherId: number, data: any) => {
+      const [existing]: any = await db.execute(
+        'SELECT voucher_id FROM Vouchers WHERE voucher_id = ?', [voucherId]
+      );
+      if (existing.length === 0) throw new Error('Không tìm thấy voucher!');
+      await db.execute(
+        'UPDATE Vouchers SET discount_percent = ?, max_discount_amount = ?, min_order_amount = ?, expiry_date = ?, max_uses = ? WHERE voucher_id = ?',
+        [data.discount_percent, data.max_discount_amount, data.min_order_amount, data.expiry_date, data.max_uses, voucherId]
+      );
+    },
+
+    getAllVouchers: async () => {
+      const [rows]: any = await db.execute('SELECT * FROM Vouchers');
+      return rows;
+    },
 };

@@ -1,11 +1,16 @@
 import { Router } from 'express';
-import { createOrder } from '../controllers/order.controller';
-import { authenticateToken, authorizeRoles } from '../middlewares/auth.middleware'; // Nhớ kiểm tra lại đường dẫn file middleware của bạn nhé
+import { cancelOrder, createOrder, getAllOrders, getMyOrders, getOrderById } from '../controllers/order.controller';
+import { authenticateToken, authorizeRoles } from '../middlewares/auth.middleware'; 
 
 const router = Router();
 
-// Endpoint: POST /api/orders/checkout
-// Bọc qua authenticateToken để bảo mật và định danh người dùng
-router.post('/checkout', authenticateToken,authorizeRoles('customer','admin'), createOrder);
+router.get('/all', authenticateToken, authorizeRoles('staff', 'admin'), getAllOrders);
+router.get('/my-orders', authenticateToken, authorizeRoles('customer', 'admin'), getMyOrders);
+router.get('/:id', authenticateToken, getOrderById);
+router.post('/checkout', authenticateToken, authorizeRoles('customer', 'admin'), createOrder);
+router.patch('/:id/cancel', authenticateToken, authorizeRoles('customer', 'admin'), cancelOrder);
+
+
+
 
 export default router;

@@ -69,3 +69,51 @@ export const createMenuItem = async (req: Request, res: Response): Promise<any> 
         return res.status(500).json({ message: "Có lỗi xảy ra tại hệ thống Backend!" });
     }
 };
+
+
+// API cập nhật thông tin món ăn (Dành cho Merchant/Admin)
+export const updateMenuItem = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { id } = req.params;
+    const { name, price, is_available } = req.body;
+    const [existing]: any = await db.execute(
+      'SELECT item_id FROM Menu_Items WHERE item_id = ?', Number(id)
+    );
+    if (existing.length === 0) return res.status(404).json({ message: 'Không tìm thấy món ăn!' });
+    
+    await db.execute(
+      'UPDATE Menu_Items SET name = ?, price = ?, is_available = ? WHERE item_id = ?',
+      [name, price, is_available, id]
+    );
+    return res.status(200).json({ message: 'Cập nhật món ăn thành công!' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};
+
+export const deleteMenuItem = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { id } = req.params;
+    const [existing]: any = await db.execute(
+      'SELECT item_id FROM Menu_Items WHERE item_id = ?', Number(id)
+    );
+    if (existing.length === 0) return res.status(404).json({ message: 'Không tìm thấy món ăn!' });
+    await db.execute('DELETE FROM Menu_Items WHERE item_id = ?', Number(id));
+    return res.status(200).json({ message: 'Xóa món ăn thành công!' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};
+
+export const getAllMenuItems = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const [rows]: any = await db.execute(
+      `SELECT m.*, r.name AS restaurant_name 
+       FROM Menu_Items m
+       JOIN Restaurants r ON m.restaurant_id = r.restaurant_id`
+    );
+    return res.status(200).json({ data: rows });
+  } catch (error) {
+    return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};

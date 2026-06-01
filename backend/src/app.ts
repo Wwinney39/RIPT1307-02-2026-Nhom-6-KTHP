@@ -1,5 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 import authRoutes from './routes/auth.routes';
 import restaurantRoutes from './routes/restaurant.routes';
 import menuRoutes from './routes/menu.routes';
@@ -15,7 +17,32 @@ import reviewRoutes from './routes/review.routes';
 dotenv.config();
 
 const app = express();
+const httpServer = createServer(app);
 
+export const io = new Server(httpServer, {
+  cors: { origin: '*' }
+});
+
+app.use(express.json());
+
+// Gắn io vào request để dùng trong controller
+app.use((req: any, res, next) => {
+  req.io = io;
+  next();
+});
+
+io.on('connection', (socket) => {
+  console.log('Client kết nối:', socket.id);
+
+  socket.on('join', (userId: number) => {
+    socket.join(`user_${userId}`);
+    console.log(`User ${userId} đã join room`);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client ngắt kết nối:', socket.id);
+  });
+});
 // Middleware để parse JSON body từ các request gửi lên
 app.use(express.json());
 
@@ -32,8 +59,8 @@ app.use('/api/delivery', deliveryRoutes);
 app.use('/api/reviews', reviewRoutes); 
 
 // Cấu hình Port chạy Server
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server đang chạy ngon lành tại port: ${PORT}`);
+httpServer.listen(process.env.PORT || 3000, () => {
+  console.log(`Server đang chạy ngon lành tại port: ${process.env.PORT || 3000}`);
 });
+
+export default app;

@@ -1,6 +1,15 @@
 import { Request, Response } from 'express';
 import { paymentService } from '../services/payment.service';
 
+export const getAllPayments = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const data = await paymentService.getAllPayments();
+    return res.status(200).json({ data });
+  } catch (error: any) {
+    return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};
+
 export const getPayment = async (req: Request, res: Response): Promise<any> => {
   try {
     const orderId = req.params.orderId;
