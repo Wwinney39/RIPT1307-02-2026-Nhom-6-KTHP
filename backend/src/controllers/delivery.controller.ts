@@ -21,6 +21,13 @@ export const updateDeliveryStatus = async (req: Request, res: Response): Promise
     }
 
     await deliveryService.updateStatus(Number(orderId), status);
+    // Sau khi cập nhật trạng thái
+    if ((req as any).io) {
+      (req as any).io.emit('delivery-update', {
+        order_id: orderId,
+        status: status
+      }); 
+    }
     return res.status(200).json({ message: 'Cập nhật trạng thái giao hàng thành công!' });
   } catch (error: any) {
     return res.status(400).json({ message: error.message || 'Có lỗi xảy ra tại hệ thống Backend!' });

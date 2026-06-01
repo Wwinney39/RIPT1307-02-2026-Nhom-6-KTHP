@@ -41,4 +41,17 @@ export const reviewService = {
       [reviewId, userId]
     );
   },
+
+  update: async (reviewId: number, userId: number, rating: number, comment: string) => {
+    if (rating < 1 || rating > 5) throw new Error('Rating phải từ 1 đến 5!');
+    const [existing]: any = await db.execute(
+      'SELECT review_id FROM Reviews WHERE review_id = ? AND user_id = ?',
+      [reviewId, userId]
+    );
+    if (existing.length === 0) throw new Error('Không tìm thấy đánh giá!');
+    await db.execute(
+      'UPDATE Reviews SET rating = ?, comment = ? WHERE review_id = ?',
+      [rating, comment, reviewId]
+    );
+  },
 };

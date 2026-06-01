@@ -92,3 +92,21 @@ export const deleteVoucher = async (req: Request, res: Response): Promise<any> =
         return res.status(400).json({ message: error.message || "Lỗi khi xóa voucher!" });
     }
 };
+
+export const getAllVouchers = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const data = await voucherService.getAllVouchers();
+    return res.status(200).json({ data });
+  } catch (error: any) {
+    return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};
+
+export const updateVoucher = async (req: Request, res: Response): Promise<any> => {
+  try {
+    await voucherService.updateVoucher(Number(req.params.id), req.body);
+    return res.status(200).json({ message: 'Cập nhật voucher thành công!' });
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message || 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};

@@ -101,5 +101,62 @@ export const orderService = {
         } finally {
             connection.release();
         }
-    }
+    },
+
+    getMyOrders: async (userId: number) => {
+    const [rows]: any = await db.execute(
+        `SELECT o.*, r.name AS restaurant_name
+        FROM Orders o
+        JOIN Restaurants r ON o.restaurant_id = r.restaurant_id
+        WHERE o.user_id = ?
+        ORDER BY o.created_at DESC`,
+        [userId]
+    );
+    return rows;
+    },
+
+    getOrderById: async (orderId: number, userId: number) => {
+    const [order]: any = await db.execute(
+        'SELECT * FROM Orders WHERE order_id = ? AND user_id = ?',
+        [orderId, userId]
+    );
+    if (order.length === 0) throw new Error('Không tìm thấy đơn hàng!');
+
+    const [details]: any = await db.execute(
+        `SELECT od.*, m.name, m.price
+        FROM Order_Details od
+        JOIN Menu_Items m ON od.item_id = m.item_id
+        WHERE od.order_id = ?`,
+        [orderId]
+    );
+    return { ...order[0], items: details };
+    },
+
+    getAllOrders: async () => {
+    const [rows]: any = await db.execute(
+        `SELECT o.*, r.name AS restaurant_name, u.name AS user_name
+        FROM Orders o
+        JOIN Restaurants r ON o.restaurant_id = r.restaurant_id
+        JOIN Users u ON o.user_id = u.user_id
+        ORDER BY o.created_at DESC`
+    );
+    return rows;
+    },
+
+    cancelOrder: async (orderId: number, userId: number) => {
+    const [order]: any = await db.execute(
+        'SELECT * FROM Orders WHERE order_id = ? AND user_id = ?',
+        [orderId, userId]
+    );
+    if (order.length === 0) throw new Error('Không tìm thấy đơn hàng!');
+    if (order[0].status !== 'PENDING') throw new Error('Chỉ có thể hủy đơn khi đang ở trạng thái PENDING!');
+
+    await db.execute(
+        'UPDATE Orders SET status = "CANCELLED" WHERE order_id = ?', [orderId]
+    );
+    await db.execute(
+        'INSERT INTO delivery_Logs (order_id, status) VALUES (?, "Đã hủy")', [orderId]
+    );
+    },
 };
+

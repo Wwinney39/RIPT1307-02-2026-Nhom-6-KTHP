@@ -36,3 +36,42 @@ export const createOrder = async (req: Request, res: Response): Promise<any> => 
         return res.status(400).json({ message: error.message || "Có lỗi xảy ra khi xử lý đơn hàng!" });
     }
 };
+
+export const getMyOrders = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const userId = (req as any).user?.user_id;
+    const data = await orderService.getMyOrders(Number(userId));
+    return res.status(200).json({ data });
+  } catch (error: any) {
+    return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};
+
+export const getOrderById = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const userId = (req as any).user?.user_id;
+    const data = await orderService.getOrderById(Number(req.params.id), Number(userId));
+    return res.status(200).json({ data });
+  } catch (error: any) {
+    return res.status(404).json({ message: error.message || 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};
+
+export const getAllOrders = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const data = await orderService.getAllOrders();
+    return res.status(200).json({ data });
+  } catch (error: any) {
+    return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};
+
+export const cancelOrder = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const userId = (req as any).user?.user_id;
+    await orderService.cancelOrder(Number(req.params.id), Number(userId));
+    return res.status(200).json({ message: 'Hủy đơn hàng thành công!' });
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message || 'Có lỗi xảy ra tại hệ thống Backend!' });
+  }
+};

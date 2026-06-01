@@ -43,4 +43,14 @@ export const paymentService = {
       );
     }
   },
+
+  getAllPayments: async () => {
+    const [rows]: any = await db.execute(
+      `SELECT p.*, o.user_id, o.restaurant_id, o.total_price
+      FROM Payments p
+      JOIN Orders o ON p.order_id = o.order_id
+      ORDER BY p.payment_id DESC`
+    );
+    return rows;
+  },
 };
