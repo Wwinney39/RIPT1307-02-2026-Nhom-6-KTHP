@@ -3,10 +3,7 @@
 """
 export_to_csv.py
 
-Export MySQL data to CSV files for Power BI.
-
-Usage:
-  python export_to_csv.py
+Export MySQL data (Cloud/Aiven) to CSV files for Power BI.
 """
 
 import mysql.connector
@@ -14,32 +11,36 @@ from mysql.connector import Error
 import pandas as pd
 import os
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
-def connect_mysql(host, user, password, database, port=3306):
-    """Connect to MySQL"""
+
+def connect_mysql(host, user, password, database, port, ssl_mode="REQUIRED"):
+    """Connect to MySQL with SSL support matching Node.js config"""
     try:
         connection = mysql.connector.connect(
             host=host,
             user=user,
             password=password,
             database=database,
-            port=port
+            port=port,
+            ssl_mode=ssl_mode  # REQUIRED tương đương với rejectUnauthorized: false
         )
         return connection
     except Error as e:
-        print(f"✗ Error: {e}")
+        print(f"✗ Lỗi kết nối: {e}")
         return None
 
 
 def export_tables_to_csv(connection, output_dir="."):
     """Export all tables to CSV"""
-    
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     
     cursor = connection.cursor()
-    
-    # Get all tables
     cursor.execute("""
         SELECT TABLE_NAME
         FROM INFORMATION_SCHEMA.TABLES
@@ -48,59 +49,59 @@ def export_tables_to_csv(connection, output_dir="."):
     """)
     
     tables = [row[0] for row in cursor.fetchall()]
-    
-    print(f"\n📁 Exporting {len(tables)} tables to CSV...\n")
+    print(f"\n📁 Đang xuất {len(tables)} bảng ra file CSV...\n")
     
     for table_name in tables:
         try:
-            # Read data
             query = f"SELECT * FROM {table_name}"
             df = pd.read_sql(query, connection)
             
-            # Save to CSV
             filename = os.path.join(output_dir, f"{table_name}.csv")
             df.to_csv(filename, index=False, encoding='utf-8-sig')
-            
-            print(f"✓ {table_name:<20} ({len(df):>5} rows) → {filename}")
-        
+            print(f"✓ {table_name:<20} ({len(df):>5} dòng) → {filename}")
         except Exception as e:
             print(f"✗ {table_name}: {e}")
-    
+            
     cursor.close()
-    print("\n✅ Export complete!")
+    print("\n✅ Xuất dữ liệu hoàn tất!")
 
 
 def main():
     print("="*60)
-    print("Export MySQL to CSV for Power BI")
+    print("Export MySQL (Cloud/Aiven) to CSV for Power BI")
     print("="*60)
     
-    # Connect
-    print("\n📡 Connecting to MySQL...")
+    # Lấy dữ liệu từ .env, nếu trống sẽ tự động lấy thông tin từ db.ts của bạn
+    db_host = os.getenv("DB_HOST", "mysql-257790e3-restaurant-project.l.aivencloud.com")
+    db_user = os.getenv("DB_USER", "avnadmin")
+    db_pass = os.getenv("DB_PASSWORD", "")  # Điền mật khẩu vào đây hoặc qua file .env
+    db_name = os.getenv("DB_NAME", "restaurant_db")
+    db_port = int(os.getenv("DB_PORT", "22180"))
+    db_ssl = os.getenv("DB_SSL_MODE", "REQUIRED")
+    
+    print("\n📡 Đang kết nối tới MySQL Cloud...")
+    print(f"🔗 Host: {db_host}:{db_port} | Database: {db_name}")
+    
     connection = connect_mysql(
-        host="localhost",
-        user="root",
-        password="hieu2006",
-        database="restaurant_db"
+        host=db_host,
+        user=db_user,
+        password=db_pass,
+        database=db_name,
+        port=db_port,
+        ssl_mode=db_ssl
     )
     
     if not connection:
+        print("✗ Thất bại! Vui lòng kiểm tra lại đường truyền hoặc mật khẩu.")
         return 1
     
-    print("✓ Connected!")
+    print("✓ Kết nối thành công!")
     
-    # Export
     output_dir = "./csv_export"
     export_tables_to_csv(connection, output_dir)
-    
     connection.close()
     
-    print(f"\n📊 All CSV files saved in: {os.path.abspath(output_dir)}")
-    print("\nNow in Power BI:")
-    print("1. Get Data → Folder")
-    print(f"2. Select: {os.path.abspath(output_dir)}")
-    print("3. Combine & Load")
-    
+    print(f"\n📊 Toàn bộ file CSV đã được lưu tại: {os.path.abspath(output_dir)}")
     return 0
 
 
