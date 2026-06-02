@@ -1,0 +1,72 @@
+================================================================================
+DATA QUALITY SUMMARY
+================================================================================
+
+Generated: 2026-05-29 16:36:39
+
+
+Users:
+  Rows: 500
+  Columns: 7
+  Missing values: 27
+  Duplicates: 0
+
+Restaurants:
+  Rows: 50
+  Columns: 6
+  Missing values: 0
+  Duplicates: 0
+
+Vouchers:
+  Rows: 22
+  Columns: 8
+  Missing values: 0
+  Duplicates: 0
+
+User_Addresses:
+  Rows: 676
+  Columns: 4
+  Missing values: 0
+  Duplicates: 0
+
+Menu_Items:
+  Rows: 383
+  Columns: 6
+  Missing values: 383
+  Duplicates: 0
+
+Reviews:
+  Rows: 336
+  Columns: 6
+  Missing values: 0
+  Duplicates: 0
+
+cart:
+  Rows: 244
+  Columns: 4
+  Missing values: 0
+  Duplicates: 0
+
+Orders:
+  Rows: 265
+  Columns: 8
+  Missing values: 226
+  Duplicates: 0
+
+Order_Details:
+  Rows: 620
+  Columns: 5
+  Missing values: 167
+  Duplicates: 0
+
+Payments:
+  Rows: 265
+  Columns: 5
+  Missing values: 0
+  Duplicates: 0
+
+delivery_logs:
+  Rows: 265
+  Columns: 4
+  Missing values: 0
+  Duplicates: 0
