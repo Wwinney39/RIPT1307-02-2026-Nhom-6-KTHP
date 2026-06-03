@@ -3,7 +3,7 @@ import { getMenuByRestaurant, createMenuItem, getAllMenuItems, deleteMenuItem, u
 import { authenticateToken, authorizeRoles } from '../middlewares/auth.middleware';
 
 const router = Router();
-
+// GET /api/menu/all -> GET /api/menu/all
 router.get('/all', authenticateToken, authorizeRoles('staff', 'admin'), getAllMenuItems);
 // GET /api/menu/restaurant/:restaurantId -> GET /api/menu/restaurant/1?category=Cơm
 router.get('/restaurant/:restaurantId', getMenuByRestaurant);
