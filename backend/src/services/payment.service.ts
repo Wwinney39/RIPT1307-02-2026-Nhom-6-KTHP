@@ -33,12 +33,12 @@ export const paymentService = {
     // Đồng bộ trạng thái đơn hàng
     if (status === 'COMPLETED') {
       await db.execute(
-        'UPDATE Orders SET status = "PREPARING" WHERE order_id = ?',
+        "UPDATE Orders SET status = 'PREPARING' WHERE order_id = ?",
         [orderId]
       );
     } else if (status === 'FAILED') {
       await db.execute(
-        'UPDATE Orders SET status = "CANCELLED" WHERE order_id = ?',
+        "UPDATE Orders SET status = 'CANCELLED' WHERE order_id = ?",
         [orderId]
       );
     }
@@ -53,4 +53,8 @@ export const paymentService = {
     );
     return rows;
   },
+  
+  paymentCallback: async (orderId: number, status: 'COMPLETED' | 'FAILED') => {
+    return await paymentService.updateStatus(orderId, status);
+  }
 };
