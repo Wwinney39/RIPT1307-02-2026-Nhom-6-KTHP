@@ -51,7 +51,6 @@ export function LoginForm() {
             />
           </div>
 
-          {/* password_hash field (raw input on FE) */}
           <div>
             <label className="block text-sm font-semibold text-[#252422] mb-1.5">
               Mật khẩu
