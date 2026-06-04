@@ -1,0 +1,677 @@
+﻿address_id,user_id,address_text,is_default
+1,1,"5 Đặng Ngõ, Thị xã JaneHuyện, 996508",1
+2,2,"4 Phạm Số, JohnHuyện, 686252",1
+3,3,"95 Lê Ngõ, Thị xã JohnThành phố, 324875",1
+4,3,"9 John Số, Thành phố JohnThị xã, 729402",0
+5,4,"35 John Số, JanePhường, 726495",1
+6,5,"7 Nguyễn Làng, JohnThành phố, 922041",1
+7,6,"2 Jane Làng, Quận JohnHuyện, 917546",1
+8,7,"93 John Ngõ, JaneHuyện, 955129",1
+9,8,"69 Jane Hẻm, JohnXã, 175902",1
+10,8,"848 Dương Số, JohnHuyện, 913274",0
+11,8,"0 Trần Khu, Thị xã JohnPhường, 835236",0
+12,9,"58 Jane Làng, JohnThị xã, 806423",1
+13,10,"827 Đặng Làng, JohnPhường, 816289",1
+14,11,"33 Jane Làng, Quận JohnXã, 473321",1
+15,12,"179 John Dãy, JaneThị xã, 702427",1
+16,13,"846 John Đường, JaneXã, 134144",1
+17,14,"2 Trần Dãy, JohnThành phố, 806848",1
+18,14,"59 Lê Khu, Huyện JaneXã, 459762",0
+19,14,"36 Đặng Số, JaneQuận, 699166",0
+20,15,"438 Bùi Làng, Quận JaneThành phố, 285186",1
+21,15,"8 Dương Khu, JohnThị xã, 203782",0
+22,16,"471 Đặng Khu, JaneXã, 684572",1
+23,17,"06 Jane Làng, Huyện JaneHuyện, 805893",1
+24,18,"694 Lê Hẻm, JanePhường, 742053",1
+25,19,"253 Đặng Khu, JaneHuyện, 566509",1
+26,19,"9 Bùi Hẻm, Thành phố JohnPhường, 346024",0
+27,20,"261 John Dãy, Thành phố JaneXã, 902156",1
+28,21,"Huyện JohnThành phố, 33 Dương Hẻm, 237654",1
+29,22,"055 Dương Khu, JohnPhường, 665484",1
+30,23,"9 Mai Khu, JaneXã, 338161",1
+31,23,"56 Lê Khu, Thành phố JohnHuyện, 400692",0
+32,23,"7 Vũ Đường, JaneXã, 342446",0
+33,24,"686 Phạm Hẻm, JaneQuận, 375754",1
+34,25,"9 Vũ Khu, JohnThành phố, 291267",1
+35,26,"7 Vũ Dãy, Huyện JohnQuận, 152042",1
+36,27,"Quận JohnHuyện, 703 John Đường, 617555",1
+37,28,"75 Nguyễn Tổ, Quận JohnHuyện, 913331",1
+38,28,"346 John Làng, JaneQuận, 873449",0
+39,29,"Thị xã JohnXã, 64 Lê Đường, 880900",1
+40,29,"74 Jane Đường, Thành phố JohnPhường, 555251",0
+41,30,"91 Phạm Đường, Thị xã JohnHuyện, 908239",1
+42,31,"19 Nguyễn Đường, JohnPhường, 662407",1
+43,32,"35 Dương Làng, Thị xã JanePhường, 241276",1
+44,33,"78 Mai Dãy, Quận JaneHuyện, 867979",1
+45,34,"827 Vũ Tổ, JohnPhường, 630535",1
+46,35,"959 Jane Ngõ, JohnXã, 816412",1
+47,36,"4 Bùi Tổ, Thành phố JohnThành phố, 975763",1
+48,36,"317 John Đường, JaneXã, 754280",0
+49,37,"539 John Làng, JohnThị xã, 939930",1
+50,37,"6 Nguyễn Khu, Thành phố JaneThành phố, 326387",0
+51,38,"386 John Làng, Thị xã JohnPhường, 704570",1
+52,39,"6 John Hẻm, JanePhường, 265860",1
+53,39,"58 Đặng Số, JaneXã, 352415",0
+54,39,"84 Dương Dãy, JohnPhường, 136346",0
+55,40,"Quận JaneThành phố, 350 Mai Hẻm, 198867",1
+56,40,"245 John Khu, JohnXã, 519218",0
+57,41,"1 Dương Hẻm, JohnXã, 773452",1
+58,42,"055 Bùi Ngõ, Thành phố JaneThành phố, 419588",1
+59,43,"9 Jane Làng, Thành phố JaneThị xã, 889410",1
+60,43,"646 John Tổ, Thị xã JohnXã, 518582",0
+61,44,"6 John Dãy, Thị xã JanePhường, 699083",1
+62,45,"146 Hoàng Ngõ, Thị xã JaneHuyện, 465227",1
+63,46,"0 Lê Tổ, JohnThị xã, 147057",1
+64,47,"521 John Làng, Huyện JohnHuyện, 827497",1
+65,48,"70 Phạm Làng, Huyện JaneXã, 865380",1
+66,48,"Thị xã JohnHuyện, 439 Nguyễn Dãy, 786563",0
+67,49,"45 John Khu, JohnThị xã, 633243",1
+68,50,"Huyện JaneXã, 387 John Làng, 655132",1
+69,50,"20 Đặng Tổ, JohnXã, 389279",0
+70,50,"08 Phạm Hẻm, JanePhường, 243928",0
+71,51,"9 Jane Làng, Thị xã JaneXã, 445280",1
+72,52,"298 John Khu, Thị xã JohnPhường, 692282",1
+73,52,"881 Jane Hẻm, Huyện JaneThị xã, 418083",0
+74,53,"312 John Khu, Quận JohnPhường, 127351",1
+75,54,"897 Lê Số, JaneQuận, 271742",1
+76,55,"04 Phạm Làng, Thành phố JohnThị xã, 747033",1
+77,56,"36 Nguyễn Số, JaneXã, 878533",1
+78,56,"1 Dương Đường, Thị xã JohnXã, 506216",0
+79,56,"476 Vũ Dãy, Thị xã JaneXã, 157196",0
+80,57,"71 John Hẻm, JaneHuyện, 572788",1
+81,58,"3 Trần Khu, JohnPhường, 868881",1
+82,58,"7 Trần Số, Thị xã JaneThành phố, 905579",0
+83,59,"2 John Hẻm, Thị xã JaneHuyện, 865630",1
+84,60,"21 John Đường, JohnThị xã, 621800",1
+85,61,"7 John Dãy, JaneThị xã, 183262",1
+86,62,"849 John Hẻm, Thành phố JaneThành phố, 252436",1
+87,63,"10 Jane Hẻm, Huyện JohnThị xã, 885734",1
+88,64,"455 Trần Số, Huyện JaneQuận, 227950",1
+89,64,"86 John Đường, Thành phố JanePhường, 822106",0
+90,65,"95 Mai Tổ, Thị xã JaneThị xã, 947228",1
+91,66,"4 John Ngõ, Thị xã JohnPhường, 989265",1
+92,67,"05 Mai Làng, Quận JaneHuyện, 928580",1
+93,68,"8 Nguyễn Ngõ, JaneThị xã, 859584",1
+94,69,"355 Dương Đường, Thị xã JohnPhường, 582992",1
+95,70,"60 Hoàng Tổ, Quận JaneHuyện, 169429",1
+96,70,"JohnHuyện, 8 Jane Hẻm, 724103",0
+97,71,"5 Jane Số, Thị xã JohnHuyện, 573858",1
+98,72,"842 Jane Đường, Thành phố JaneXã, 126146",1
+99,73,"578 Đặng Hẻm, Quận JohnPhường, 138328",1
+100,74,"409 Jane Dãy, Thành phố JaneThành phố, 705615",1
+101,75,"33 Vũ Tổ, JohnHuyện, 256574",1
+102,76,"988 John Tổ, JaneQuận, 838568",1
+103,77,"149 Mai Dãy, Quận JohnThị xã, 808308",1
+104,78,"166 Jane Tổ, JaneQuận, 847528",1
+105,79,"92 Jane Ngõ, JanePhường, 775721",1
+106,80,"33 Jane Tổ, JohnPhường, 797492",1
+107,81,"70 Jane Ngõ, JaneThị xã, 986850",1
+108,82,"9 John Số, Huyện JohnHuyện, 658624",1
+109,83,"938 Jane Số, Huyện JohnPhường, 719677",1
+110,84,"5 John Ngõ, JohnXã, 725030",1
+111,85,"24 Trần Ngõ, JaneThị xã, 776320",1
+112,85,"290 John Dãy, JaneXã, 706005",0
+113,85,"5 Hoàng Khu, JaneThành phố, 711033",0
+114,86,"405 John Tổ, Huyện JohnQuận, 552686",1
+115,87,"5 Bùi Số, JohnPhường, 281833",1
+116,88,"6 Bùi Hẻm, JohnQuận, 112166",1
+117,89,"762 John Số, JaneXã, 288531",1
+118,90,"7 Đặng Làng, Thị xã JohnXã, 622355",1
+119,91,"8 Bùi Tổ, Thành phố JanePhường, 486482",1
+120,91,"1 Jane Dãy, Thành phố JohnThị xã, 761297",0
+121,92,"8 Hoàng Đường, JohnThị xã, 576089",1
+122,92,"5 Đặng Khu, JohnThành phố, 828813",0
+123,93,"9 Nguyễn Dãy, Thành phố JanePhường, 754643",1
+124,93,"281 Vũ Hẻm, JaneHuyện, 114892",0
+125,94,"2 Đặng Hẻm, JohnThị xã, 289592",1
+126,95,"12 Jane Số, JohnPhường, 561567",1
+127,96,"950 Trần Đường, Thị xã JaneThị xã, 416006",1
+128,97,"67 Lê Số, Huyện JaneThị xã, 811451",1
+129,98,"856 Đặng Khu, JohnHuyện, 786128",1
+130,99,"3 Jane Hẻm, JohnPhường, 108887",1
+131,100,"18 Jane Tổ, Huyện JaneQuận, 135695",1
+132,101,"939 John Ngõ, Thị xã JohnThành phố, 829445",1
+133,102,"17 Bùi Tổ, JohnThành phố, 390756",1
+134,103,"50 Vũ Hẻm, JohnThị xã, 310416",1
+135,104,"7 John Số, Thành phố JanePhường, 371577",1
+136,104,"947 Jane Hẻm, Thành phố JaneHuyện, 258971",0
+137,105,"0 Dương Số, JohnXã, 336817",1
+138,106,"985 Vũ Số, Thành phố JaneXã, 994794",1
+139,107,"43 John Số, Huyện JaneThành phố, 761249",1
+140,108,"732 John Đường, Thị xã JaneThành phố, 931247",1
+141,109,"87 John Tổ, Huyện JohnThị xã, 223928",1
+142,110,"8 John Ngõ, Quận JanePhường, 119989",1
+143,111,"202 Jane Ngõ, JohnXã, 167064",1
+144,111,"799 John Làng, JanePhường, 811351",0
+145,112,"9 Jane Làng, Quận JaneThành phố, 226610",1
+146,112,"582 Phạm Đường, Thành phố JaneQuận, 116389",0
+147,113,"021 Bùi Dãy, Quận JohnPhường, 384111",1
+148,113,"290 Jane Ngõ, JaneThị xã, 104792",0
+149,114,"819 Mai Làng, JohnHuyện, 155646",1
+150,115,"7 Lê Hẻm, Thành phố JaneHuyện, 319770",1
+151,116,"7 John Đường, Quận JohnThị xã, 639915",1
+152,117,"7 Bùi Làng, JohnThành phố, 441974",1
+153,118,"6 Jane Làng, Thị xã JaneThành phố, 557037",1
+154,119,"652 Phạm Tổ, JohnHuyện, 233391",1
+155,120,"21 Dương Số, Huyện JohnHuyện, 732958",1
+156,120,"8 John Số, JohnXã, 596489",0
+157,121,"633 Bùi Làng, Thành phố JaneThành phố, 142004",1
+158,122,"Thị xã JaneThị xã, 73 John Số, 328596",1
+159,122,"107 Lê Dãy, Thị xã JaneQuận, 837290",0
+160,123,"7 John Số, JohnHuyện, 546590",1
+161,124,"1 Nguyễn Tổ, Thành phố JaneHuyện, 587957",1
+162,124,"28 John Hẻm, JohnXã, 219073",0
+163,124,"3 Đặng Khu, JaneThành phố, 166447",0
+164,125,"88 Jane Khu, JanePhường, 826897",1
+165,125,"711 Lê Khu, Thành phố JohnHuyện, 217466",0
+166,125,"380 Bùi Hẻm, JaneThị xã, 565420",0
+167,126,"31 John Tổ, JanePhường, 777433",1
+168,126,"8 Dương Khu, Huyện JohnHuyện, 337798",0
+169,127,"254 Lê Hẻm, JohnQuận, 980103",1
+170,127,"310 Hoàng Hẻm, JaneHuyện, 293458",0
+171,127,"5 Lê Tổ, JohnXã, 416208",0
+172,128,"72 Đặng Hẻm, Huyện JaneThị xã, 403905",1
+173,128,"Thị xã JanePhường, 7 John Ngõ, 423047",0
+174,128,"51 Nguyễn Làng, Huyện JohnThành phố, 187649",0
+175,129,"1 Phạm Dãy, JohnPhường, 478603",1
+176,130,"65 Jane Tổ, JaneThị xã, 688285",1
+177,131,"6 Vũ Hẻm, JaneQuận, 976097",1
+178,132,"347 Trần Số, Thành phố JanePhường, 386606",1
+179,132,"9 John Hẻm, JaneXã, 614416",0
+180,133,"4 Mai Dãy, Thành phố JohnQuận, 375436",1
+181,133,"462 Phạm Đường, Huyện JaneThành phố, 727983",0
+182,134,"6 Dương Ngõ, JohnHuyện, 270757",1
+183,135,"72 Lê Đường, JaneThị xã, 767153",1
+184,135,"448 John Hẻm, Quận JaneHuyện, 966985",0
+185,135,"51 Lê Đường, Huyện JaneThị xã, 532007",0
+186,136,"328 John Ngõ, JaneThành phố, 222227",1
+187,136,"54 Lê Dãy, JohnPhường, 419484",0
+188,136,"223 Lê Làng, Thành phố JanePhường, 900088",0
+189,137,"760 John Đường, Thị xã JohnHuyện, 145383",1
+190,138,"193 John Tổ, Thành phố JohnPhường, 390849",1
+191,139,"28 John Ngõ, Quận JohnHuyện, 280117",1
+192,139,"1 Jane Tổ, Thị xã JohnQuận, 975290",0
+193,139,"38 Jane Ngõ, JohnThị xã, 215674",0
+194,140,"48 John Tổ, JohnThị xã, 397388",1
+195,141,"7 Jane Khu, JohnThành phố, 981913",1
+196,142,"071 Dương Ngõ, Quận JaneThị xã, 828799",1
+197,143,"2 Jane Làng, JohnXã, 985029",1
+198,144,"Quận JanePhường, 99 Bùi Tổ, 598940",1
+199,145,"84 Jane Ngõ, Huyện JaneThị xã, 342034",1
+200,146,"101 Nguyễn Hẻm, JaneQuận, 417459",1
+201,146,"877 Jane Dãy, JaneXã, 460307",0
+202,147,"616 Đặng Số, JaneThành phố, 134455",1
+203,148,"2 Bùi Hẻm, JaneThị xã, 901123",1
+204,149,"8 Dương Hẻm, Thị xã JaneThị xã, 719755",1
+205,150,"JaneHuyện, 902 Đặng Đường, 902364",1
+206,151,"16 Đặng Số, JohnPhường, 356092",1
+207,152,"1 Jane Ngõ, JohnThành phố, 664570",1
+208,153,"6 Vũ Đường, JohnHuyện, 496086",1
+209,153,"1 Trần Làng, JaneXã, 950874",0
+210,154,"945 Phạm Dãy, Quận JaneHuyện, 149840",1
+211,155,"919 Jane Khu, Thị xã JaneQuận, 464187",1
+212,156,"4 Mai Tổ, Thị xã JaneHuyện, 755322",1
+213,157,"829 Phạm Dãy, JaneXã, 861911",1
+214,157,"72 John Khu, JaneHuyện, 970542",0
+215,158,"44 Jane Làng, JohnThành phố, 257246",1
+216,159,"77 Bùi Đường, Quận JaneQuận, 130557",1
+217,160,"8 John Dãy, Thành phố JohnHuyện, 730823",1
+218,161,"51 Lê Làng, Thành phố JaneThị xã, 194632",1
+219,162,"59 Phạm Số, Quận JohnQuận, 324509",1
+220,162,"JaneHuyện, 85 Jane Số, 597920",0
+221,163,"575 Nguyễn Đường, Quận JaneXã, 503376",1
+222,164,"1 Jane Số, Thị xã JaneHuyện, 194634",1
+223,164,"32 Đặng Số, Huyện JohnThị xã, 593975",0
+224,164,"6 John Khu, Huyện JaneXã, 864654",0
+225,165,"00 Jane Hẻm, Thị xã JohnPhường, 420389",1
+226,166,"238 Jane Tổ, JanePhường, 239995",1
+227,167,"31 Đặng Hẻm, JaneXã, 335391",1
+228,167,"9 John Dãy, Huyện JohnThành phố, 520515",0
+229,168,"152 John Số, JaneThành phố, 335388",1
+230,168,"47 Lê Số, Quận JanePhường, 810083",0
+231,169,"20 Vũ Làng, JohnHuyện, 711218",1
+232,169,"072 Bùi Làng, JanePhường, 726205",0
+233,170,"0 Jane Làng, JaneXã, 803375",1
+234,171,"Thành phố JaneXã, 65 John Hẻm, 372935",1
+235,171,"72 Jane Số, Huyện JohnHuyện, 146307",0
+236,171,"JanePhường, 44 Mai Tổ, 556943",0
+237,172,"7 Jane Đường, Quận JohnQuận, 292037",1
+238,173,"761 Nguyễn Dãy, JaneThị xã, 616935",1
+239,174,"513 Lê Hẻm, JohnXã, 104326",1
+240,175,"13 Trần Tổ, Huyện JohnThị xã, 491704",1
+241,175,"20 Jane Dãy, JaneXã, 789969",0
+242,176,"9 Đặng Hẻm, Thành phố JaneHuyện, 936917",1
+243,177,"9 Trần Số, JohnQuận, 908323",1
+244,178,"326 Vũ Hẻm, Huyện JaneThị xã, 871635",1
+245,179,"9 Jane Ngõ, JohnThị xã, 567080",1
+246,180,"99 Trần Số, JohnThị xã, 761322",1
+247,181,"5 Phạm Hẻm, JohnHuyện, 590963",1
+248,181,"22 Phạm Số, JohnXã, 180250",0
+249,182,"6 Trần Dãy, JaneHuyện, 714012",1
+250,182,"722 Nguyễn Ngõ, JaneHuyện, 715732",0
+251,183,"4 Lê Làng, Thành phố JanePhường, 211495",1
+252,184,"610 Jane Dãy, JaneHuyện, 748543",1
+253,184,"6 Trần Hẻm, Thành phố JohnThành phố, 955604",0
+254,184,"372 Jane Làng, Huyện JaneQuận, 597013",0
+255,185,"277 Nguyễn Dãy, Quận JaneXã, 969742",1
+256,186,"01 Bùi Dãy, JohnThị xã, 519095",1
+257,187,"080 Hoàng Tổ, Huyện JaneThị xã, 222621",1
+258,188,"60 Jane Làng, JaneThị xã, 343377",1
+259,189,"7 Jane Số, JaneThị xã, 938603",1
+260,190,"Quận JanePhường, 7 John Làng, 263907",1
+261,191,"74 John Đường, Huyện JaneHuyện, 809810",1
+262,191,"561 John Làng, JaneHuyện, 923012",0
+263,191,"4 John Đường, JaneThành phố, 211035",0
+264,192,"0 John Ngõ, Huyện JohnPhường, 406313",1
+265,193,"1 Jane Tổ, Thành phố JohnThị xã, 535945",1
+266,193,"754 John Khu, JaneHuyện, 760016",0
+267,194,"6 John Số, JaneThị xã, 993796",1
+268,195,"720 John Tổ, JaneQuận, 555157",1
+269,195,"2 Jane Số, JanePhường, 878774",0
+270,196,"489 Jane Dãy, Thị xã JanePhường, 524154",1
+271,196,"085 Lê Khu, Thành phố JaneXã, 457259",0
+272,197,"089 Phạm Khu, JohnPhường, 162857",1
+273,198,"8 Trần Đường, Thị xã JaneXã, 872652",1
+274,199,"998 Jane Khu, JohnPhường, 496011",1
+275,200,"589 Jane Dãy, Quận JaneThị xã, 185927",1
+276,201,"737 Jane Số, JaneXã, 623058",1
+277,202,"7 Lê Hẻm, Thị xã JaneQuận, 838747",1
+278,203,"3 Dương Đường, Huyện JohnXã, 993719",1
+279,204,"94 John Ngõ, JaneHuyện, 417991",1
+280,205,"296 Jane Khu, Quận JaneThành phố, 228270",1
+281,206,"679 Hoàng Dãy, JaneThị xã, 974994",1
+282,207,"877 Lê Tổ, Thị xã JaneQuận, 514603",1
+283,208,"7 Trần Hẻm, Huyện JohnPhường, 686523",1
+284,209,"8 Jane Đường, Quận JohnHuyện, 924974",1
+285,209,"895 Hoàng Đường, JohnHuyện, 558245",0
+286,209,"5 Vũ Ngõ, Thành phố JohnHuyện, 251030",0
+287,210,"462 Jane Hẻm, Thành phố JaneThị xã, 203540",1
+288,211,"46 John Làng, Quận JaneXã, 888938",1
+289,212,"05 Mai Số, Thị xã JohnThị xã, 764316",1
+290,213,"89 John Hẻm, JaneThị xã, 187984",1
+291,213,"582 Jane Dãy, Thành phố JaneXã, 403300",0
+292,213,"074 Bùi Tổ, Huyện JohnQuận, 875089",0
+293,214,"16 John Khu, JohnXã, 629342",1
+294,215,"5 Dương Khu, Huyện JaneQuận, 582134",1
+295,216,"209 Nguyễn Đường, Thị xã JaneThị xã, 664271",1
+296,217,"0 Trần Tổ, JaneThị xã, 285793",1
+297,217,"753 Nguyễn Làng, Huyện JaneQuận, 194336",0
+298,217,"3 Jane Tổ, Huyện JanePhường, 841309",0
+299,218,"614 Lê Làng, Thành phố JohnPhường, 168209",1
+300,219,"4 John Khu, JohnThị xã, 772101",1
+301,220,"66 Trần Dãy, JaneXã, 895891",1
+302,221,"468 Đặng Đường, JohnHuyện, 185782",1
+303,222,"3 Trần Làng, Quận JaneHuyện, 165896",1
+304,223,"760 Vũ Làng, Thị xã JohnHuyện, 972957",1
+305,223,"3 Jane Ngõ, JohnThành phố, 163634",0
+306,224,"12 Jane Đường, JaneThành phố, 206773",1
+307,225,"66 Jane Làng, Thị xã JaneThị xã, 933790",1
+308,226,"07 Hoàng Làng, Thành phố JohnXã, 847948",1
+309,227,"2 Đặng Số, JaneQuận, 354963",1
+310,228,"249 Mai Tổ, JohnQuận, 592331",1
+311,229,"50 John Làng, Thị xã JaneQuận, 310105",1
+312,230,"537 Hoàng Tổ, JaneThị xã, 444582",1
+313,230,"730 John Dãy, Quận JanePhường, 905671",0
+314,231,"6 Jane Hẻm, Huyện JohnThành phố, 475271",1
+315,232,"473 Nguyễn Đường, Quận JaneQuận, 329580",1
+316,233,"83 John Đường, Huyện JohnThành phố, 971834",1
+317,234,"1 Phạm Khu, JohnHuyện, 948809",1
+318,235,"9 Trần Ngõ, Quận JohnQuận, 658424",1
+319,235,"96 John Làng, JohnHuyện, 359178",0
+320,236,"897 John Dãy, Quận JanePhường, 887623",1
+321,237,"7 Jane Tổ, JaneThị xã, 381370",1
+322,238,"337 Jane Làng, JaneThị xã, 699125",1
+323,239,"81 John Khu, JaneQuận, 712328",1
+324,240,"77 Bùi Tổ, JaneHuyện, 500944",1
+325,240,"415 Jane Ngõ, JohnThành phố, 224348",0
+326,241,"3 Phạm Tổ, JanePhường, 955181",1
+327,242,"928 Nguyễn Khu, JaneThị xã, 525468",1
+328,242,"82 Phạm Làng, Thị xã JohnXã, 715517",0
+329,242,"7 Trần Tổ, Thị xã JaneQuận, 559990",0
+330,243,"29 Jane Đường, JaneHuyện, 336444",1
+331,243,"8 Đặng Đường, Quận JohnHuyện, 695791",0
+332,244,"36 Jane Làng, JohnHuyện, 697179",1
+333,245,"JohnQuận, 8 John Dãy, 128142",1
+334,246,"43 Jane Ngõ, JohnHuyện, 643719",1
+335,247,"62 John Số, JohnThị xã, 316509",1
+336,247,"67 Jane Làng, JaneQuận, 107804",0
+337,248,"JohnThị xã, 5 Dương Dãy, 704118",1
+338,249,"75 Bùi Hẻm, JohnQuận, 747743",1
+339,250,"29 Jane Đường, Quận JanePhường, 663858",1
+340,251,"3 Bùi Ngõ, JohnThành phố, 628896",1
+341,252,"72 Phạm Đường, JohnThành phố, 769900",1
+342,252,"56 Jane Đường, Huyện JohnPhường, 243110",0
+343,252,"71 John Dãy, Thị xã JaneQuận, 278875",0
+344,253,"418 Lê Ngõ, Huyện JohnThị xã, 475481",1
+345,253,"8 Jane Đường, Thị xã JaneThị xã, 154961",0
+346,253,"33 Phạm Làng, Thành phố JaneThành phố, 115267",0
+347,254,"1 John Hẻm, Thành phố JaneXã, 212914",1
+348,255,"3 Jane Số, Quận JohnThành phố, 473897",1
+349,255,"50 Phạm Dãy, Thành phố JanePhường, 754216",0
+350,256,"649 Trần Hẻm, JohnXã, 440110",1
+351,256,"JohnHuyện, 5 Trần Tổ, 118506",0
+352,257,"83 John Đường, Huyện JohnPhường, 549312",1
+353,257,"257 Phạm Hẻm, JohnPhường, 139748",0
+354,258,"5 Jane Tổ, Thị xã JaneThành phố, 340134",1
+355,259,"33 John Làng, JaneQuận, 563849",1
+356,260,"13 John Làng, Thành phố JohnXã, 675507",1
+357,261,"816 Vũ Hẻm, Quận JaneQuận, 735281",1
+358,261,"7 Jane Dãy, Huyện JaneThị xã, 275915",0
+359,262,"9 Lê Dãy, Thị xã JaneThành phố, 895720",1
+360,263,"8 John Khu, JaneHuyện, 575637",1
+361,264,"527 John Làng, Thành phố JaneThị xã, 524206",1
+362,264,"5 Dương Khu, Thị xã JohnThành phố, 503519",0
+363,265,"645 Đặng Đường, JanePhường, 358779",1
+364,266,"02 Hoàng Dãy, Huyện JohnXã, 706435",1
+365,267,"116 Hoàng Ngõ, Thị xã JohnThị xã, 365154",1
+366,267,"4 Trần Ngõ, JohnHuyện, 885100",0
+367,268,"4 John Dãy, Thành phố JohnPhường, 538136",1
+368,269,"6 John Tổ, Quận JohnThị xã, 290824",1
+369,270,"93 John Đường, Quận JaneThị xã, 562139",1
+370,271,"2 Jane Ngõ, JohnHuyện, 167384",1
+371,272,"71 John Khu, Thành phố JohnQuận, 647707",1
+372,272,"8 Dương Dãy, JaneHuyện, 488796",0
+373,272,"35 Bùi Đường, JaneThành phố, 103234",0
+374,273,"2 John Khu, Huyện JaneXã, 819517",1
+375,273,"6 John Tổ, Huyện JohnPhường, 441337",0
+376,273,"7 Hoàng Ngõ, JaneThị xã, 790318",0
+377,274,"6 Hoàng Làng, Thành phố JohnThị xã, 935527",1
+378,275,"717 John Làng, Thành phố JohnThị xã, 850534",1
+379,276,"43 Dương Ngõ, Thị xã JohnPhường, 448967",1
+380,277,"5 Bùi Số, Quận JaneThành phố, 405110",1
+381,278,"93 Jane Hẻm, JaneXã, 872714",1
+382,279,"8 Jane Số, JanePhường, 935259",1
+383,280,"608 Đặng Hẻm, JohnThị xã, 813011",1
+384,281,"095 Mai Ngõ, JanePhường, 968941",1
+385,281,"6 Jane Hẻm, Quận JohnQuận, 998397",0
+386,282,"20 Đặng Số, JaneThị xã, 510059",1
+387,283,"38 Trần Hẻm, JohnPhường, 418844",1
+388,284,"2 Dương Khu, Quận JohnPhường, 305159",1
+389,285,"91 Jane Số, Thành phố JohnHuyện, 596894",1
+390,285,"859 Lê Số, Thành phố JohnQuận, 515912",0
+391,285,"6 Jane Số, JaneHuyện, 112166",0
+392,286,"783 Jane Khu, Quận JaneThị xã, 775908",1
+393,287,"2 Jane Ngõ, Thị xã JohnThị xã, 683071",1
+394,288,"898 John Ngõ, Quận JohnXã, 568957",1
+395,289,"293 John Khu, Thành phố JohnXã, 413081",1
+396,289,"03 Nguyễn Khu, JohnXã, 614266",0
+397,290,"8 John Đường, Thành phố JohnQuận, 414267",1
+398,291,"983 Vũ Hẻm, JohnXã, 367352",1
+399,292,"71 Bùi Hẻm, Thành phố JanePhường, 830650",1
+400,293,"8 Jane Hẻm, JaneThị xã, 127168",1
+401,294,"Thành phố JaneThành phố, 8 Trần Tổ, 771274",1
+402,294,"23 Nguyễn Ngõ, JohnThị xã, 210103",0
+403,295,"849 Trần Tổ, JaneXã, 203878",1
+404,296,"62 Mai Số, JohnHuyện, 109958",1
+405,297,"2 Jane Khu, Huyện JohnPhường, 738271",1
+406,298,"757 Vũ Số, Huyện JohnHuyện, 526261",1
+407,299,"1 John Ngõ, Thành phố JohnPhường, 399736",1
+408,300,"682 Dương Ngõ, JohnXã, 299422",1
+409,301,"6 Phạm Đường, JohnPhường, 900808",1
+410,301,"152 Nguyễn Số, JaneQuận, 491416",0
+411,302,"JohnXã, 47 Vũ Làng, 102342",1
+412,303,"480 Hoàng Dãy, Huyện JohnXã, 582716",1
+413,304,"052 Đặng Đường, Thị xã JaneQuận, 188860",1
+414,304,"17 John Khu, Thị xã JaneHuyện, 413823",0
+415,304,"4 Jane Dãy, Quận JanePhường, 555040",0
+416,305,"340 Jane Số, JohnQuận, 798566",1
+417,306,"4 Jane Dãy, JohnHuyện, 887574",1
+418,307,"6 John Ngõ, Quận JohnHuyện, 624288",1
+419,308,"569 Jane Dãy, JaneThị xã, 186627",1
+420,309,"2 John Khu, Huyện JohnPhường, 960471",1
+421,310,"1 John Hẻm, Thành phố JohnThị xã, 140230",1
+422,311,"609 John Đường, JaneXã, 421331",1
+423,312,"567 Jane Đường, JohnHuyện, 481237",1
+424,313,"6 Jane Đường, Thành phố JohnThành phố, 792511",1
+425,313,"74 Jane Hẻm, JaneHuyện, 450520",0
+426,314,"0 Jane Tổ, JaneQuận, 781834",1
+427,315,"129 John Làng, Thị xã JohnThành phố, 673129",1
+428,316,"7 John Đường, Quận JaneXã, 846169",1
+429,317,"71 Trần Dãy, JohnQuận, 728258",1
+430,318,"09 John Số, JohnQuận, 559008",1
+431,319,"6 Hoàng Khu, Quận JohnQuận, 699678",1
+432,319,"7 Vũ Làng, JaneXã, 224888",0
+433,320,"3 Nguyễn Hẻm, JohnHuyện, 929026",1
+434,321,"810 Hoàng Tổ, JohnPhường, 675956",1
+435,322,"94 Nguyễn Đường, JohnPhường, 393276",1
+436,323,"9 Jane Khu, Thị xã JohnHuyện, 381850",1
+437,323,"736 Lê Dãy, Thị xã JohnThị xã, 294015",0
+438,323,"972 Nguyễn Khu, Quận JanePhường, 737347",0
+439,324,"637 Trần Hẻm, Thành phố JaneThị xã, 121722",1
+440,325,"0 John Ngõ, JohnPhường, 728765",1
+441,326,"851 John Dãy, JohnHuyện, 447871",1
+442,327,"848 John Đường, Huyện JohnXã, 977116",1
+443,327,"036 Lê Tổ, JohnPhường, 503433",0
+444,328,"21 John Khu, JohnXã, 449935",1
+445,329,"922 Mai Tổ, Thị xã JohnPhường, 820540",1
+446,329,"14 Đặng Khu, Thành phố JohnPhường, 253709",0
+447,330,"71 Jane Khu, Thành phố JaneQuận, 290706",1
+448,331,"76 Bùi Tổ, Quận JaneThị xã, 676023",1
+449,332,"8 Jane Ngõ, JohnPhường, 191488",1
+450,333,"058 Lê Ngõ, Huyện JaneQuận, 409012",1
+451,334,"330 John Hẻm, JohnPhường, 545339",1
+452,335,"9 Jane Hẻm, Quận JaneQuận, 182830",1
+453,336,"6 John Dãy, Huyện JaneThị xã, 857656",1
+454,337,"12 John Hẻm, Thành phố JaneThị xã, 812930",1
+455,337,"4 Phạm Số, Huyện JohnXã, 495900",0
+456,337,"Quận JaneXã, 628 Jane Dãy, 428403",0
+457,338,"20 Bùi Làng, JohnThành phố, 181588",1
+458,338,"342 John Làng, Huyện JohnXã, 311524",0
+459,339,"419 Jane Đường, Huyện JohnHuyện, 108890",1
+460,340,"JaneXã, 65 John Tổ, 527070",1
+461,341,"2 Jane Dãy, Huyện JohnQuận, 815520",1
+462,341,"3 John Hẻm, JaneQuận, 455488",0
+463,342,"633 John Dãy, Thành phố JohnHuyện, 673713",1
+464,343,"17 Lê Khu, Thành phố JaneXã, 480977",1
+465,343,"747 Dương Hẻm, Thị xã JohnHuyện, 400548",0
+466,344,"58 Đặng Ngõ, JaneHuyện, 815711",1
+467,345,"3 John Ngõ, JaneQuận, 697828",1
+468,346,"671 Dương Dãy, JohnThành phố, 289030",1
+469,347,"36 Trần Tổ, JaneQuận, 836405",1
+470,347,"70 Jane Hẻm, Huyện JohnXã, 911813",0
+471,347,"73 John Đường, JaneHuyện, 766566",0
+472,348,"461 Dương Số, Huyện JohnThành phố, 196931",1
+473,349,"42 Jane Số, JaneXã, 822291",1
+474,349,"96 John Ngõ, Huyện JaneThành phố, 257817",0
+475,350,"51 Vũ Đường, JohnPhường, 571155",1
+476,351,"336 Jane Làng, JohnQuận, 812641",1
+477,352,"50 Vũ Ngõ, JaneThị xã, 530321",1
+478,352,"5 John Dãy, JaneQuận, 679604",0
+479,352,"46 Hoàng Ngõ, Thành phố JohnPhường, 117224",0
+480,353,"798 Jane Đường, JaneQuận, 333705",1
+481,354,"371 Dương Số, JohnHuyện, 920192",1
+482,355,"44 Phạm Đường, JohnThành phố, 127521",1
+483,356,"9 Đặng Hẻm, JohnXã, 510373",1
+484,357,"962 Lê Số, JohnThị xã, 342189",1
+485,358,"1 Vũ Hẻm, JohnThành phố, 197795",1
+486,359,"9 John Ngõ, JohnPhường, 869832",1
+487,360,"5 John Làng, JohnXã, 981282",1
+488,361,"04 John Đường, Thành phố JaneXã, 228643",1
+489,362,"21 Jane Tổ, Thị xã JohnThị xã, 934080",1
+490,363,"13 Bùi Tổ, JohnQuận, 413267",1
+491,364,"9 John Tổ, JaneXã, 729138",1
+492,365,"4 John Đường, Quận JohnHuyện, 220364",1
+493,365,"23 John Khu, JaneQuận, 196437",0
+494,366,"76 Phạm Khu, Quận JaneThị xã, 207892",1
+495,366,"376 Bùi Khu, JohnXã, 501652",0
+496,367,"17 John Khu, JaneXã, 966843",1
+497,368,"01 Jane Số, Huyện JohnThành phố, 325636",1
+498,369,"510 Nguyễn Tổ, Thị xã JaneQuận, 688922",1
+499,370,"3 John Khu, Thị xã JaneHuyện, 952905",1
+500,371,"770 Bùi Ngõ, Thị xã JohnXã, 442753",1
+501,372,"0 Nguyễn Đường, JaneQuận, 982526",1
+502,373,"Thành phố JanePhường, 716 Vũ Tổ, 890303",1
+503,374,"5 Hoàng Đường, JanePhường, 576663",1
+504,375,"91 John Đường, Quận JohnHuyện, 820999",1
+505,376,"135 John Khu, Thành phố JohnHuyện, 178687",1
+506,377,"22 Trần Hẻm, JohnXã, 991450",1
+507,377,"JanePhường, 8 Jane Dãy, 394169",0
+508,378,"144 Jane Làng, Thành phố JohnThị xã, 163194",1
+509,378,"63 Trần Tổ, Huyện JanePhường, 576076",0
+510,379,"356 Hoàng Làng, JohnThành phố, 391334",1
+511,380,"1 Jane Ngõ, Quận JohnThị xã, 296114",1
+512,381,"8 Đặng Khu, Thành phố JaneThị xã, 322367",1
+513,381,"5 Jane Khu, JohnThành phố, 780129",0
+514,382,"436 Jane Dãy, JohnPhường, 152294",1
+515,382,"100 Phạm Ngõ, Huyện JohnXã, 833491",0
+516,383,"13 Dương Làng, Quận JanePhường, 401982",1
+517,384,"0 John Dãy, JohnQuận, 430419",1
+518,385,"572 Jane Số, JohnQuận, 376648",1
+519,386,"0 Dương Đường, JohnThị xã, 214699",1
+520,387,"4 John Hẻm, Thành phố JanePhường, 451983",1
+521,387,"4 Vũ Tổ, JohnHuyện, 415761",0
+522,388,"480 Jane Làng, Huyện JaneThành phố, 356238",1
+523,389,"31 Jane Ngõ, JaneXã, 283450",1
+524,390,"69 Vũ Khu, Thành phố JaneXã, 228934",1
+525,390,"5 Trần Đường, JohnThị xã, 813999",0
+526,390,"8 Jane Dãy, JohnHuyện, 116349",0
+527,391,"91 Jane Khu, Thị xã JanePhường, 974627",1
+528,392,"548 John Khu, Quận JaneXã, 184638",1
+529,393,"53 Bùi Số, Huyện JaneXã, 425830",1
+530,394,"5 John Khu, Thị xã JohnHuyện, 419811",1
+531,394,"2 Bùi Ngõ, Thị xã JaneXã, 818445",0
+532,394,"67 Bùi Dãy, Thành phố JaneThành phố, 892572",0
+533,395,"985 Jane Đường, JohnThị xã, 802629",1
+534,396,"104 Jane Ngõ, JanePhường, 447401",1
+535,397,"9 John Hẻm, JohnQuận, 808502",1
+536,397,"40 Hoàng Làng, Thành phố JohnQuận, 733120",0
+537,398,"317 Jane Số, Thành phố JaneThị xã, 607216",1
+538,399,"Huyện JanePhường, 20 John Làng, 279071",1
+539,399,"74 Trần Dãy, JaneThị xã, 504562",0
+540,400,"66 John Khu, JohnXã, 508346",1
+541,400,"970 Lê Dãy, JaneThành phố, 266004",0
+542,401,"86 John Hẻm, JaneThị xã, 849923",1
+543,402,"46 Jane Số, JohnXã, 842916",1
+544,403,"599 Hoàng Số, Thành phố JohnPhường, 266911",1
+545,404,"75 John Ngõ, Thị xã JaneThành phố, 164934",1
+546,404,"175 John Tổ, Thị xã JaneQuận, 768357",0
+547,404,"477 Phạm Làng, Thị xã JohnThành phố, 710384",0
+548,405,"020 Bùi Ngõ, JohnPhường, 865436",1
+549,406,"397 Đặng Hẻm, Thị xã JanePhường, 494388",1
+550,407,"841 Jane Làng, Huyện JohnQuận, 961224",1
+551,408,"51 Jane Ngõ, Huyện JaneXã, 159399",1
+552,409,"7 Nguyễn Đường, JaneHuyện, 310251",1
+553,410,"385 John Dãy, Thành phố JaneThành phố, 536459",1
+554,411,"7 Jane Đường, Thành phố JaneXã, 336186",1
+555,411,"43 John Đường, Thị xã JohnXã, 605595",0
+556,412,"2 Bùi Hẻm, Thị xã JohnXã, 485570",1
+557,413,"03 John Đường, Thị xã JohnThành phố, 854793",1
+558,414,"027 Jane Đường, JaneXã, 787036",1
+559,415,"967 John Ngõ, JohnThị xã, 839513",1
+560,416,"745 Phạm Khu, JohnThành phố, 463473",1
+561,416,"13 John Khu, Thành phố JanePhường, 956036",0
+562,416,"771 Jane Đường, JaneXã, 502838",0
+563,417,"496 Nguyễn Số, JaneThành phố, 335351",1
+564,418,"6 Jane Đường, JohnXã, 891127",1
+565,419,"3 Jane Số, JohnThành phố, 680170",1
+566,419,"7 Hoàng Khu, Thị xã JanePhường, 349799",0
+567,420,"41 Jane Tổ, JohnXã, 387592",1
+568,421,"9 John Khu, JaneQuận, 565367",1
+569,422,"705 Mai Làng, JohnXã, 183410",1
+570,422,"724 Vũ Dãy, Quận JohnQuận, 747966",0
+571,422,"028 Hoàng Tổ, Quận JohnPhường, 371638",0
+572,423,"Huyện JohnXã, 11 Trần Ngõ, 348490",1
+573,423,"6 Jane Khu, Thành phố JaneXã, 926450",0
+574,424,"5 Vũ Đường, Huyện JohnHuyện, 257352",1
+575,424,"935 Phạm Số, Quận JanePhường, 182255",0
+576,424,"8 Mai Ngõ, Thị xã JaneHuyện, 382258",0
+577,425,"535 Jane Tổ, Quận JanePhường, 529838",1
+578,426,"8 Jane Dãy, Thị xã JaneQuận, 696998",1
+579,427,"3 Hoàng Hẻm, JaneHuyện, 429089",1
+580,428,"82 Phạm Hẻm, JohnQuận, 226656",1
+581,428,"1 John Số, Quận JohnQuận, 639908",0
+582,429,"52 Mai Làng, JohnHuyện, 964776",1
+583,430,"0 Jane Dãy, JanePhường, 975356",1
+584,431,"2 John Hẻm, Huyện JaneThị xã, 436002",1
+585,432,"347 Nguyễn Số, JaneThị xã, 434053",1
+586,433,"368 Hoàng Tổ, Huyện JaneQuận, 224309",1
+587,433,"32 Vũ Ngõ, Huyện JohnThành phố, 316890",0
+588,433,"908 John Dãy, Huyện JohnHuyện, 698910",0
+589,434,"2 Vũ Ngõ, Thị xã JaneThị xã, 375834",1
+590,434,"15 John Ngõ, JohnXã, 451626",0
+591,435,"5 Jane Ngõ, JohnXã, 793245",1
+592,436,"0 John Số, Quận JaneThị xã, 258789",1
+593,436,"7 Lê Làng, Quận JohnThị xã, 170528",0
+594,437,"2 Jane Khu, JohnPhường, 465642",1
+595,438,"34 Dương Số, JaneHuyện, 201222",1
+596,439,"75 Jane Ngõ, Thị xã JanePhường, 219051",1
+597,439,"2 Dương Số, Thành phố JaneHuyện, 632139",0
+598,440,"854 Bùi Số, JaneThị xã, 373363",1
+599,441,"35 Jane Dãy, JohnXã, 274624",1
+600,442,"9 Lê Đường, Thị xã JohnPhường, 449477",1
+601,442,"0 Jane Làng, Thị xã JohnHuyện, 940208",0
+602,442,"63 John Đường, Thành phố JaneThị xã, 144339",0
+603,443,"330 Trần Số, JohnPhường, 383114",1
+604,444,"860 John Ngõ, JohnXã, 427354",1
+605,445,"0 Vũ Dãy, Thành phố JanePhường, 704190",1
+606,446,"13 Mai Khu, JanePhường, 659104",1
+607,447,"765 Jane Làng, Thị xã JohnThị xã, 487786",1
+608,448,"4 Lê Ngõ, Quận JohnThị xã, 722234",1
+609,448,"97 John Dãy, JaneHuyện, 876482",0
+610,448,"599 Nguyễn Khu, Thị xã JaneHuyện, 783680",0
+611,449,"7 John Số, Thị xã JohnThành phố, 269966",1
+612,449,"371 Jane Dãy, Thị xã JohnPhường, 673660",0
+613,450,"16 Vũ Tổ, JohnQuận, 404293",1
+614,451,"5 Dương Dãy, Huyện JohnQuận, 649850",1
+615,452,"562 Jane Ngõ, Huyện JohnQuận, 827759",1
+616,452,"10 Hoàng Hẻm, Huyện JohnHuyện, 759367",0
+617,453,"46 Đặng Số, JohnThành phố, 721427",1
+618,454,"24 John Số, JanePhường, 745804",1
+619,454,"203 John Hẻm, Quận JaneThành phố, 439044",0
+620,455,"876 Đặng Khu, Quận JaneThị xã, 911513",1
+621,456,"48 Mai Ngõ, Quận JanePhường, 249824",1
+622,457,"41 Đặng Hẻm, Huyện JanePhường, 462798",1
+623,458,"8 Jane Tổ, Thành phố JohnThị xã, 478526",1
+624,459,"4 Trần Tổ, JohnXã, 386290",1
+625,460,"7 Nguyễn Khu, JohnXã, 963319",1
+626,461,"7 Lê Dãy, Thành phố JaneThành phố, 742693",1
+627,461,"2 John Số, Thành phố JanePhường, 845108",0
+628,462,"4 John Tổ, JohnXã, 857213",1
+629,462,"6 Nguyễn Ngõ, Quận JaneThành phố, 280968",0
+630,463,"3 Lê Đường, JaneXã, 467719",1
+631,464,"1 Trần Ngõ, Quận JohnQuận, 432924",1
+632,465,"035 Trần Làng, JohnPhường, 892547",1
+633,466,"642 Lê Tổ, JohnQuận, 386050",1
+634,467,"47 Trần Dãy, JaneHuyện, 909889",1
+635,468,"2 Jane Hẻm, Thị xã JanePhường, 950299",1
+636,468,"588 Trần Làng, JohnThị xã, 373516",0
+637,468,"2 Lê Dãy, JaneXã, 496267",0
+638,469,"15 John Số, JaneHuyện, 779352",1
+639,470,"42 Mai Hẻm, Thị xã JaneXã, 703943",1
+640,471,"34 Hoàng Tổ, JaneHuyện, 142078",1
+641,472,"Thành phố JaneThị xã, 6 John Hẻm, 415183",1
+642,473,"2 Jane Đường, Huyện JohnHuyện, 580995",1
+643,474,"232 Vũ Ngõ, Quận JohnThị xã, 194546",1
+644,474,"8 Nguyễn Dãy, Huyện JohnThị xã, 676537",0
+645,475,"67 John Số, Huyện JohnThị xã, 910822",1
+646,476,"6 Mai Ngõ, JanePhường, 876396",1
+647,477,"Quận JohnQuận, 58 Jane Ngõ, 776936",1
+648,478,"034 Trần Tổ, JohnThị xã, 258070",1
+649,479,"7 Jane Số, Quận JanePhường, 642479",1
+650,480,"516 John Tổ, Thị xã JaneThành phố, 609754",1
+651,481,"04 Vũ Ngõ, JaneThị xã, 846610",1
+652,481,"268 Trần Hẻm, Huyện JaneQuận, 639907",0
+653,482,"07 Nguyễn Ngõ, JaneHuyện, 152505",1
+654,483,"65 Nguyễn Khu, Huyện JaneThị xã, 118369",1
+655,484,"0 Jane Đường, JohnQuận, 188129",1
+656,485,"2 Bùi Khu, JanePhường, 747224",1
+657,485,"155 John Ngõ, JohnHuyện, 767671",0
+658,486,"02 Trần Số, Quận JaneHuyện, 745483",1
+659,487,"0 Hoàng Dãy, Thị xã JanePhường, 822325",1
+660,488,"0 Lê Khu, JohnThị xã, 317198",1
+661,488,"2 Vũ Dãy, JohnQuận, 335745",0
+662,488,"194 Hoàng Số, JaneThị xã, 684745",0
+663,489,"57 Jane Dãy, Quận JaneHuyện, 522511",1
+664,489,"7 Trần Làng, JaneHuyện, 887331",0
+665,490,"299 Jane Số, JohnHuyện, 683469",1
+666,491,"82 Hoàng Ngõ, Thị xã JohnQuận, 216006",1
+667,492,"686 Phạm Số, JaneHuyện, 760891",1
+668,493,"8 Phạm Số, JaneHuyện, 966268",1
+669,493,"640 Dương Hẻm, Thị xã JaneThị xã, 530224",0
+670,494,"3 John Số, Huyện JohnQuận, 696960",1
+671,495,"09 Mai Làng, Thị xã JanePhường, 350940",1
+672,496,"24 John Làng, JaneQuận, 816881",1
+673,497,"781 Lê Làng, JohnThành phố, 884972",1
+674,498,"7 Trần Số, JohnPhường, 914320",1
+675,499,"70 Bùi Đường, JanePhường, 636409",1
+676,500,"11 Jane Ngõ, Huyện JanePhường, 456342",1

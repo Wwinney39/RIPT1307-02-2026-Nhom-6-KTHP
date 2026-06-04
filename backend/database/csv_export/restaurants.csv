@@ -1,0 +1,51 @@
+﻿restaurant_id,name,address,latitude,longitude,status
+1,Phạm và Vũ Công ty TNHH MTV Caffe,"49 Dương Ngõ, JohnPhường, 711922",21.009009,105.81736,OPEN
+2,Dương Công ty Cổ phần Nhà hàng,"4 Nguyễn Hẻm, Quận JaneThị xã, 697062",21.023728,105.789519,OPEN
+3,Lê và đối tác Doanh nghiệp tư nhân Quán ăn,"752 Nguyễn Đường, JaneQuận, 898169",20.924136,105.843075,OPEN
+4,Hoàng Lê Công ty TNHH MTV Caffe,"966 Bùi Dãy, JohnThành phố, 659711",20.933116,105.792621,OPEN
+5,Đặng Nguyễn Doanh nghiệp tư nhân Nhà hàng,"033 Vũ Hẻm, Thị xã JaneQuận, 168458",20.934787,105.753545,OPEN
+6,Vũ Doanh nghiệp tư nhân Quán,"25 Đặng Làng, Thị xã JohnQuận, 335217",21.066578,105.854522,OPEN
+7,Phạm Nguyễn Công ty Hợp danh Nhà hàng,"06 Mai Đường, Thành phố JohnThành phố, 823255",21.0364,105.757275,CLOSED
+8,Bùi Công ty TNHH MTV Quán ăn,"23 Jane Số, Huyện JohnThị xã, 971002",21.056083,105.803894,OPEN
+9,Mai Công ty Trách nhiệm hữu hạn Quán ăn,"173 Jane Làng, JaneHuyện, 268163",21.059766,105.797031,OPEN
+10,Mai Công ty TNHH MTV Quán ăn,"30 John Ngõ, JohnThành phố, 917392",21.029636,105.793357,CLOSED
+11,Trần Doanh nghiệp tư nhân Quán,"47 John Hẻm, Huyện JanePhường, 427897",20.993717,105.799677,OPEN
+12,Trần và đối tác Công ty TNHH Quán,"225 Dương Khu, Huyện JaneQuận, 219361",21.058,105.777029,OPEN
+13,Bùi và đối tác Công ty TNHH MTV Quán,"7 Lê Ngõ, Thành phố JohnThành phố, 536236",21.000386,105.806774,OPEN
+14,Hoàng và đối tác Công ty Trách nhiệm hữu hạn Quán,"90 Jane Dãy, Thị xã JaneThành phố, 166412",20.934173,105.798351,OPEN
+15,Đặng và Nguyễn Công ty Trách nhiệm hữu hạn Caffe,"5 Jane Làng, JanePhường, 809147",20.983042,105.796471,OPEN
+16,Lê và đối tác Tập Đoàn Quán,"287 Lê Ngõ, JaneQuận, 446968",21.024192,105.849404,OPEN
+17,Nguyễn và Mai Công ty Cổ phần Quán ăn,"31 Dương Dãy, Thị xã JaneHuyện, 224473",20.916279,105.805072,OPEN
+18,Nguyễn và đối tác Công ty TNHH Nhà hàng,"8 John Khu, Thị xã JaneHuyện, 965401",20.970752,105.785581,OPEN
+19,Phạm Tập Đoàn Quán ăn,"5 Trần Ngõ, Thành phố JaneHuyện, 970196",21.006257,105.82839,OPEN
+20,Mai và Mai Doanh nghiệp tư nhân Quán ăn,"726 Jane Làng, Thành phố JaneQuận, 579247",20.916232,105.785648,OPEN
+21,Đặng Trần Tập Đoàn Nhà hàng,"79 Jane Đường, Thị xã JaneXã, 919023",21.029307,105.76359,OPEN
+22,Hoàng Lê Công ty Trách nhiệm hữu hạn Quán ăn,"99 Mai Số, JohnHuyện, 517196",21.014133,105.759384,OPEN
+23,Vũ và Dương Tập Đoàn Nhà hàng,"8 Mai Tổ, Quận JohnXã, 849086",20.968162,105.791867,OPEN
+24,Đặng và Lê Công ty Trách nhiệm hữu hạn Caffe,"8 Trần Tổ, JanePhường, 884197",21.001788,105.822548,OPEN
+25,Bùi và Nguyễn Công ty Hợp danh Nhà hàng,"003 Lê Khu, JohnThành phố, 824141",20.932196,105.828325,OPEN
+26,Phạm và Mai Công ty TNHH Caffe,"983 Phạm Khu, Thị xã JaneThị xã, 926394",21.031429,105.855706,OPEN
+27,Mai và Nguyễn Công ty TNHH Nhà hàng,"7 Jane Làng, Huyện JaneQuận, 815819",20.92116,105.764473,OPEN
+28,Lê Công ty Cổ phần Caffe,"06 Mai Khu, Quận JaneThành phố, 446620",20.902197,105.804739,OPEN
+29,Lê và đối tác Công ty TNHH Quán,"0 Dương Tổ, Huyện JohnQuận, 645895",21.009437,105.804281,OPEN
+30,Mai Công ty Cổ phần Quán ăn,"533 Đặng Tổ, JohnXã, 656268",20.981673,105.798606,OPEN
+31,Mai và đối tác Tập Đoàn Quán,"573 John Tổ, JohnThị xã, 369054",20.944048,105.810208,OPEN
+32,Nguyễn và Mai Tập Đoàn Nhà hàng,"04 Jane Ngõ, Quận JohnPhường, 168652",20.908805,105.766308,OPEN
+33,Phạm Bùi Tập Đoàn Quán,"1 John Dãy, JohnThành phố, 176806",20.926167,105.753568,OPEN
+34,Lê Tập Đoàn Caffe,"3 Bùi Số, JaneThị xã, 431773",20.9596,105.759647,OPEN
+35,Bùi Công ty Trách nhiệm hữu hạn Nhà hàng,"9 John Ngõ, JohnHuyện, 925115",20.92904,105.781282,OPEN
+36,Hoàng và Trần Doanh nghiệp tư nhân Nhà hàng,"60 Lê Làng, Thị xã JanePhường, 251074",21.073933,105.832427,OPEN
+37,Đặng và Nguyễn Công ty Hợp danh Quán,"009 Mai Ngõ, JohnPhường, 877446",20.916763,105.782922,OPEN
+38,Phạm và Bùi Công ty Trách nhiệm hữu hạn Quán ăn,"239 Phạm Ngõ, Thành phố JanePhường, 676365",21.047648,105.833429,OPEN
+39,Vũ Công ty Trách nhiệm hữu hạn Quán,"975 Lê Làng, Huyện JohnQuận, 433222",20.95271,105.7648,OPEN
+40,Dương và đối tác Doanh nghiệp tư nhân Caffe,"9 Jane Tổ, JohnThành phố, 428429",20.959258,105.795513,OPEN
+41,Phạm Bùi Doanh nghiệp tư nhân Nhà hàng,"5 Dương Dãy, JaneThị xã, 678469",21.01017,105.762023,OPEN
+42,Lê Công ty Trách nhiệm hữu hạn Quán,"834 John Đường, Thị xã JohnThành phố, 678388",20.987059,105.825752,CLOSED
+43,Mai và Mai Công ty TNHH MTV Caffe,"63 Lê Dãy, Thị xã JaneXã, 111106",20.97687,105.843258,OPEN
+44,Hoàng Lê Tập Đoàn Caffe,"299 Jane Tổ, Quận JaneQuận, 165914",21.066879,105.817572,OPEN
+45,Đặng và Phạm Công ty TNHH Quán ăn,"77 John Tổ, Huyện JaneXã, 670792",20.988651,105.76979,OPEN
+46,Bùi Bùi Doanh nghiệp tư nhân Caffe,"4 Phạm Số, JaneThị xã, 931161",21.076266,105.750174,OPEN
+47,Hoàng và đối tác Công ty TNHH Quán,"23 Jane Làng, Quận JohnHuyện, 731264",21.032744,105.772806,OPEN
+48,Phạm Công ty TNHH MTV Quán ăn,"77 John Số, Quận JohnQuận, 701344",20.974527,105.786717,OPEN
+49,Lê Mai Công ty TNHH Nhà hàng,"242 Hoàng Đường, JohnQuận, 571023",20.902034,105.772131,OPEN
+50,Dương và đối tác Công ty Cổ phần Quán,"2 Jane Hẻm, JaneXã, 719284",20.955399,105.805736,OPEN
