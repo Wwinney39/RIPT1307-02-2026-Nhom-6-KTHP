@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import useToast from '../hooks/useToast';
 
-// ─── LoginForm ────────────────────────────────────────────────────────────────
-
 export function LoginForm() {
   const { showToast } = useToast();
   const [form, setForm] = useState({ phone: '', password: '' });
@@ -31,7 +29,6 @@ export function LoginForm() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-          {/* phone → maps to users.phone (unique) */}
           <div>
             <label className="block text-sm font-semibold text-[#252422] mb-1.5">
               Số điện thoại
@@ -51,10 +48,6 @@ export function LoginForm() {
             />
           </div>
 
-<<<<<<< HEAD
-=======
-          {/* password_hash field (raw input on FE) */}
->>>>>>> 7ac46ab (new file)
           <div>
             <label className="block text-sm font-semibold text-[#252422] mb-1.5">
               Mật khẩu
@@ -96,8 +89,6 @@ export function LoginForm() {
     </div>
   );
 }
-
-// ─── RegisterForm ─────────────────────────────────────────────────────────────
 
 export function RegisterForm() {
   const { showToast } = useToast();
@@ -153,7 +144,6 @@ export function RegisterForm() {
             />
           </div>
 
-          {/* users.phone (unique) */}
           <div>
             <label className="block text-sm font-semibold text-[#252422] mb-1.5">
               Số điện thoại
@@ -173,7 +163,6 @@ export function RegisterForm() {
             />
           </div>
 
-          {/* users.email */}
           <div>
             <label className="block text-sm font-semibold text-[#252422] mb-1.5">
               Email
@@ -193,7 +182,6 @@ export function RegisterForm() {
             />
           </div>
 
-          {/* users.password_hash (raw on FE) */}
           <div>
             <label className="block text-sm font-semibold text-[#252422] mb-1.5">
               Mật khẩu

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { useState, useRef, useEffect } from 'react';
-=======
 import { useState, useRef, useEffect, useCallback } from 'react';
->>>>>>> 7ac46ab (new file)
 import {
   NAV_LINKS,
   HEADER_SEARCH_PLACEHOLDER,
@@ -11,10 +7,7 @@ import {
 } from '../../constants';
 import { SearchIcon, ShoppingBagIcon } from '../common/Icons';
 import useToast from '../../hooks/useToast';
-<<<<<<< HEAD
-=======
 import { useAddress } from '../../context/AddressContext';
->>>>>>> 7ac46ab (new file)
 import {
   ChevronDown,
   UserCircle,
@@ -22,17 +15,10 @@ import {
   LogOut,
   ShieldAlert,
   X,
-<<<<<<< HEAD
-} from 'lucide-react';
-import type { CartItem } from '../../types';
-
-// ─── Types ────────────────────────────────────────────────────────────────────
-=======
   Search,
 } from 'lucide-react';
 import type { CartItem } from '../../types';
 import { storage } from '../../utils/storage';
->>>>>>> 7ac46ab (new file)
 
 interface LoggedInUser {
   name: string;
@@ -52,16 +38,6 @@ function AuthGuardModal({ isOpen, onClose, onConfirm }: AuthGuardModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div
-<<<<<<< HEAD
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
-        onClick={onClose}
-      />
-
-      <div className="relative w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-center shadow-2xl transition-all animate-in fade-in zoom-in-95 duration-200">
-        <button
-          onClick={onClose}
-          className="absolute right-4 top-4 rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
-=======
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
@@ -74,19 +50,14 @@ function AuthGuardModal({ isOpen, onClose, onConfirm }: AuthGuardModalProps) {
           className="absolute right-4 top-4 rounded-lg p-1 text-gray-400
                      hover:bg-gray-100 hover:text-gray-600 transition-colors"
           aria-label="Đóng"
->>>>>>> 7ac46ab (new file)
         >
           <X size={18} />
         </button>
 
-<<<<<<< HEAD
-        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-amber-50 text-amber-500">
-=======
         <div
           className="mx-auto mb-4 flex h-12 w-12 items-center justify-center
                         rounded-full bg-amber-50 text-amber-500"
         >
->>>>>>> 7ac46ab (new file)
           <ShieldAlert size={28} />
         </div>
 
@@ -102,13 +73,9 @@ function AuthGuardModal({ isOpen, onClose, onConfirm }: AuthGuardModalProps) {
           <button
             type="button"
             onClick={onClose}
-<<<<<<< HEAD
-            className="w-full sm:w-auto px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 active:scale-95 transition-all"
-=======
             className="w-full sm:w-auto px-4 py-2 text-sm font-semibold
                        text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200
                        active:scale-95 transition-all"
->>>>>>> 7ac46ab (new file)
           >
             Để sau
           </button>
@@ -118,13 +85,9 @@ function AuthGuardModal({ isOpen, onClose, onConfirm }: AuthGuardModalProps) {
               onConfirm();
               onClose();
             }}
-<<<<<<< HEAD
-            className="w-full sm:w-auto px-5 py-2 text-sm font-bold text-white bg-[#EB5E28] rounded-xl hover:bg-[#d44e1e] active:scale-95 transition-all shadow-md"
-=======
             className="w-full sm:w-auto px-5 py-2 text-sm font-bold text-white
                        bg-[#EB5E28] rounded-xl hover:bg-[#d44e1e] active:scale-95
                        transition-all shadow-md"
->>>>>>> 7ac46ab (new file)
           >
             Đăng nhập ngay
           </button>
@@ -134,11 +97,6 @@ function AuthGuardModal({ isOpen, onClose, onConfirm }: AuthGuardModalProps) {
   );
 }
 
-<<<<<<< HEAD
-// ─── UserDropdown ─────────────────────────────────────────────────────────────
-
-=======
->>>>>>> 7ac46ab (new file)
 interface UserDropdownProps {
   user: LoggedInUser;
   onClose: () => void;
@@ -179,13 +137,8 @@ function UserDropdown({ user, onClose, onLogout }: UserDropdownProps) {
       >
         <div
           className="w-10 h-10 rounded-full bg-[#EB5E28] flex items-center
-<<<<<<< HEAD
-                     justify-center text-white font-display font-bold text-base
-                     shrink-0 select-none"
-=======
                         justify-center text-white font-display font-bold text-base
                         shrink-0 select-none"
->>>>>>> 7ac46ab (new file)
         >
           {user.avatarInitial}
         </div>
@@ -232,11 +185,6 @@ function UserDropdown({ user, onClose, onLogout }: UserDropdownProps) {
   );
 }
 
-<<<<<<< HEAD
-// ─── Header ───────────────────────────────────────────────────────────────────
-
-=======
->>>>>>> 7ac46ab (new file)
 interface HeaderProps {
   cartCount?: number;
 }
@@ -244,47 +192,6 @@ interface HeaderProps {
 export function Header({ cartCount: propCartCount }: HeaderProps) {
   const [searchValue, setSearchValue] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
-<<<<<<< HEAD
-
-  const [showGuardModal, setShowGuardModal] = useState(false);
-
-  const [localCartCount, setLocalCartCount] = useState<number>(() => {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      try {
-        const cartItems: CartItem[] = JSON.parse(savedCart);
-        return cartItems.reduce((sum, item) => sum + (item.quantity ?? 0), 0);
-      } catch {
-        return 0;
-      }
-    }
-    return 0;
-  });
-
-  const [currentUser, setCurrentUser] = useState<LoggedInUser | null>(() => {
-    const savedUser = localStorage.getItem('user');
-    return savedUser ? JSON.parse(savedUser) : null;
-  });
-
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const { showToast } = useToast();
-
-  const updateCountFromStorage = () => {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      try {
-        const cartItems: CartItem[] = JSON.parse(savedCart);
-        setLocalCartCount(
-          cartItems.reduce((sum, item) => sum + (item.quantity ?? 0), 0),
-        );
-      } catch {
-        setLocalCartCount(0);
-      }
-    } else {
-      setLocalCartCount(0);
-    }
-  };
-=======
   const [showGuardModal, setShowGuardModal] = useState(false);
 
   const { address } = useAddress();
@@ -299,7 +206,6 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
     const items = storage.get<CartItem[]>('cart', []);
     setLocalCartCount(Array.isArray(items) ? items.length : 0);
   }, []);
->>>>>>> 7ac46ab (new file)
 
   useEffect(() => {
     window.addEventListener('storage', updateCountFromStorage);
@@ -308,18 +214,11 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
       window.removeEventListener('storage', updateCountFromStorage);
       window.removeEventListener('cartUpdated', updateCountFromStorage);
     };
-<<<<<<< HEAD
-  }, []);
-=======
   }, [updateCountFromStorage]);
->>>>>>> 7ac46ab (new file)
 
   const displayCartCount =
     propCartCount !== undefined ? propCartCount : localCartCount;
 
-<<<<<<< HEAD
-  useEffect(() => {
-=======
   const [currentUser, setCurrentUser] = useState<LoggedInUser | null>(() => {
     return storage.get<LoggedInUser | null>('user', null);
   });
@@ -329,7 +228,6 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
   useEffect(() => {
     if (!dropdownOpen) return;
 
->>>>>>> 7ac46ab (new file)
     function handleClickOutside(e: MouseEvent) {
       if (
         dropdownRef.current &&
@@ -338,14 +236,8 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
         setDropdownOpen(false);
       }
     }
-<<<<<<< HEAD
-    if (dropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-=======
 
     document.addEventListener('mousedown', handleClickOutside);
->>>>>>> 7ac46ab (new file)
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [dropdownOpen]);
 
@@ -357,40 +249,21 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-<<<<<<< HEAD
-  function handleSearchSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (searchValue.trim()) {
-      showToast(`Đang tìm kiếm: <strong>${searchValue}</strong>`);
-    }
-  }
-
-  function handleLogout() {
-    localStorage.removeItem('user');
-=======
   function handleLogout() {
     storage.remove('user');
->>>>>>> 7ac46ab (new file)
     setCurrentUser(null);
     setDropdownOpen(false);
     showToast('Đã đăng xuất thành công.');
   }
 
-<<<<<<< HEAD
-  const handleNavLinkClick = (e: React.MouseEvent, href: string) => {
-=======
   function handleNavLinkClick(
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
   ) {
->>>>>>> 7ac46ab (new file)
     if (href.includes('/orders') && !currentUser) {
       e.preventDefault();
       setShowGuardModal(true);
     }
-<<<<<<< HEAD
-  };
-=======
   }
 
   function handleSearchFocus(e: React.FocusEvent<HTMLInputElement>) {
@@ -424,7 +297,6 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
   }
 
   const isSearchDisabled = !address;
->>>>>>> 7ac46ab (new file)
 
   return (
     <>
@@ -433,10 +305,6 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
                    bg-[#FFFBF7]/90 backdrop-blur-md"
       >
         <div className="max-w-[1200px] mx-auto px-6 h-[68px] flex items-center gap-5">
-<<<<<<< HEAD
-          {/* Logo */}
-=======
->>>>>>> 7ac46ab (new file)
           <a
             href="/"
             className="flex items-center gap-1.5 font-display font-extrabold text-2xl
@@ -450,20 +318,10 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
             />
           </a>
 
-<<<<<<< HEAD
-          {/* Search */}
-=======
->>>>>>> 7ac46ab (new file)
           <form
             onSubmit={handleSearchSubmit}
             className="flex-1 max-w-sm relative hidden sm:flex items-center"
             role="search"
-<<<<<<< HEAD
-          >
-            <SearchIcon
-              size={15}
-              className="absolute left-3 text-[#7A7570] pointer-events-none"
-=======
             aria-label="Tìm kiếm nhà hàng"
           >
             <Search
@@ -471,24 +329,11 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
               className={`absolute left-3 pointer-events-none transition-colors
                           ${isSearchDisabled ? 'text-[#B0AAA4]' : 'text-[#7A7570]'}`}
               aria-hidden="true"
->>>>>>> 7ac46ab (new file)
             />
             <input
               type="text"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
-<<<<<<< HEAD
-              placeholder={HEADER_SEARCH_PLACEHOLDER}
-              className="w-full pl-9 pr-4 py-[9px] rounded-full border border-black/10
-                         bg-[#F5F0EB] text-sm text-[#252422] placeholder:text-[#7A7570]
-                         outline-none focus:border-[#EB5E28] focus:bg-white
-                         focus:ring-2 focus:ring-[#EB5E28]/15 transition-all"
-              aria-label="Tìm kiếm địa chỉ giao hàng"
-            />
-          </form>
-
-          {/* Nav */}
-=======
               onFocus={handleSearchFocus}
               placeholder={
                 isSearchDisabled
@@ -543,7 +388,6 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
             </div>
           )}
 
->>>>>>> 7ac46ab (new file)
           <nav
             className="hidden lg:flex items-center gap-0.5 ml-auto"
             aria-label="Menu chính"
@@ -552,11 +396,7 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
               <a
                 key={link.href}
                 href={link.href}
-<<<<<<< HEAD
-                onClick={(e) => handleNavLinkClick(e, link.href)} // 🎯 Thêm sự kiện kiểm tra chặn tại đây
-=======
                 onClick={(e) => handleNavLinkClick(e, link.href)}
->>>>>>> 7ac46ab (new file)
                 className="text-sm font-medium text-[#3d3a37] px-3 py-2 rounded-lg
                            hover:bg-[#F5F0EB] hover:text-[#252422] transition-colors
                            whitespace-nowrap"
@@ -566,10 +406,6 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
             ))}
           </nav>
 
-<<<<<<< HEAD
-          {/* Cart */}
-=======
->>>>>>> 7ac46ab (new file)
           <a
             href="/cart"
             className="relative flex items-center justify-center w-10 h-10 rounded-full
@@ -590,10 +426,6 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
             )}
           </a>
 
-<<<<<<< HEAD
-          {/* Logged-out */}
-=======
->>>>>>> 7ac46ab (new file)
           {!currentUser && (
             <div className="flex items-center gap-2 shrink-0">
               <button
@@ -618,10 +450,6 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
             </div>
           )}
 
-<<<<<<< HEAD
-          {/* Logged-in */}
-=======
->>>>>>> 7ac46ab (new file)
           {currentUser && (
             <div className="relative shrink-0" ref={dropdownRef}>
               <button
