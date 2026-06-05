@@ -1,52 +1,81 @@
 import type { Restaurant } from '../../types';
 import { SectionHeader } from '../common/SectionHeader';
 import { RestaurantCard } from './RestaurantCard';
-import useToast from '../../hooks/useToast';
-
 const MOCK_RESTAURANTS: Restaurant[] = [
   {
     restaurant_id: 1,
-    name: 'Pizza Saigon',
-    address: '123 Nguyễn Huệ, Q.1, TP.HCM',
-    latitude: 10.7769,
-    longitude: 106.7009,
+    name: 'Phở 10 Lý Quốc Sư',
+    address: '10 Lý Quốc Sư, Hàng Trống, Hoàn Kiếm, Hà Nội',
+    cuisine: ['pho'],
     status: 'open',
+    rating: 4.8,
+    reviewCount: 1250,
+    deliveryTimeMin: 15,
+    deliveryTimeMax: 25,
+    deliveryFee: 15000,
+    image_url:
+      'https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=600&auto=format&fit=crop&q=80',
+    isPopular: true,
+    isFastDelivery: true,
   },
   {
     restaurant_id: 2,
-    name: 'Burger House',
-    address: '45 Lê Lợi, Q.1, TP.HCM',
-    latitude: 10.7745,
-    longitude: 106.6983,
+    name: 'Chả Cá Thăng Long',
+    address: '6B Đường Thành, Cửa Đông, Hoàn Kiếm, Hà Nội',
+    cuisine: ['chaca'],
     status: 'open',
+    rating: 4.7,
+    reviewCount: 840,
+    deliveryTimeMin: 20,
+    deliveryTimeMax: 30,
+    deliveryFee: 20000,
+    image_url:
+      'https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format&fit=crop&q=80',
+    isPopular: true,
+    isFastDelivery: false,
   },
   {
     restaurant_id: 3,
-    name: 'Tokyo Sushi Bar',
-    address: '88 Hai Bà Trưng, Q.3, TP.HCM',
-    latitude: 10.7831,
-    longitude: 106.6942,
+    name: 'Bò Tơ Quán Mộc',
+    address: '102 Thái Thịnh, Ngã Tư Sở, Đống Đa, Hà Nội',
+    cuisine: ['boto'],
     status: 'open',
+    rating: 4.6,
+    reviewCount: 912,
+    deliveryTimeMin: 25,
+    deliveryTimeMax: 35,
+    deliveryFee: 0,
+    image_url:
+      'https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop&q=80',
+    isPopular: true,
+    isFastDelivery: false,
   },
   {
     restaurant_id: 4,
-    name: 'Phở 24',
-    address: '200 Nguyễn Trãi, Q.5, TP.HCM',
-    latitude: 10.7527,
-    longitude: 106.6665,
-    status: 'closed',
+    name: 'Bún Chả Hương Liên (Bun Cha Obama)',
+    address: '24 Lê Văn Hưu, Phan Chu Trinh, Hai Bà Trưng, Hà Nội',
+    cuisine: ['pho'],
+    status: 'open',
+    rating: 4.7,
+    reviewCount: 1850,
+    deliveryTimeMin: 15,
+    deliveryTimeMax: 25,
+    deliveryFee: 18000,
+    image_url:
+      'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&auto=format&fit=crop&q=80',
+    isPopular: true,
+    isFastDelivery: true,
   },
 ];
-
 export function RestaurantGrid() {
-  const { showToast } = useToast();
-
   function handleRestaurantClick(restaurant: Restaurant) {
-    showToast(`Đang mở nhà hàng: <strong>${restaurant.name}</strong>`);
+    if (restaurant.status !== 'closed') {
+      window.open(`/menu?id=${restaurant.restaurant_id}`, '_self');
+    }
   }
 
   function handleViewAll() {
-    showToast('Đang xem <strong>tất cả nhà hàng</strong>...');
+    window.open('/restaurants', '_self');
   }
 
   return (
@@ -64,15 +93,23 @@ export function RestaurantGrid() {
           }}
         >
           {MOCK_RESTAURANTS.map((restaurant) => (
-            <RestaurantCard
+            <div
               key={restaurant.restaurant_id}
-              restaurant={restaurant}
-              averageRating={4.8}
-              deliveryTimeMin={20}
-              deliveryTimeMax={35}
-              minPrice={65000}
-              onClick={handleRestaurantClick}
-            />
+              className={
+                restaurant.status === 'closed'
+                  ? 'cursor-not-allowed'
+                  : 'cursor-pointer'
+              }
+            >
+              <RestaurantCard
+                restaurant={restaurant}
+                averageRating={restaurant.restaurant_id === 1 ? 4.8 : 4.7}
+                deliveryTimeMin={restaurant.restaurant_id === 1 ? 15 : 20}
+                deliveryTimeMax={restaurant.restaurant_id === 1 ? 25 : 35}
+                minPrice={restaurant.restaurant_id === 1 ? 60000 : 65000}
+                onClick={() => handleRestaurantClick(restaurant)}
+              />
+            </div>
           ))}
         </div>
       </div>
