@@ -211,17 +211,41 @@ def generate(args):
     menu_items = []
     item_id = 1
     restaurant_items_map = defaultdict(list)
+    
+    # 1. Phân loại menu để tạo dữ liệu thực tế hơn
+    main_dishes = [
+        "Phở bò tái", "Bún chả Hà Nội", "Cơm gà xối mỡ", "Bánh mì thịt nướng", 
+        "Cơm tấm sườn bì chả", "Bún riêu", "Mì Quảng", "Xôi mặn", "Gỏi cuốn", "Hải sản hấp"
+    ]
+    side_dishes = [
+        "Trứng ốp la", "Quẩy nóng", "Thêm chả lụa", "Canh rong biển", 
+        "Bánh mì thêm", "Pate thêm", "Thịt nướng thêm", "Trân châu trắng"
+    ]
+    drinks_and_extras = [
+        "Trà đá", "Khăn lạnh", "Trà sữa trân châu", "Coca Cola", "Nước ép cam", "Cà phê đen"
+    ]
+
     for r in restaurants:
-        count = random.randint(5, 12)
-        for _ in range(count):
-            name = random.choice([
-                "Phở bò tái", "Bún chả Hà Nội", "Cơm gà xối mỡ", "Trà sữa trân châu",
-                "Bánh mì thịt nướng", "Hải sản hấp", "Cơm tấm sườn bì chả", "Bún riêu",
-                "Mì Quảng", "Xôi mặn", "Gỏi cuốn"
-            ]) + " " + fake.word()
-            price = random.randrange(15000, 200000, 5000)
+        count = random.randint(8, 15) # Tăng số lượng món lên một chút để menu phong phú
+        
+        # Gộp tất cả các món lại thành 1 kho để random
+        pool_menu = main_dishes + side_dishes + drinks_and_extras
+        
+        # Chọn ngẫu nhiên 'count' món cho quán này (đảm bảo không trùng nhau)
+        selected_names = random.sample(pool_menu, min(count, len(pool_menu)))
+        
+        for name in selected_names:
+            # 2. Logic set giá tiền cho hợp lý với từng loại món
+            if name in main_dishes:
+                price = random.randrange(35000, 80000, 5000) # Món chính 35k - 80k
+            elif name in side_dishes:
+                price = random.randrange(5000, 20000, 5000)  # Món phụ 5k - 20k
+            else:
+                price = random.randrange(2000, 35000, 1000)  # Nước & linh tinh 2k - 35k
+                
             image_url = None
             is_available = random.choices([1, 1, 1, 0], weights=[0.7, 0.1, 0.1, 0.1])[0]
+            
             menu_items.append({
                 "item_id": item_id,
                 "restaurant_id": r["restaurant_id"],
@@ -237,7 +261,7 @@ def generate(args):
     for it in menu_items:
         lines.append(
             f"INSERT INTO Menu_Items (item_id, restaurant_id, name, price, image_url, is_available) VALUES "
-            f"({it['item_id']}, {it['restaurant_id']}, {sql_escape(it['name'])}, {money(it['price'])}, "
+            f"({it['item_id']}, {it['restaurant_id']}, {sql_escape(it['name'])}, {it['price']}, "
             f"{sql_escape(it['image_url'])}, {1 if it['is_available'] else 0});"
         )
     lines.append("\n")
