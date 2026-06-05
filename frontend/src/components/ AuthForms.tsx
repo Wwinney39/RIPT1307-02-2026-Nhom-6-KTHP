@@ -51,6 +51,10 @@ export function LoginForm() {
             />
           </div>
 
+<<<<<<< HEAD
+=======
+          {/* password_hash field (raw input on FE) */}
+>>>>>>> 7ac46ab (new file)
           <div>
             <label className="block text-sm font-semibold text-[#252422] mb-1.5">
               Mật khẩu
