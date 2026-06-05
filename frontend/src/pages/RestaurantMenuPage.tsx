@@ -1,73 +1,8 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { MenuItem, Restaurant, CartItem } from '../types';
 import useToast from '../hooks/useToast';
-
-// ─── Mock data ────────────────────────────────────────────────────────────────
-
-const MOCK_RESTAURANT: Restaurant = {
-  restaurant_id: 1,
-  name: 'Pizza Saigon',
-  address: '123 Nguyễn Huệ, Quận 1, TP.HCM',
-  latitude: 10.7769,
-  longitude: 106.7009,
-  status: 'open',
-};
-
-const UI_AVERAGE_RATING = 4.8;
-const UI_DELIVERY_TIME = '20–30 phút';
-
-const MOCK_MENU_ITEMS: MenuItem[] = [
-  {
-    item_id: 1,
-    restaurant_id: 1,
-    name: 'Pizza Margherita',
-    price: 129000,
-    image_url: '',
-    is_available: true,
-  },
-  {
-    item_id: 2,
-    restaurant_id: 1,
-    name: 'Pizza Pepperoni',
-    price: 149000,
-    image_url: '',
-    is_available: true,
-  },
-  {
-    item_id: 3,
-    restaurant_id: 1,
-    name: 'Pizza 4 Phô Mai',
-    price: 169000,
-    image_url: '',
-    is_available: true,
-  },
-  {
-    item_id: 4,
-    restaurant_id: 1,
-    name: 'Pizza Hải Sản',
-    price: 185000,
-    image_url: '',
-    is_available: false,
-  },
-  {
-    item_id: 5,
-    restaurant_id: 1,
-    name: 'Mì Ý Bò Bằm',
-    price: 89000,
-    image_url: '',
-    is_available: true,
-  },
-  {
-    item_id: 6,
-    restaurant_id: 1,
-    name: 'Salad Caesar',
-    price: 75000,
-    image_url: '',
-    is_available: true,
-  },
-];
-
-// ─── Status helpers ───────────────────────────────────────────────────────────
+import { MOCK_RESTAURANTS, ALL_MENU_ITEMS } from '../data/mockData';
+import { storage } from '../utils/storage';
 
 const STATUS_LABEL: Record<Restaurant['status'], string> = {
   open: '● Đang mở cửa',
@@ -81,8 +16,6 @@ const STATUS_COLOR: Record<Restaurant['status'], string> = {
   suspended: 'bg-gray-500/20 text-gray-300',
 };
 
-// ─── MenuItemCard ─────────────────────────────────────────────────────────────
-
 interface MenuItemCardProps {
   item: MenuItem;
   onAddToCart: (item: MenuItem) => void;
@@ -95,10 +28,7 @@ function MenuItemCard({ item, onAddToCart }: MenuItemCardProps) {
                   transition-shadow hover:shadow-md
                   ${!item.is_available ? 'opacity-50' : ''}`}
     >
-      <div
-        className="w-20 h-20 rounded-xl bg-[#F5F0EB] flex items-center
-                      justify-center text-3xl shrink-0 overflow-hidden"
-      >
+      <div className="w-20 h-20 rounded-xl bg-[#F5F0EB] flex items-center justify-center text-3xl shrink-0 overflow-hidden">
         {item.image_url ? (
           <img
             src={item.image_url}
@@ -106,7 +36,7 @@ function MenuItemCard({ item, onAddToCart }: MenuItemCardProps) {
             className="w-full h-full object-cover"
           />
         ) : (
-          '🍽️'
+          '🍜'
         )}
       </div>
 
@@ -114,11 +44,9 @@ function MenuItemCard({ item, onAddToCart }: MenuItemCardProps) {
         <h3 className="font-display font-bold text-sm text-[#252422] truncate">
           {item.name}
         </h3>
-
         {!item.is_available && (
           <span className="text-xs text-red-500 font-medium">Tạm hết hàng</span>
         )}
-
         <p className="text-[#EB5E28] font-bold text-sm mt-1">
           {item.price.toLocaleString('vi-VN')} đ
         </p>
@@ -131,7 +59,6 @@ function MenuItemCard({ item, onAddToCart }: MenuItemCardProps) {
                    text-xl font-bold flex items-center justify-center
                    hover:bg-[#d44e1e] active:scale-95 transition-all
                    disabled:bg-gray-300 disabled:cursor-not-allowed"
-        aria-label={`Thêm ${item.name} vào giỏ`}
       >
         +
       </button>
@@ -139,17 +66,28 @@ function MenuItemCard({ item, onAddToCart }: MenuItemCardProps) {
   );
 }
 
-// ─── RestaurantMenuPage ───────────────────────────────────────────────────────
-
 export function RestaurantMenuPage() {
   const { showToast } = useToast();
-  const restaurant = MOCK_RESTAURANT;
-  const menuItems = MOCK_MENU_ITEMS;
 
-  // Khởi tạo state giỏ hàng từ localStorage
+  const searchParams = new URLSearchParams(window.location.search);
+  const restaurantId = Number(searchParams.get('id')) || 1;
+
+  const restaurant = useMemo(() => {
+    return (
+      MOCK_RESTAURANTS.find((r) => r.restaurant_id === restaurantId) ||
+      MOCK_RESTAURANTS[0]
+    );
+  }, [restaurantId]);
+
+  const menuItems = useMemo(() => {
+    return ALL_MENU_ITEMS.filter((item) => item.restaurant_id === restaurantId);
+  }, [restaurantId]);
+
+  const uiDeliveryTime = `${restaurant.deliveryTimeMin}–${restaurant.deliveryTimeMax} phút`;
+  const uiAverageRating = restaurant.rating;
+
   const [cartList, setCartList] = useState<CartItem[]>(() => {
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
+    return storage.get<CartItem[]>('cart', []);
   });
 
   function handleAddToCart(item: MenuItem) {
@@ -175,10 +113,8 @@ export function RestaurantMenuPage() {
           ];
 
     setCartList(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-
+    storage.set('cart', updatedCart);
     window.dispatchEvent(new Event('cartUpdated'));
-
     showToast(`Đã thêm <strong>${item.name}</strong> vào giỏ hàng`);
   }
 
@@ -186,36 +122,35 @@ export function RestaurantMenuPage() {
 
   return (
     <div className="min-h-screen bg-[#FFFBF7]">
-      {/* Restaurant header */}
       <div className="bg-[#252422] px-6 py-10 text-center">
-        <div className="text-5xl mb-3" aria-hidden="true">
-          🍽️
+        <div className="text-5xl mb-3">
+          {restaurantId === 4
+            ? '🍕'
+            : restaurantId === 3
+              ? '🥩'
+              : restaurantId === 5
+                ? '☕'
+                : '🍜'}
         </div>
-
         <h1 className="font-display font-extrabold text-2xl text-white">
           {restaurant.name}
         </h1>
-
         <p className="text-white/55 text-sm mt-1">{restaurant.address}</p>
 
         <div className="flex flex-wrap justify-center gap-4 mt-4">
           <span
-            className={`text-xs font-bold px-3 py-1 rounded-full
-                            ${STATUS_COLOR[restaurant.status]}`}
+            className={`text-xs font-bold px-3 py-1 rounded-full ${STATUS_COLOR[restaurant.status]}`}
           >
             {STATUS_LABEL[restaurant.status]}
           </span>
-
-          <span className="text-xs text-white/55">⏱ {UI_DELIVERY_TIME}</span>
-
-          <span className="text-xs text-white/55">⭐ {UI_AVERAGE_RATING}</span>
+          <span className="text-xs text-white/55">⏱ {uiDeliveryTime}</span>
+          <span className="text-xs text-white/55">⭐ {uiAverageRating}</span>
         </div>
       </div>
 
-      {/* Menu items */}
       <div className="max-w-2xl mx-auto px-4 py-8">
         <h2 className="font-display font-bold text-xl text-[#252422] mb-5">
-          Thực đơn
+          Thực đơn phổ biến
         </h2>
 
         <div className="space-y-3">
@@ -229,9 +164,8 @@ export function RestaurantMenuPage() {
         </div>
       </div>
 
-      {/* Sticky cart CTA */}
       {totalCartItems > 0 && (
-        <div className="fixed bottom-6 left-0 right-0 px-4 z-40 animate-fade-up">
+        <div className="fixed bottom-6 left-0 right-0 px-4 z-40">
           <a
             href="/cart"
             className="max-w-2xl mx-auto flex items-center justify-between
@@ -242,7 +176,7 @@ export function RestaurantMenuPage() {
               {totalCartItems} món
             </span>
             <span>Xem giỏ hàng</span>
-            <span aria-hidden="true">›</span>
+            <span>›</span>
           </a>
         </div>
       )}
