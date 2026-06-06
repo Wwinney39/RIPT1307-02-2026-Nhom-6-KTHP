@@ -357,7 +357,7 @@ export function RestaurantsPage() {
       </div>
 
       <div
-        className="sticky top-[68px] z-20 bg-[#FFFBF7]/95 backdrop-blur-md
+        className="sticky top-0 z-20 bg-[#FFFBF7]/95 backdrop-blur-md
                    border-b border-black/[0.06] shadow-sm"
       >
         <div className="max-w-5xl mx-auto px-4">
