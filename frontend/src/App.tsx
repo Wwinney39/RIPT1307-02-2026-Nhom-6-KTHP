@@ -44,6 +44,15 @@ function StaffGuard() {
   return <StaffLayout />;
 }
 
+function OrdersGuard() {
+  const currentUser = storage.get<User | null>('currentUser', null);
+  if (!currentUser) {
+    window.location.replace('/login');
+    return null;
+  }
+  return <OrdersListPage />;
+}
+
 function Router() {
   const path = window.location.pathname;
 
@@ -57,7 +66,7 @@ function Router() {
   if (path === '/menu') return <RestaurantMenuPage />;
   if (path === '/cart') return <CartPage />;
   if (path === '/checkout') return <CheckoutPage />;
-  if (path === '/orders') return <OrdersListPage />;
+  if (path === '/orders') return <OrdersGuard />;
   if (path.startsWith('/delivery/'))
     return <DeliveryTrackingPage orderId={Number(path.split('/')[2])} />;
   if (path === '/profile') return <UserProfilePage />;
