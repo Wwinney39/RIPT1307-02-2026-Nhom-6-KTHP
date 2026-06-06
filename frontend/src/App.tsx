@@ -11,9 +11,24 @@ import { OrdersListPage } from './pages/OrdersPage';
 import { DeliveryTrackingPage } from './pages/DeliveryTrackingPage';
 import { UserProfilePage } from './pages/UserProfilePage';
 import { ReviewsPage } from './pages/ReviewsPage';
+import { AdminLayout } from './pages/admin/AdminLayout';
+import { storage } from './utils/storage';
+import { type User } from './types/index';
+
+function AdminGuard() {
+  const currentUser = storage.get<User | null>('currentUser', null);
+
+  if (!currentUser || currentUser.role !== 'admin') {
+    window.location.replace('/login');
+    return null;
+  }
+
+  return <AdminLayout />;
+}
 
 function Router() {
   const path = window.location.pathname;
+  if (path.startsWith('/admin')) return <AdminGuard />;
 
   if (path === '/login') return <LoginForm />;
   if (path === '/register') return <RegisterForm />;
