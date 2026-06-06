@@ -38,19 +38,24 @@ export function LoginForm() {
       showToast('Đăng nhập thành công!');
 
       const redirectUrl = storage.get<string | null>('redirectAfterLogin', null);
+      const currentPath = window.location.pathname;
 
       if (redirectUrl) {
         storage.remove('redirectAfterLogin');
         window.location.href = redirectUrl;
-      } else if (response.user.role === 'admin') {
-        window.location.href = '/admin';
-      } else if (response.user.role === 'restaurant_owner') {
-        window.location.href = '/merchant';
-      } else if (response.user.role === 'staff') {
-        window.location.href = '/staff';
-      } else {
-        window.location.href = '/checkout';
+      } else if (currentPath === '/login') {
+        // Nếu ở trang login, redirect dựa trên role
+        if (response.user.role === 'admin') {
+          window.location.href = '/admin';
+        } else if (response.user.role === 'restaurant_owner') {
+          window.location.href = '/merchant';
+        } else if (response.user.role === 'staff') {
+          window.location.href = '/staff';
+        } else {
+          window.location.href = '/';
+        }
       }
+      // Nếu ở trang khác (home, restaurants, etc), stay lại
     } catch (error) {
       showToast(error instanceof Error ? error.message : 'Đăng nhập thất bại');
     } finally {
