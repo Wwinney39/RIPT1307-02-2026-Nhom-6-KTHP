@@ -126,7 +126,6 @@ export function RegisterForm() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-          {/* users.name */}
           <div>
             <label className="block text-sm font-semibold text-[#252422] mb-1.5">
               Họ và tên
