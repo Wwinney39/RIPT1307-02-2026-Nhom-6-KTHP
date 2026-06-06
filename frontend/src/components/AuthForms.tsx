@@ -18,31 +18,34 @@ export function LoginForm() {
     setLoading(true);
     try {
       const response = await api.login(form.phone, form.password);
-      storage.set('authToken', response.token);
 
       const userData = {
         name: response.user.name,
         email: response.user.phone,
         avatarInitial: response.user.name.charAt(0).toUpperCase(),
       };
+
+      storage.set('authToken', response.token);
       storage.set('user', userData);
       storage.set('currentUser', response.user);
 
-      window.dispatchEvent(new Event('userLoggedIn'));
+      console.log('Login successful, saved to localStorage:', {
+        user: storage.get('user', null),
+        currentUser: storage.get('currentUser', null),
+      });
 
+      window.dispatchEvent(new Event('userLoggedIn'));
       showToast('Đăng nhập thành công!');
 
-      setTimeout(() => {
-        if (response.user.role === 'admin') {
-          window.location.href = '/admin';
-        } else if (response.user.role === 'restaurant_owner') {
-          window.location.href = '/merchant';
-        } else if (response.user.role === 'staff') {
-          window.location.href = '/staff';
-        } else {
-          window.location.href = '/';
-        }
-      }, 500);
+      if (response.user.role === 'admin') {
+        window.location.href = '/admin';
+      } else if (response.user.role === 'restaurant_owner') {
+        window.location.href = '/merchant';
+      } else if (response.user.role === 'staff') {
+        window.location.href = '/staff';
+      } else {
+        window.location.href = '/';
+      }
     } catch (error) {
       showToast(error instanceof Error ? error.message : 'Đăng nhập thất bại');
     } finally {
