@@ -50,8 +50,7 @@ io.on('connection', (socket) => {
     console.log('Client ngắt kết nối:', socket.id);
   });
 });
-// Middleware để parse JSON body từ các request gửi lên
-app.use(express.json());
+
 
 // Khai báo Base URL cho cụm API Auth
 app.use('/api/auth', authRoutes);
