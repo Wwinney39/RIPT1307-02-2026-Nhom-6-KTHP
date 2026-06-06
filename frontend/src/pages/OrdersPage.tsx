@@ -90,17 +90,27 @@ export function OrdersListPage() {
       ) : (
         <>
           <div className="sticky top-0 z-10 bg-[#FFFBF7]/90 backdrop-blur-md border-b border-black/[0.06] px-4 py-4">
-            <div className="max-w-3xl mx-auto flex items-center gap-3">
+           <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
               <button
                 onClick={() => window.history.back()}
-                className="w-9 h-9 rounded-full border border-black/10 bg-white flex items-center justify-center text-[#252422] hover:bg-[#F5F0EB] transition-colors shrink-0"
+                className="w-9 h-9 rounded-full border border-black/10 bg-white flex items-center justify-center text-[#252422] hover:bg-[#F5F0EB] transition-colors"
               >
                 ←
               </button>
+
               <h1 className="font-display font-bold text-xl text-[#252422]">
                 Đơn hàng của tôi
               </h1>
             </div>
+
+            <button
+              onClick={() => (window.location.href = '/')}
+              className="px-4 py-2 rounded-full bg-[#EB5E28] text-white text-sm font-bold hover:bg-[#d44e1e] transition-all"
+            >
+              🏠 Trang chủ
+            </button>
+</div>
           </div>
 
           <div className="max-w-3xl mx-auto px-4 py-6 space-y-3">
