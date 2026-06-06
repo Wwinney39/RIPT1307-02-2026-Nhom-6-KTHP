@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import dotenv from 'dotenv';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
@@ -18,6 +19,12 @@ dotenv.config();
 
 const app = express();
 const httpServer = createServer(app);
+
+app.use(cors({
+  origin: 'https://restaurant-manager-frontend-g6vo.onrender.com', // Điền chính xác link Frontend Render của bạn
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 export const io = new Server(httpServer, {
   cors: { origin: '*' }
