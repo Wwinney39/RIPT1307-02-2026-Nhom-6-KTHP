@@ -161,9 +161,7 @@ export function RegisterForm() {
     try {
       await api.register(form.name, form.phone, form.email, form.password);
       showToast('Đăng ký thành công! Chuyển hướng đến đăng nhập...');
-      setTimeout(() => {
-        window.location.href = '/login';
-      }, 1000);
+      window.location.href = '/login';
     } catch (error) {
       showToast(error instanceof Error ? error.message : 'Đăng ký thất bại');
     } finally {
