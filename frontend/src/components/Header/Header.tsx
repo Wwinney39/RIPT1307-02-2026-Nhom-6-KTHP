@@ -7,7 +7,7 @@ import {
 } from '../../constants';
 import { SearchIcon, ShoppingBagIcon } from '../common/Icons';
 import useToast from '../../hooks/useToast';
-import { useAddress } from '../../context/AddressContext';
+import { useAddress } from '../../context/AddressContextCore';
 import {
   ChevronDown,
   UserCircle,
