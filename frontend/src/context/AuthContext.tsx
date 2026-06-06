@@ -1,44 +1,23 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 import { storage } from '../utils/storage';
-
-interface User {
-  user_id: number;
-  name: string;
-  phone: string;
-  role: string;
-}
-
-interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  isLoading: boolean;
-  login: (user: User, token: string) => void;
-  logout: () => void;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+import { AuthContext, type User } from '../hooks/useAuth';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(() =>
+    storage.get<User | null>('currentUser', null),
+  );
+  const [token, setToken] = useState<string | null>(() =>
+    storage.get<string | null>('authToken', null),
+  );
+  const [isLoading] = useState(false);
 
   useEffect(() => {
-    const savedUser = storage.get<User | null>('currentUser', null);
-    const savedToken = storage.get<string | null>('authToken', null);
-
-    if (savedUser && savedToken) {
-      setUser(savedUser);
-      setToken(savedToken);
-    }
-    setIsLoading(false);
-
     function handleLogin() {
-      const user = storage.get<User | null>('currentUser', null);
-      const token = storage.get<string | null>('authToken', null);
-      if (user && token) {
-        setUser(user);
-        setToken(token);
+      const savedUser = storage.get<User | null>('currentUser', null);
+      const savedToken = storage.get<string | null>('authToken', null);
+      if (savedUser && savedToken) {
+        setUser(savedUser);
+        setToken(savedToken);
       }
     }
 
@@ -46,11 +25,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('userLoggedIn', handleLogin);
   }, []);
 
-  const login = (user: User, token: string) => {
-    setUser(user);
-    setToken(token);
-    storage.set('currentUser', user);
-    storage.set('authToken', token);
+  const login = (newUser: User, newToken: string) => {
+    setUser(newUser);
+    setToken(newToken);
+    storage.set('currentUser', newUser);
+    storage.set('authToken', newToken);
   };
 
   const logout = () => {
@@ -66,12 +45,4 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within AuthProvider');
-  }
-  return context;
 }

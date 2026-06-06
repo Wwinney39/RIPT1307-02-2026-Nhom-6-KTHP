@@ -118,8 +118,9 @@ export function CartPage() {
 
   function handleCheckout() {
     const isLoggedIn =
-      storage.get<string>('isLoggedIn', 'false') === 'true' ||
-      !!storage.get<string | null>('user_token', null);
+      !!storage.get<string | null>('authToken', null) ||
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      !!storage.get<any | null>('currentUser', null);
 
     if (!isLoggedIn) {
       setShowLoginModal(true);
@@ -127,6 +128,8 @@ export function CartPage() {
       window.location.href = '/checkout';
     }
   }
+  const shippingFee =
+    cartItems.length > 0 ? (cartItems[0].shipping_fee ?? 15000) : 0;
 
   const subtotal = cartItems.reduce(
     (s, i) => s + (i.price ?? 0) * i.quantity,
@@ -140,7 +143,7 @@ export function CartPage() {
       )
     : 0;
 
-  const total = subtotal - discount;
+  const total = subtotal - discount + shippingFee;
 
   if (cartItems.length === 0) {
     return (
@@ -165,7 +168,7 @@ export function CartPage() {
 
   return (
     <div className="min-h-screen bg-[#FFFBF7] px-4 py-8 relative">
-     <button
+      <button
         onClick={() => (window.location.href = '/')}
         className="fixed top-4 left-4 z-50
                   bg-[#EB5E28] text-white
@@ -240,7 +243,11 @@ export function CartPage() {
             )}
             <div className="flex justify-between text-[#7A7570]">
               <span>Phí giao hàng</span>
-              <span className="text-emerald-600 font-semibold">Miễn phí</span>
+              <span className="text-[#252422] font-semibold">
+                {shippingFee === 0
+                  ? 'Miễn phí'
+                  : `${shippingFee.toLocaleString('vi-VN')} đ`}
+              </span>
             </div>
             <div
               className="flex justify-between font-bold text-[#252422] text-base pt-2

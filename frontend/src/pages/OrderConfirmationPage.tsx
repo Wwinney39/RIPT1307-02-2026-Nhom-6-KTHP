@@ -2,44 +2,58 @@ import { useEffect, useState } from 'react';
 import { storage } from '../utils/storage';
 import { CheckCircle } from 'lucide-react';
 
+interface Order {
+  order_id: string;
+  order_code: string;
+  restaurant_name: string;
+  payment_method: string;
+  delivery_address: string;
+  note?: string;
+  total: number;
+}
+
 export function OrderConfirmationPage() {
-  const [order, setOrder] = useState(null);
-  const [orderId] = useState(() => {
+  const [orderId] = useState<string | null>(() => {
     const params = new URLSearchParams(window.location.search);
     return params.get('orderId');
   });
 
+  const [order] = useState<Order | null>(() => {
+    const currentUser = storage.get('currentUser', null);
+    if (!currentUser || !orderId) {
+      return null;
+    }
+
+    const orders = storage.get<Order[]>('orders', []) || [];
+    return orders.find((o) => o.order_id === orderId) || null;
+  });
+
   useEffect(() => {
     const currentUser = storage.get('currentUser', null);
+
     if (!currentUser) {
       window.location.href = '/login';
       return;
     }
 
-    if (!orderId) {
+    if (!orderId || !order) {
       window.location.href = '/';
-      return;
     }
+  }, [orderId, order]);
 
-    const orders = storage.get('orders', []) || [];
-    const found = orders.find((o: any) => o.order_id === orderId);
-    if (found) {
-      setOrder(found);
-    }
-  }, [orderId]);
-
-  if (!order) {
-    return (
-      <div className="min-h-screen bg-[#FFFBF7] flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin">⏳</div>
-          <p className="mt-2 text-[#7A7570]">Đang tải...</p>
+  if (!orderId || !order) {
+    const currentUser = storage.get('currentUser', null);
+    if (!currentUser || !orderId || !order) {
+      return (
+        <div className="min-h-screen bg-[#FFFBF7] flex items-center justify-center">
+          <div className="text-center">
+            <div className="inline-block animate-spin">⏳</div>
+            <p className="mt-2 text-[#7A7570]">Đang xử lý điều hướng...</p>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
-
-  const order_any = order as any;
 
   return (
     <div className="min-h-screen bg-[#FFFBF7] py-12 px-4">
@@ -53,9 +67,7 @@ export function OrderConfirmationPage() {
           <h1 className="text-3xl font-bold text-[#252422] mb-2">
             Đặt hàng thành công!
           </h1>
-          <p className="text-[#7A7570]">
-            Cảm ơn bạn đã tin tưởng ZestyDash
-          </p>
+          <p className="text-[#7A7570]">Cảm ơn bạn đã tin tưởng ZestyDash</p>
         </div>
 
         <div className="bg-white rounded-2xl p-8 mb-8">
@@ -67,44 +79,46 @@ export function OrderConfirmationPage() {
             <div className="flex justify-between border-b pb-2">
               <span className="text-[#7A7570]">Mã đơn hàng:</span>
               <span className="font-bold text-[#252422]">
-                {order_any.order_code}
+                {order.order_code}
               </span>
             </div>
 
             <div className="flex justify-between border-b pb-2">
               <span className="text-[#7A7570]">Nhà hàng:</span>
               <span className="font-bold text-[#252422]">
-                {order_any.restaurant_name}
+                {order.restaurant_name}
               </span>
             </div>
 
             <div className="flex justify-between border-b pb-2">
               <span className="text-[#7A7570]">Phương thức thanh toán:</span>
               <span className="font-bold text-[#252422] capitalize">
-                {order_any.payment_method === 'cash'
+                {order.payment_method === 'cash'
                   ? 'Tiền mặt'
-                  : order_any.payment_method}
+                  : order.payment_method}
               </span>
             </div>
 
             <div className="flex justify-between border-b pb-2">
               <span className="text-[#7A7570]">Địa chỉ giao:</span>
               <span className="font-bold text-[#252422] text-right max-w-xs">
-                {order_any.delivery_address}
+                {order.delivery_address}
               </span>
             </div>
 
             <div className="flex justify-between border-b pb-2">
               <span className="text-[#7A7570]">Ghi chú:</span>
               <span className="font-bold text-[#252422]">
-                {order_any.note || '(Không có)'}
+                {order.note || '(Không có)'}
               </span>
             </div>
 
             <div className="flex justify-between pt-2">
-              <span className="text-lg font-bold text-[#252422]">Tổng cộng:</span>
+              <span className="text-lg font-bold text-[#252422]">
+                Tổng cộng:
+              </span>
               <span className="text-2xl font-bold text-[#EB5E28]">
-                {order_any.total?.toLocaleString()}₫
+                {order.total?.toLocaleString()}₫
               </span>
             </div>
           </div>

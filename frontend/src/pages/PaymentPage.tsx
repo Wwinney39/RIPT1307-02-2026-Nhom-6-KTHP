@@ -3,6 +3,16 @@ import { storage } from '../utils/storage';
 import useToast from '../hooks/useToast';
 import type { PaymentMethod } from '../types';
 
+interface OrderSummary {
+  order_id: string | number;
+  subtotal: number;
+  shipping_fee: number;
+  discount: number;
+  total: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+}
+
 const PAYMENT_METHODS: { value: PaymentMethod; label: string; icon: string }[] =
   [
     { value: 'cash', label: 'Tiền mặt khi nhận hàng', icon: '💵' },
@@ -16,8 +26,8 @@ export function PaymentPage() {
   const { showToast } = useToast();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash');
   const [loading, setLoading] = useState(false);
-  const [orderSummary] = useState(() => {
-    return storage.get('orderSummary', null);
+  const [orderSummary] = useState<OrderSummary | null>(() => {
+    return storage.get<OrderSummary | null>('orderSummary', null);
   });
 
   useEffect(() => {
@@ -43,8 +53,8 @@ export function PaymentPage() {
         payment_status: 'pending',
         created_at: new Date().toISOString(),
       };
-
-      const orders = storage.get('orders', []) || [];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const orders = storage.get<any[]>('orders', []) || [];
       orders.push(order);
       storage.set('orders', orders);
 
@@ -56,7 +66,7 @@ export function PaymentPage() {
       setTimeout(() => {
         window.location.href = `/order-confirmation?orderId=${order.order_id}`;
       }, 500);
-    } catch (error) {
+    } catch {
       showToast('Có lỗi xảy ra, vui lòng thử lại');
     } finally {
       setLoading(false);
@@ -116,16 +126,17 @@ export function PaymentPage() {
           <div className="space-y-2 text-[#7A7570]">
             <div className="flex justify-between">
               <span>Tiền hàng:</span>
-              <span>{orderSummary.subtotal?.toLocaleString()}₫</span>
+              <span>{(orderSummary.subtotal ?? 0).toLocaleString()}₫</span>
             </div>
             <div className="flex justify-between">
               <span>Phí giao hàng:</span>
-              <span>{orderSummary.shipping_fee?.toLocaleString()}₫</span>
+              {/* Đọc và hiển thị chính xác phí giao hàng từ orderSummary */}
+              <span>{(orderSummary.shipping_fee ?? 0).toLocaleString()}₫</span>
             </div>
-            {orderSummary.discount > 0 && (
+            {(orderSummary.discount ?? 0) > 0 && (
               <div className="flex justify-between text-green-600">
                 <span>Giảm giá:</span>
-                <span>-{orderSummary.discount?.toLocaleString()}₫</span>
+                <span>-{(orderSummary.discount ?? 0).toLocaleString()}₫</span>
               </div>
             )}
           </div>
@@ -133,7 +144,7 @@ export function PaymentPage() {
           <div className="border-t border-[#E0E0E0] pt-4 mt-4 flex justify-between font-bold text-lg text-[#252422]">
             <span>Tổng cộng:</span>
             <span className="text-[#EB5E28]">
-              {orderSummary.total?.toLocaleString()}₫
+              {(orderSummary.total ?? 0).toLocaleString()}₫
             </span>
           </div>
         </div>
@@ -149,7 +160,9 @@ export function PaymentPage() {
         </button>
 
         <button
-          onClick={() => window.location.href = '/checkout'}
+          onClick={() => {
+            window.location.href = '/checkout';
+          }}
           className="w-full py-3 rounded-full border-2 border-[#E0E0E0] text-[#252422] font-bold
                      text-lg hover:bg-[#F5F0EB] active:scale-95 transition-all mt-3"
         >

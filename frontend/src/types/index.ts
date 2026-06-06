@@ -77,6 +77,7 @@ export interface CartItem {
   price?: number;
   image_url?: string;
   restaurant_name?: string;
+  shipping_fee?: number;
 }
 
 export interface Voucher {
