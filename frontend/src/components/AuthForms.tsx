@@ -19,6 +19,13 @@ export function LoginForm() {
     try {
       const response = await api.login(form.phone, form.password);
       storage.set('authToken', response.token);
+
+      const userData = {
+        name: response.user.name,
+        email: response.user.phone,
+        avatarInitial: response.user.name.charAt(0).toUpperCase(),
+      };
+      storage.set('user', userData);
       storage.set('currentUser', response.user);
       showToast('Đăng nhập thành công!');
 
