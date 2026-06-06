@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { storage } from '../utils/storage';
 import useToast from '../hooks/useToast';
-import type { CartItem, PaymentMethod } from '../types';
+import type { PaymentMethod } from '../types';
 
 const PAYMENT_METHODS: { value: PaymentMethod; label: string; icon: string }[] =
   [

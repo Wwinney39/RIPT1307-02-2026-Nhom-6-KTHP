@@ -37,7 +37,7 @@ export function LoginForm() {
       window.dispatchEvent(new Event('userLoggedIn'));
       showToast('Đăng nhập thành công!');
 
-      const redirectUrl = storage.get<string>('redirectAfterLogin', null);
+      const redirectUrl = storage.get<string | null>('redirectAfterLogin', null);
 
       if (redirectUrl) {
         storage.remove('redirectAfterLogin');
