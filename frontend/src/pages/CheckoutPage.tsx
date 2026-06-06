@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import type { UserAddress, PaymentMethod, CartItem } from '../types';
+import { useState } from 'react';
+import type { UserAddress, CartItem } from '../types';
 import useToast from '../hooks/useToast';
 import { storage } from '../utils/storage';
 
@@ -18,14 +18,12 @@ const DEFAULT_ADDRESSES: UserAddress[] = [
   },
 ];
 
-const PAYMENT_METHODS: { value: PaymentMethod; label: string; icon: string }[] =
-  [
-    { value: 'cash', label: 'Tiền mặt khi nhận hàng', icon: '💵' },
-    { value: 'momo', label: 'Ví MoMo', icon: '💜' },
-    { value: 'vnpay', label: 'VNPay', icon: '🔵' },
-    { value: 'zalopay', label: 'ZaloPay', icon: '🟢' },
-    { value: 'card', label: 'Thẻ tín dụng / Ghi nợ', icon: '💳' },
-  ];
+const generateOrderMeta = () => {
+  return {
+    uniqueId: Date.now().toString(),
+    randomCode: `10${Math.floor(10 + Math.random() * 90)}`,
+  };
+};
 
 export function CheckoutPage() {
   const { showToast } = useToast();
@@ -46,17 +44,19 @@ export function CheckoutPage() {
     );
   });
 
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash');
   const [itemNote, setItemNote] = useState('');
+  const shippingFee =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    cartItems.length > 0 ? ((cartItems[0] as any).shipping_fee ?? 15000) : 0;
 
   const subtotal = cartItems.reduce(
     (s, i) => s + (i.price ?? 0) * i.quantity,
     0,
   );
   const discount = 0;
-  const total = subtotal - discount;
+  const total = subtotal - discount + shippingFee;
 
-  function handlePlaceOrder() {
+  const handlePlaceOrder = () => {
     if (cartItems.length === 0) {
       showToast('Giỏ hàng của bạn đang trống, không thể đặt hàng!');
       return;
@@ -66,12 +66,12 @@ export function CheckoutPage() {
       addresses.find((a) => a.address_id === selectedAddressId)?.address_text ||
       '';
 
-    const shippingFee = 25000;
-    const discount = 0;
+    const discountAmount = 0;
+    const { uniqueId, randomCode } = generateOrderMeta();
 
     const orderSummary = {
-      order_id: Date.now().toString(),
-      order_code: `10${Math.floor(10 + Math.random() * 90)}`,
+      order_id: uniqueId,
+      order_code: randomCode,
       restaurant_name: cartItems[0]?.restaurant_name || 'Nhà hàng ZestyDash',
       item_summary: cartItems
         .map(
@@ -82,8 +82,8 @@ export function CheckoutPage() {
       items: cartItems,
       subtotal,
       shipping_fee: shippingFee,
-      discount,
-      total: subtotal + shippingFee - discount,
+      discount: discountAmount,
+      total: subtotal + shippingFee - discountAmount,
       delivery_address: selectedAddress,
       note: itemNote,
       created_at: new Date().toISOString(),
@@ -95,7 +95,7 @@ export function CheckoutPage() {
     setTimeout(() => {
       window.location.href = '/payment';
     }, 500);
-  }
+  };
 
   return (
     <div className="min-h-screen bg-[#FFFBF7] px-4 py-8">
@@ -152,31 +152,6 @@ export function CheckoutPage() {
 
         <div className="bg-white rounded-2xl border border-black/[0.07] p-5">
           <p className="font-semibold text-sm text-[#252422] mb-3">
-            💳 Phương thức thanh toán
-          </p>
-          <div className="space-y-2">
-            {PAYMENT_METHODS.map((pm) => (
-              <label
-                key={pm.value}
-                className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${paymentMethod === pm.value ? 'border-[#EB5E28] bg-orange-50' : 'border-black/10 hover:bg-[#F5F0EB]'}`}
-              >
-                <input
-                  type="radio"
-                  name="payment"
-                  value={pm.value}
-                  checked={paymentMethod === pm.value}
-                  onChange={() => setPaymentMethod(pm.value)}
-                  className="accent-[#EB5E28]"
-                />
-                <span className="text-base">{pm.icon}</span>
-                <span className="text-sm text-[#252422]">{pm.label}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl border border-black/[0.07] p-5">
-          <p className="font-semibold text-sm text-[#252422] mb-3">
             🧾 Tóm tắt thanh toán
           </p>
           <div className="space-y-2 text-sm">
@@ -186,7 +161,11 @@ export function CheckoutPage() {
             </div>
             <div className="flex justify-between text-[#7A7570]">
               <span>Phí giao hàng</span>
-              <span className="text-emerald-600 font-semibold">Miễn phí</span>
+              <span className="text-[#252422] font-semibold">
+                {shippingFee === 0
+                  ? 'Miễn phí'
+                  : `${shippingFee.toLocaleString('vi-VN')} đ`}
+              </span>
             </div>
             <div className="flex justify-between font-bold text-[#252422] text-base pt-2 border-t border-black/[0.07]">
               <span>Tổng cộng</span>

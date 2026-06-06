@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Order, OrderStatus } from '../types';
 import { storage } from '../utils/storage';
 
@@ -62,20 +62,62 @@ function StatusPill({ status }: { status: OrderStatus }) {
 export function OrdersListPage() {
   const [selectedOrderId, setSelectedOrderId] = useState<number | null>(null);
   const [cancelOrderId, setCancelOrderId] = useState<number | null>(null);
-  const [orders, setOrders] = useState<ExtendedOrder[]>(() => {
-    return storage.get<ExtendedOrder[]>('user_orders', []);
-  });
+  const [orders, setOrders] = useState<ExtendedOrder[]>([]);
 
-  function executeCancelOrder(orderId: number) {
-    const updatedOrders = orders.map((order) => {
-      if (order.order_id === orderId) {
-        return { ...order, status: 'cancelled' as OrderStatus };
+  useEffect(() => {
+    async function fetchOrders() {
+      try {
+        const token = storage.get<string | null>('authToken', null);
+        const API_BASE_URL = 'http://localhost:3000/api';
+
+        const response = await fetch(`${API_BASE_URL}/orders`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const fetchedOrders = Array.isArray(data)
+            ? data
+            : data.orders || data.data || [];
+          setOrders(fetchedOrders);
+        }
+      } catch (error) {
+        console.error('Lỗi kết nối API lấy danh sách đơn hàng:', error);
       }
-      return order;
-    });
+    }
 
-    setOrders(updatedOrders);
-    storage.set('user_orders', updatedOrders);
+    fetchOrders();
+  }, []);
+
+  async function executeCancelOrder(orderId: number) {
+    try {
+      const token = storage.get<string | null>('authToken', null);
+      const API_BASE_URL = 'http://localhost:3000/api';
+
+      const response = await fetch(`${API_BASE_URL}/orders/${orderId}/cancel`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const updatedOrders = orders.map((order) => {
+          if (order.order_id === orderId) {
+            return { ...order, status: 'cancelled' as OrderStatus };
+          }
+          return order;
+        });
+        setOrders(updatedOrders);
+      }
+    } catch (error) {
+      console.error('Lỗi khi gọi API hủy đơn hàng:', error);
+    }
   }
 
   return (
@@ -90,27 +132,27 @@ export function OrdersListPage() {
       ) : (
         <>
           <div className="sticky top-0 z-10 bg-[#FFFBF7]/90 backdrop-blur-md border-b border-black/[0.06] px-4 py-4">
-           <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
+            <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => window.history.back()}
+                  className="w-9 h-9 rounded-full border border-black/10 bg-white flex items-center justify-center text-[#252422] hover:bg-[#F5F0EB] transition-colors"
+                >
+                  ←
+                </button>
+
+                <h1 className="font-display font-bold text-xl text-[#252422]">
+                  Đơn hàng của tôi
+                </h1>
+              </div>
+
               <button
-                onClick={() => window.history.back()}
-                className="w-9 h-9 rounded-full border border-black/10 bg-white flex items-center justify-center text-[#252422] hover:bg-[#F5F0EB] transition-colors"
+                onClick={() => (window.location.href = '/')}
+                className="px-4 py-2 rounded-full bg-[#EB5E28] text-white text-sm font-bold hover:bg-[#d44e1e] transition-all"
               >
-                ←
+                🏠 Trang chủ
               </button>
-
-              <h1 className="font-display font-bold text-xl text-[#252422]">
-                Đơn hàng của tôi
-              </h1>
             </div>
-
-            <button
-              onClick={() => (window.location.href = '/')}
-              className="px-4 py-2 rounded-full bg-[#EB5E28] text-white text-sm font-bold hover:bg-[#d44e1e] transition-all"
-            >
-              🏠 Trang chủ
-            </button>
-</div>
           </div>
 
           <div className="max-w-3xl mx-auto px-4 py-6 space-y-3">
