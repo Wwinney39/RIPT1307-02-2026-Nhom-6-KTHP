@@ -276,6 +276,7 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
   ) {
     if (href.includes('/orders') && !currentUser) {
       e.preventDefault();
+      storage.set('redirectAfterLogin', href);
       setShowGuardModal(true);
     }
   }

@@ -37,14 +37,19 @@ export function LoginForm() {
       window.dispatchEvent(new Event('userLoggedIn'));
       showToast('Đăng nhập thành công!');
 
-      if (response.user.role === 'admin') {
+      const redirectUrl = storage.get<string>('redirectAfterLogin', null);
+
+      if (redirectUrl) {
+        storage.remove('redirectAfterLogin');
+        window.location.href = redirectUrl;
+      } else if (response.user.role === 'admin') {
         window.location.href = '/admin';
       } else if (response.user.role === 'restaurant_owner') {
         window.location.href = '/merchant';
       } else if (response.user.role === 'staff') {
         window.location.href = '/staff';
       } else {
-        window.location.href = '/';
+        window.location.href = '/checkout';
       }
     } catch (error) {
       showToast(error instanceof Error ? error.message : 'Đăng nhập thất bại');
