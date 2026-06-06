@@ -54,8 +54,7 @@ export const login = async (req: Request<{}, {}, LoginBody>, res: Response): Pro
     const user = users[0];
 
     // Kiểm tra mật khẩu
-    //const isMatch = await bcrypt.compare(password, user.password_hash);
-    const isMatch = (password === user.password_hash);
+    const isMatch = await bcrypt.compare(password, user.password_hash);
     if (!isMatch) {
       return res.status(400).json({ message: "Số điện thoại hoặc mật khẩu không đúng!" });
     }
