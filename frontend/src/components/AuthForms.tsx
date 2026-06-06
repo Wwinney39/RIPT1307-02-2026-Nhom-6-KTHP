@@ -1,17 +1,66 @@
 import { useState } from 'react';
 import useToast from '../hooks/useToast';
+import { api } from '../utils/api';
+import { storage } from '../utils/storage';
 
 export function LoginForm() {
   const { showToast } = useToast();
   const [form, setForm] = useState({ phone: '', password: '' });
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.phone || !form.password) {
       showToast('Vui lòng điền đầy đủ thông tin.');
       return;
     }
-    showToast('Đang đăng nhập...');
+
+    setLoading(true);
+    try {
+      const response = await api.login(form.phone, form.password);
+
+      const userData = {
+        name: response.user.name,
+        email: response.user.phone,
+        avatarInitial: response.user.name.charAt(0).toUpperCase(),
+      };
+
+      storage.set('authToken', response.token);
+      storage.set('user', userData);
+      storage.set('currentUser', response.user);
+
+      console.log('Login successful, saved to localStorage:', {
+        user: storage.get('user', null),
+        currentUser: storage.get('currentUser', null),
+      });
+
+      window.dispatchEvent(new Event('userLoggedIn'));
+      showToast('Đăng nhập thành công!');
+
+      const redirectUrl = storage.get<string | null>('redirectAfterLogin', null);
+      const currentPath = window.location.pathname;
+
+      if (redirectUrl) {
+        storage.remove('redirectAfterLogin');
+        window.location.href = redirectUrl;
+      } else if (currentPath === '/login') {
+        // Nếu ở trang login, redirect dựa trên role
+        if (response.user.role === 'admin') {
+          window.location.href = '/admin';
+        } else if (response.user.role === 'restaurant_owner') {
+          window.location.href = '/merchant';
+        } else if (response.user.role === 'staff') {
+          window.location.href = '/staff';
+        } else {
+          window.location.href = '/';
+        }
+      }
+      // Nếu ở trang khác (home, restaurants, etc), stay lại
+    } catch (error) {
+      showToast(error instanceof Error ? error.message : 'Đăng nhập thất bại');
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -69,10 +118,12 @@ export function LoginForm() {
 
           <button
             type="submit"
+            disabled={loading}
             className="w-full py-3 rounded-full bg-[#EB5E28] text-white font-bold
-                       text-sm hover:bg-[#d44e1e] active:scale-95 transition-all mt-2"
+                       text-sm hover:bg-[#d44e1e] active:scale-95 transition-all mt-2
+                       disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Đăng nhập
+            {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
           </button>
         </form>
 
@@ -99,14 +150,33 @@ export function RegisterForm() {
     password: '',
     confirmPassword: '',
   });
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!form.name || !form.phone || !form.email || !form.password) {
+      showToast('Vui lòng điền đầy đủ thông tin.');
+      return;
+    }
     if (form.password !== form.confirmPassword) {
       showToast('Mật khẩu xác nhận không khớp.');
       return;
     }
-    showToast('Đang tạo tài khoản...');
+    if (form.password.length < 6) {
+      showToast('Mật khẩu phải có ít nhất 6 ký tự.');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await api.register(form.name, form.phone, form.email, form.password);
+      showToast('Đăng ký thành công! Chuyển hướng đến đăng nhập...');
+      window.location.href = '/login';
+    } catch (error) {
+      showToast(error instanceof Error ? error.message : 'Đăng ký thất bại');
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -221,10 +291,12 @@ export function RegisterForm() {
 
           <button
             type="submit"
+            disabled={loading}
             className="w-full py-3 rounded-full bg-[#EB5E28] text-white font-bold
-                       text-sm hover:bg-[#d44e1e] active:scale-95 transition-all mt-2"
+                       text-sm hover:bg-[#d44e1e] active:scale-95 transition-all mt-2
+                       disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Đăng ký
+            {loading ? 'Đang đăng ký...' : 'Đăng ký'}
           </button>
         </form>
 

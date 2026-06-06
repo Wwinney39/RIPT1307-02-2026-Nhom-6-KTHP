@@ -71,12 +71,14 @@ const ROLE_STYLE: Record<UserRole, string> = {
   customer: 'bg-blue-50 text-blue-700 border-blue-200',
   restaurant_owner: 'bg-green-50 text-green-700 border-green-200',
   admin: 'bg-orange-50 text-orange-700 border-orange-200',
+  staff: 'bg-purple-50 text-purple-700 border-purple-200',
 };
 
 const ROLE_LABEL: Record<UserRole, string> = {
   customer: 'Khách hàng',
   restaurant_owner: 'Chủ nhà hàng',
   admin: 'Quản trị viên',
+  staff: 'Nhân viên',
 };
 
 function fmtDate(iso: string) {

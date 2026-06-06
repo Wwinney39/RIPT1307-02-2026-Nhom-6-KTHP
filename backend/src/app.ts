@@ -21,8 +21,13 @@ const app = express();
 const httpServer = createServer(app);
 
 app.use(cors({
-  origin: 'https://restaurant-manager-frontend-g6vo.onrender.com', // Điền chính xác link Frontend Render của bạn
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: [
+    'https://restaurant-manager-frontend-g6vo.onrender.com', // Khi deploy lên Render
+    'http://localhost:3000',                                  // Cổng Backend của bạn
+    'http://localhost:5173',                                  // Cổng mặc định của Vite
+    'http://localhost:3001'                                   // Cổng dự phòng trùng port
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   credentials: true
 }));
 
