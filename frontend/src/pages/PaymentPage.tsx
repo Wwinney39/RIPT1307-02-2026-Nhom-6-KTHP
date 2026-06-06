@@ -21,6 +21,12 @@ export function PaymentPage() {
   });
 
   useEffect(() => {
+    const currentUser = storage.get('currentUser', null);
+    if (!currentUser) {
+      window.location.href = '/login';
+      return;
+    }
+
     if (!orderSummary) {
       window.location.href = '/checkout';
     }

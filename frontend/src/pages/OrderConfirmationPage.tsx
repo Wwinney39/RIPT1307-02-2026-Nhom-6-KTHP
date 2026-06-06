@@ -10,6 +10,12 @@ export function OrderConfirmationPage() {
   });
 
   useEffect(() => {
+    const currentUser = storage.get('currentUser', null);
+    if (!currentUser) {
+      window.location.href = '/login';
+      return;
+    }
+
     if (!orderId) {
       window.location.href = '/';
       return;
