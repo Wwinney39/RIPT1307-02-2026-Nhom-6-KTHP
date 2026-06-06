@@ -223,6 +223,20 @@ export function Header({ cartCount: propCartCount }: HeaderProps) {
     return storage.get<LoggedInUser | null>('user', null);
   });
 
+  useEffect(() => {
+    function handleUserChange() {
+      const user = storage.get<LoggedInUser | null>('user', null);
+      setCurrentUser(user);
+    }
+
+    window.addEventListener('userLoggedIn', handleUserChange);
+    window.addEventListener('storage', handleUserChange);
+    return () => {
+      window.removeEventListener('userLoggedIn', handleUserChange);
+      window.removeEventListener('storage', handleUserChange);
+    };
+  }, []);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

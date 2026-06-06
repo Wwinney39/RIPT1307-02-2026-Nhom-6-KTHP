@@ -27,6 +27,9 @@ export function LoginForm() {
       };
       storage.set('user', userData);
       storage.set('currentUser', response.user);
+
+      window.dispatchEvent(new Event('userLoggedIn'));
+
       showToast('Đăng nhập thành công!');
 
       setTimeout(() => {
