@@ -12,6 +12,7 @@ import { DeliveryTrackingPage } from './pages/DeliveryTrackingPage';
 import { UserProfilePage } from './pages/UserProfilePage';
 import { ReviewsPage } from './pages/ReviewsPage';
 import { AdminLayout } from './pages/admin/AdminLayout';
+import { MerchantLayout } from './pages/merchant/MerchantLayout';
 import { storage } from './utils/storage';
 import { type User } from './types/index';
 
@@ -26,9 +27,22 @@ function AdminGuard() {
   return <AdminLayout />;
 }
 
+function MerchantGuard() {
+  const currentUser = storage.get<User | null>('currentUser', null);
+
+  if (!currentUser || currentUser.role !== 'restaurant_owner') {
+    window.location.replace('/login');
+    return null;
+  }
+
+  return <MerchantLayout />;
+}
+
 function Router() {
   const path = window.location.pathname;
+
   if (path.startsWith('/admin')) return <AdminGuard />;
+  if (path.startsWith('/merchant')) return <MerchantGuard />;
 
   if (path === '/login') return <LoginForm />;
   if (path === '/register') return <RegisterForm />;
