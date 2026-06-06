@@ -13,29 +13,35 @@ import { UserProfilePage } from './pages/UserProfilePage';
 import { ReviewsPage } from './pages/ReviewsPage';
 import { AdminLayout } from './pages/admin/AdminLayout';
 import { MerchantLayout } from './pages/merchant/MerchantLayout';
+import { StaffLayout } from './pages/staff/StaffLayout';
 import { storage } from './utils/storage';
 import { type User } from './types/index';
 
 function AdminGuard() {
   const currentUser = storage.get<User | null>('currentUser', null);
-
   if (!currentUser || currentUser.role !== 'admin') {
     window.location.replace('/login');
     return null;
   }
-
   return <AdminLayout />;
 }
 
 function MerchantGuard() {
   const currentUser = storage.get<User | null>('currentUser', null);
-
   if (!currentUser || currentUser.role !== 'restaurant_owner') {
     window.location.replace('/login');
     return null;
   }
-
   return <MerchantLayout />;
+}
+
+function StaffGuard() {
+  const currentUser = storage.get<User | null>('currentUser', null);
+  if (!currentUser || currentUser.role !== 'staff') {
+    window.location.replace('/login');
+    return null;
+  }
+  return <StaffLayout />;
 }
 
 function Router() {
@@ -43,6 +49,7 @@ function Router() {
 
   if (path.startsWith('/admin')) return <AdminGuard />;
   if (path.startsWith('/merchant')) return <MerchantGuard />;
+  if (path.startsWith('/staff')) return <StaffGuard />;
 
   if (path === '/login') return <LoginForm />;
   if (path === '/register') return <RegisterForm />;
