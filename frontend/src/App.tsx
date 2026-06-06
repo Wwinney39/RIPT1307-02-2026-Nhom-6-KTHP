@@ -1,5 +1,6 @@
 import { ToastProvider } from './hooks/ToastProvider';
 import { AddressProvider } from './context/AddressContext';
+import { AuthProvider } from './context/AuthContext';
 import { ToastContainer } from './components/common/ToastContainer';
 import { LandingPage } from './pages/LandingPage';
 import { RestaurantsPage } from './pages/RestaurantsPage';
@@ -7,6 +8,8 @@ import { LoginForm, RegisterForm } from './components/AuthForms';
 import { RestaurantMenuPage } from './pages/RestaurantMenuPage';
 import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
+import { PaymentPage } from './pages/PaymentPage';
+import { OrderConfirmationPage } from './pages/OrderConfirmationPage';
 import { OrdersListPage } from './pages/OrdersPage';
 import { DeliveryTrackingPage } from './pages/DeliveryTrackingPage';
 import { UserProfilePage } from './pages/UserProfilePage';
@@ -66,6 +69,8 @@ function Router() {
   if (path === '/menu') return <RestaurantMenuPage />;
   if (path === '/cart') return <CartPage />;
   if (path === '/checkout') return <CheckoutPage />;
+  if (path === '/payment') return <PaymentPage />;
+  if (path === '/order-confirmation') return <OrderConfirmationPage />;
   if (path === '/orders') return <OrdersGuard />;
   if (path.startsWith('/delivery/'))
     return <DeliveryTrackingPage orderId={Number(path.split('/')[2])} />;
@@ -77,11 +82,13 @@ function Router() {
 
 export default function App() {
   return (
-    <AddressProvider>
-      <ToastProvider>
-        <Router />
-        <ToastContainer />
-      </ToastProvider>
-    </AddressProvider>
+    <AuthProvider>
+      <AddressProvider>
+        <ToastProvider>
+          <Router />
+          <ToastContainer />
+        </ToastProvider>
+      </AddressProvider>
+    </AuthProvider>
   );
 }

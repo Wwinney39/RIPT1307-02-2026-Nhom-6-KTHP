@@ -74,8 +74,11 @@ export function CheckoutPage() {
       addresses.find((a) => a.address_id === selectedAddressId)?.address_text ||
       '';
 
-    const newOrder = {
-      order_id: Date.now(),
+    const shippingFee = 25000;
+    const discount = 0;
+
+    const orderSummary = {
+      order_id: Date.now().toString(),
       order_code: `10${Math.floor(10 + Math.random() * 90)}`,
       restaurant_name: cartItems[0]?.restaurant_name || 'Nhà hàng ZestyDash',
       item_summary: cartItems
@@ -84,23 +87,22 @@ export function CheckoutPage() {
             `${item.name}${item.quantity > 1 ? ` x${item.quantity}` : ''}`,
         )
         .join(', '),
-      total_price: total,
-      status: 'preparing',
-      created_at: new Date().toLocaleDateString('vi-VN'),
-      address_text: selectedAddress,
-      payment_method: paymentMethod,
+      items: cartItems,
+      subtotal,
+      shipping_fee: shippingFee,
+      discount,
+      total: subtotal + shippingFee - discount,
+      delivery_address: selectedAddress,
       note: itemNote,
+      created_at: new Date().toISOString(),
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const existingOrders = storage.get<any[]>('user_orders', []);
-    const updatedOrders = [newOrder, ...existingOrders];
-    storage.set('user_orders', updatedOrders);
 
-    storage.remove('cart');
+    storage.set('orderSummary', orderSummary);
+    showToast('Chuyển đến thanh toán...');
 
-    showToast('Đặt hàng thành công!');
-
-    window.location.href = '/orders';
+    setTimeout(() => {
+      window.location.href = '/payment';
+    }, 500);
   }
 
   return (
