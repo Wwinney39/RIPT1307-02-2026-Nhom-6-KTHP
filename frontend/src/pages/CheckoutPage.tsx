@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { UserAddress, PaymentMethod, CartItem } from '../types';
 import useToast from '../hooks/useToast';
 import { storage } from '../utils/storage';
@@ -29,6 +29,14 @@ const PAYMENT_METHODS: { value: PaymentMethod; label: string; icon: string }[] =
 
 export function CheckoutPage() {
   const { showToast } = useToast();
+
+  useEffect(() => {
+    const currentUser = storage.get('currentUser', null);
+    if (!currentUser) {
+      storage.set('redirectAfterLogin', '/checkout');
+      window.location.href = '/login';
+    }
+  }, []);
 
   const [cartItems] = useState<CartItem[]>(() => {
     return storage.get<CartItem[]>('cart', []);
