@@ -122,6 +122,17 @@ export function RestaurantMenuPage() {
 
   return (
     <div className="min-h-screen bg-[#FFFBF7]">
+      <button
+        onClick={() => (window.location.href = '/')}
+        className="fixed top-4 left-4 z-50
+                  bg-[#EB5E28] text-white
+                  shadow-lg rounded-full
+                  px-4 py-2
+                  flex items-center gap-2
+                  font-bold"
+      >
+        🏠 Trang chủ
+      </button>
       <div className="bg-[#252422] px-6 py-10 text-center">
         <div className="text-5xl mb-3">
           {restaurantId === 4

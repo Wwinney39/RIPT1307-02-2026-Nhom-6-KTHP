@@ -165,6 +165,17 @@ export function CartPage() {
 
   return (
     <div className="min-h-screen bg-[#FFFBF7] px-4 py-8 relative">
+     <button
+        onClick={() => (window.location.href = '/')}
+        className="fixed top-4 left-4 z-50
+                  bg-[#EB5E28] text-white
+                  shadow-lg rounded-full
+                  px-4 py-2
+                  flex items-center gap-2
+                  font-bold"
+      >
+        🏠 Trang chủ
+      </button>
       <div className="max-w-xl mx-auto">
         <h1 className="font-display font-bold text-2xl text-[#252422] mb-6">
           Giỏ hàng của bạn
