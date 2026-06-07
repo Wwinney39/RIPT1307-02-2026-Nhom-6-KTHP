@@ -130,8 +130,11 @@ export function PaymentPage() {
             </div>
             <div className="flex justify-between">
               <span>Phí giao hàng:</span>
-              {/* Đọc và hiển thị chính xác phí giao hàng từ orderSummary */}
-              <span>{(orderSummary.shipping_fee ?? 0).toLocaleString()}₫</span>
+              <span className="text-[#252422] font-semibold">
+                {orderSummary.shipping_fee === 0
+                  ? 'Miễn phí'
+                  : `${(orderSummary.shipping_fee ?? 0).toLocaleString()}₫`}
+              </span>
             </div>
             {(orderSummary.discount ?? 0) > 0 && (
               <div className="flex justify-between text-green-600">

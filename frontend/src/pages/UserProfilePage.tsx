@@ -298,6 +298,29 @@ function ChangePasswordSection({ onBack }: { onBack: () => void }) {
   );
 }
 
+function translateRole(role: string): string {
+  switch (role) {
+    case 'admin':
+      return 'Quản trị viên (Admin)';
+    case 'staff':
+      return 'Nhân viên';
+    case 'restaurant_owner':
+      return 'Chủ nhà hàng (Merchant)';
+    case 'customer':
+      return 'Khách hàng';
+    default:
+      return role || 'Khách hàng';
+  }
+}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function parseJoinDate(dateString: any): string {
+  const date = dateString ? new Date(dateString) : new Date();
+  if (isNaN(date.getTime())) {
+    return new Date().toLocaleDateString('vi-VN');
+  }
+  return date.toLocaleDateString('vi-VN');
+}
+
 export function UserProfilePage() {
   const { showToast } = useToast();
   const [user, setUser] = useState<User>(() => {
@@ -339,6 +362,9 @@ export function UserProfilePage() {
       </div>
     );
   }
+
+  const finalPhone = user.phone || '---';
+  const finalEmail = user.email || '---';
 
   return (
     <div className="min-h-screen bg-[#FFFBF7] px-4 py-8">
@@ -413,17 +439,17 @@ export function UserProfilePage() {
               </div>
             </form>
           ) : (
-            <div className="space-y-3 text-sm">
-              <ProfileRow label="Họ và tên" value={user.name} />
-              <ProfileRow label="Số điện thoại" value={user.phone} />
-              <ProfileRow label="Email" value={user.email} />
-              <ProfileRow
-                label="Vai trò"
-                value={user.role === 'customer' ? 'Khách hàng' : user.role}
-              />
+            <div className="space-y-4 text-sm">
+              <ProfileRow label="Họ và tên" value={user.name || '---'} />
+              <ProfileRow label="Số điện thoại" value={finalPhone} />
+              <ProfileRow label="Email" value={finalEmail} />
+              <ProfileRow label="Vai trò" value={translateRole(user.role)} />
               <ProfileRow
                 label="Ngày tham gia"
-                value={new Date(user.created_at).toLocaleDateString('vi-VN')}
+                value={parseJoinDate(
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  user.created_at || (user as any).createdAt,
+                )}
               />
             </div>
           )}
@@ -478,9 +504,11 @@ export function UserProfilePage() {
 
 function ProfileRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex justify-between items-center">
-      <span className="text-[#7A7570]">{label}</span>
-      <span className="font-medium text-[#252422]">{value}</span>
+    <div className="grid grid-cols-3 gap-4 py-0.5 items-center">
+      <span className="text-[#7A7570] text-sm">{label}</span>
+      <span className="col-span-2 text-left font-medium text-[#252422] break-all">
+        {value}
+      </span>
     </div>
   );
 }

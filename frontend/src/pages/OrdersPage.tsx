@@ -70,7 +70,7 @@ export function OrdersListPage() {
         const token = storage.get<string | null>('authToken', null);
         const API_BASE_URL = 'http://localhost:3000/api';
 
-        const response = await fetch(`${API_BASE_URL}/orders`, {
+        const response = await fetch(`${API_BASE_URL}/orders/my-orders`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -79,10 +79,10 @@ export function OrdersListPage() {
         });
 
         if (response.ok) {
-          const data = await response.json();
-          const fetchedOrders = Array.isArray(data)
-            ? data
-            : data.orders || data.data || [];
+          const resBody = await response.json();
+          const fetchedOrders = Array.isArray(resBody.data)
+            ? resBody.data
+            : resBody.orders || resBody.data || [];
           setOrders(fetchedOrders);
         }
       } catch (error) {
@@ -99,7 +99,7 @@ export function OrdersListPage() {
       const API_BASE_URL = 'http://localhost:3000/api';
 
       const response = await fetch(`${API_BASE_URL}/orders/${orderId}/cancel`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -281,7 +281,7 @@ export function OrdersListPage() {
             <div className="flex gap-3 pt-2">
               <button
                 onClick={() => setCancelOrderId(null)}
-                className="flex-1 py-3 rounded-full border border-black/10 font-bold text-sm text-[#252422] hover:bg-[#F5F0EB] active:scale-95 transition-all"
+                className="flex-1 py-3 rounded-full border border-black/10 font-bold text-sm text-[#252422] hover:bg-[#F5F0EB] transition-all"
               >
                 Hủy bỏ
               </button>
@@ -290,7 +290,7 @@ export function OrdersListPage() {
                   executeCancelOrder(cancelOrderId);
                   setCancelOrderId(null);
                 }}
-                className="flex-1 py-3 rounded-full bg-red-600 text-white font-bold text-sm hover:bg-red-700 active:scale-95 transition-all"
+                className="flex-1 py-3 rounded-full bg-red-600 text-white font-bold text-sm hover:bg-red-700 transition-all"
               >
                 Xác nhận hủy
               </button>
