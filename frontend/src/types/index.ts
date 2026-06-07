@@ -8,7 +8,7 @@ export interface Toast {
   message: string;
 }
 
-export type UserRole = 'customer' | 'restaurant_owner' | 'admin' | 'staff';
+export type UserRole = 'customer' | 'merchant' | 'admin' | 'staff';
 
 export interface User {
   user_id: number;

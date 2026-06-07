@@ -22,16 +22,15 @@ import { type User } from './types/index';
 
 function AdminGuard() {
   const currentUser = storage.get<User | null>('currentUser', null);
-  if (!currentUser || currentUser.role !== 'admin') {
+  if (!currentUser || currentUser.role?.toLowerCase() !== 'admin') {
     window.location.replace('/login');
     return null;
   }
   return <AdminLayout />;
 }
-
 function MerchantGuard() {
   const currentUser = storage.get<User | null>('currentUser', null);
-  if (!currentUser || currentUser.role !== 'merchant') {
+  if (!currentUser || currentUser.role?.toLowerCase() !== 'merchant') {
     window.location.replace('/login');
     return null;
   }
@@ -40,7 +39,7 @@ function MerchantGuard() {
 
 function StaffGuard() {
   const currentUser = storage.get<User | null>('currentUser', null);
-  if (!currentUser || currentUser.role !== 'staff') {
+  if (!currentUser || currentUser.role?.toLowerCase() !== 'staff') {
     window.location.replace('/login');
     return null;
   }
