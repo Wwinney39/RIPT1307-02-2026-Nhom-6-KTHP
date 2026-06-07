@@ -17,11 +17,11 @@ export const api = {
     return response.json();
   },
 
-  async register(name: string, phone: string, email: string, password: string) {
+  async register(name: string, phone: string, password: string) {
     const response = await fetch(`${API_BASE_URL}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, phone, email, password, role: 'customer' }),
+      body: JSON.stringify({ name, phone, password, role: 'customer' }),
       credentials: 'include',
     });
 
@@ -32,4 +32,5 @@ export const api = {
 
     return response.json();
   },
+  
 };

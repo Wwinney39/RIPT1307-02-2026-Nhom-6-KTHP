@@ -351,7 +351,6 @@ export function LoginForm() {
       const userData = {
         name: response.user.name,
         phone: response.user.phone,
-        email: response.user.email,
         avatarInitial: response.user.name.charAt(0).toUpperCase(),
       };
 
@@ -494,7 +493,6 @@ export function RegisterForm() {
   const [form, setForm] = useState({
     name: '',
     phone: '',
-    email: '',
     password: '',
     confirmPassword: '',
   });
@@ -502,7 +500,7 @@ export function RegisterForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.name || !form.phone || !form.email || !form.password) {
+    if (!form.name || !form.phone || !form.password) {
       showToast('Vui lòng điền đầy đủ thông tin.');
       return;
     }
@@ -517,7 +515,7 @@ export function RegisterForm() {
 
     setLoading(true);
     try {
-      await api.register(form.name, form.phone, form.email, form.password);
+      await api.register(form.name, form.phone, form.password);
       showToast('Đăng ký thành công! Chuyển hướng đến đăng nhập...');
       window.location.href = '/login';
     } catch (error) {
@@ -580,24 +578,7 @@ export function RegisterForm() {
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-[#252422] mb-1.5">
-              Email
-            </label>
-            <input
-              type="email"
-              value={form.email}
-              onChange={(e) =>
-                setForm((f) => ({ ...f, email: e.target.value }))
-              }
-              placeholder="example@email.com"
-              className="w-full px-4 py-3 rounded-xl border border-black/10 bg-[#F5F0EB]
-                         text-sm placeholder:text-[#7A7570] outline-none
-                         focus:border-[#EB5E28] focus:bg-white focus:ring-2
-                         focus:ring-[#EB5E28]/15 transition-all"
-              required
-            />
-          </div>
+        
 
           <div>
             <label className="block text-sm font-semibold text-[#252422] mb-1.5">
@@ -661,3 +642,4 @@ export function RegisterForm() {
     </div>
   );
 }
+console.log('RegisterForm');
