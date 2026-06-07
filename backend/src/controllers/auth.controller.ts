@@ -6,7 +6,11 @@ import { RegisterBody, LoginBody } from '../interfaces/auth.interface';
 
 // ==================== 1. API ĐĂNG KÝ ====================
 export const register = async (req: Request<{}, {}, RegisterBody>, res: Response): Promise<any> => {
-  const { name, phone, email, password, role } = req.body;
+    console.log('REGISTER HIT');
+  console.log('BODY:', req.body);
+
+
+  const { name, phone, password, role } = req.body;
 
   if (!name || !phone || !password) {
     return res.status(400).json({ message: "Vui lòng điền đầy đủ họ tên, số điện thoại và mật khẩu!" });
@@ -26,8 +30,8 @@ export const register = async (req: Request<{}, {}, RegisterBody>, res: Response
     const userRole = role || 'customer'; // Mặc định role là 'customer' nếu không được cung cấp
 
     // Lưu vào database
-    const query = `INSERT INTO Users (name, phone, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?, NOW())`;
-    await db.execute(query, [name, phone, email || null, passwordHash, userRole]);
+    const query = `INSERT INTO Users (name, phone, password_hash, role, created_at) VALUES (?, ?, ?, ?, NOW())`;
+    await db.execute(query, [name, phone, passwordHash, userRole]);
 
     return res.status(201).json({ message: "Đăng ký tài khoản thành công!" });
   } catch (error) {
