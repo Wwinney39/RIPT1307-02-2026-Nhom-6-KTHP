@@ -128,8 +128,24 @@ export function CartPage() {
       window.location.href = '/checkout';
     }
   }
-  const shippingFee =
-    cartItems.length > 0 ? (cartItems[0].shipping_fee ?? 15000) : 0;
+
+  const shippingFee = (() => {
+    if (cartItems.length === 0) return 0;
+
+    const feeRaw =
+      cartItems[0].shipping_fee ?? cartItems[0].restaurant_shipping_fee;
+
+    if (!feeRaw || feeRaw === 'Miễn phí' || feeRaw === 0 || feeRaw === '0') {
+      return 0;
+    }
+
+    if (typeof feeRaw === 'string') {
+      const parsedFee = parseInt(feeRaw.replace(/[^0-9]/g, ''), 10);
+      return isNaN(parsedFee) ? 15000 : parsedFee;
+    }
+
+    return typeof feeRaw === 'number' ? feeRaw : 15000;
+  })();
 
   const subtotal = cartItems.reduce(
     (s, i) => s + (i.price ?? 0) * i.quantity,

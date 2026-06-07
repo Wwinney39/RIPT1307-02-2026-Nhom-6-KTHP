@@ -90,16 +90,32 @@ export function RestaurantMenuPage() {
     return storage.get<CartItem[]>('cart', []);
   });
 
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [pendingItem, setPendingItem] = useState<MenuItem | null>(null);
+
   function handleAddToCart(item: MenuItem) {
-    const existingIndex = cartList.findIndex((c) => c.item_id === item.item_id);
+    if (
+      cartList.length > 0 &&
+      cartList[0].restaurant_name !== restaurant.name
+    ) {
+      setPendingItem(item);
+      setShowConfirmModal(true);
+      return;
+    }
+    executeAddToCart(item, false);
+  }
+
+  function executeAddToCart(item: MenuItem, clearCart: boolean) {
+    const baseCart = clearCart ? [] : cartList;
+    const existingIndex = baseCart.findIndex((c) => c.item_id === item.item_id);
 
     const updatedCart: CartItem[] =
       existingIndex > -1
-        ? cartList.map((c, idx) =>
+        ? baseCart.map((c, idx) =>
             idx === existingIndex ? { ...c, quantity: c.quantity + 1 } : c,
           )
         : [
-            ...cartList,
+            ...baseCart,
             {
               cart_id: item.item_id,
               user_id: 1,
@@ -109,6 +125,8 @@ export function RestaurantMenuPage() {
               price: item.price,
               image_url: item.image_url || '',
               restaurant_name: restaurant.name,
+              shipping_fee: restaurant.deliveryFee,
+              restaurant_shipping_fee: restaurant.deliveryFee,
             },
           ];
 
@@ -116,6 +134,9 @@ export function RestaurantMenuPage() {
     storage.set('cart', updatedCart);
     window.dispatchEvent(new Event('cartUpdated'));
     showToast(`Đã thêm <strong>${item.name}</strong> vào giỏ hàng`);
+
+    setShowConfirmModal(false);
+    setPendingItem(null);
   }
 
   const totalCartItems = cartList.reduce((sum, item) => sum + item.quantity, 0);
@@ -189,6 +210,45 @@ export function RestaurantMenuPage() {
             <span>Xem giỏ hàng</span>
             <span>›</span>
           </a>
+        </div>
+      )}
+
+      {showConfirmModal && pendingItem && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 animate-fade-in">
+          <div className="bg-white rounded-3xl p-6 max-w-sm w-full border border-black/[0.05] shadow-2xl animate-scale-up">
+            <div className="text-center mb-4">
+              <span className="text-4xl">⚠️</span>
+            </div>
+            <h3 className="font-display font-bold text-lg text-[#252422] text-center mb-2">
+              Tạo giỏ hàng mới?
+            </h3>
+            <p className="text-sm text-[#7A7570] text-center leading-relaxed mb-6">
+              Bạn có muốn huỷ giỏ hàng hiện tại của{' '}
+              <strong className="text-[#252422]">
+                "{cartList[0]?.restaurant_name}"
+              </strong>{' '}
+              để thêm món từ{' '}
+              <strong className="text-[#252422]">"{restaurant.name}"</strong>{' '}
+              không?
+            </p>
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={() => executeAddToCart(pendingItem, true)}
+                className="w-full py-3 rounded-full bg-[#EB5E28] text-white font-bold text-sm hover:bg-[#d44e1e] transition-colors"
+              >
+                Xác nhận huỷ và tạo mới
+              </button>
+              <button
+                onClick={() => {
+                  setShowConfirmModal(false);
+                  setPendingItem(null);
+                }}
+                className="w-full py-3 rounded-full bg-[#F5F0EB] text-[#252422] font-semibold text-sm hover:bg-[#EAE3DC] transition-colors"
+              >
+                Giữ lại giỏ hàng cũ
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

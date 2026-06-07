@@ -45,9 +45,26 @@ export function CheckoutPage() {
   });
 
   const [itemNote, setItemNote] = useState('');
-  const shippingFee =
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    cartItems.length > 0 ? ((cartItems[0] as any).shipping_fee ?? 15000) : 0;
+
+  const shippingFee = (() => {
+    if (cartItems.length === 0) return 0;
+    const feeRaw =
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (cartItems[0] as any).shipping_fee ??
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (cartItems[0] as any).restaurant_shipping_fee;
+
+    if (!feeRaw || feeRaw === 'Miễn phí' || feeRaw === 0 || feeRaw === '0') {
+      return 0;
+    }
+
+    if (typeof feeRaw === 'string') {
+      const parsedFee = parseInt(feeRaw.replace(/[^0-9]/g, ''), 10);
+      return isNaN(parsedFee) ? 15000 : parsedFee;
+    }
+
+    return typeof feeRaw === 'number' ? feeRaw : 15000;
+  })();
 
   const subtotal = cartItems.reduce(
     (s, i) => s + (i.price ?? 0) * i.quantity,
