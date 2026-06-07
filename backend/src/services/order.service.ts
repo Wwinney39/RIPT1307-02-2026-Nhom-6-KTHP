@@ -95,6 +95,7 @@ export const orderService = {
             };
 
         } catch (error) {
+            console.error("--- LỖI TRANSACTION ---", error);
             // CÓ LỖI LÀ ROLLBACK NGAY LẬP TỨC ĐỂ BẢO VỆ DỮ LIỆU
             await connection.rollback();
             throw error;
@@ -104,15 +105,20 @@ export const orderService = {
     },
 
     getMyOrders: async (userId: number) => {
-    const [rows]: any = await db.execute(
-        `SELECT o.*, r.name AS restaurant_name
-        FROM Orders o
-        JOIN Restaurants r ON o.restaurant_id = r.restaurant_id
-        WHERE o.user_id = ?
-        ORDER BY o.created_at DESC`,
-        [userId]
-    );
-    return rows;
+        console.log("SERVICE USER ID:", userId);
+
+        const [rows]: any = await db.execute(
+            `
+            SELECT *
+            FROM Orders
+            WHERE user_id = ?
+            `,
+            [userId]
+        );
+
+        console.log("ROWS:", rows);
+
+        return rows;
     },
 
     getOrderById: async (orderId: number, userId: number) => {
