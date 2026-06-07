@@ -184,7 +184,7 @@ export const orderService = {
         [orderId, userId]
     );
     if (order.length === 0) throw new Error('Không tìm thấy đơn hàng!');
-    if (order[0].status !== 'PENDING') throw new Error('Chỉ có thể hủy đơn khi đang ở trạng thái PENDING!');
+    if (order[0].status.toUpperCase() !== 'PENDING') throw new Error('Chỉ có thể hủy đơn khi đang ở trạng thái PENDING!');
 
     await db.execute(
         'UPDATE Orders SET status = "CANCELLED" WHERE order_id = ?', [orderId]
