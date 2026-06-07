@@ -67,7 +67,10 @@ export function OrdersListPage() {
   useEffect(() => {
     async function fetchOrders() {
       try {
-        const token = storage.get<string | null>('authToken', null);
+        const token =
+          storage.get<string | null>('authToken', null) ||
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          storage.get<any>('currentUser', null)?.token;
         const API_BASE_URL = 'http://localhost:3000/api';
 
         const response = await fetch(`${API_BASE_URL}/orders/my-orders`, {
@@ -202,7 +205,13 @@ export function OrdersListPage() {
                           Tổng thanh toán
                         </p>
                         <p className="font-display font-bold text-[#EB5E28] text-lg">
-                          {order.total_price.toLocaleString('vi-VN')} đ
+                          {(
+                            order.total_price ||
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            (order as any).total ||
+                            0
+                          ).toLocaleString('vi-VN')}{' '}
+                          đ
                         </p>
                       </div>
 
