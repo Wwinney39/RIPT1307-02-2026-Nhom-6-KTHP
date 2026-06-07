@@ -201,3 +201,51 @@ export const resetPassword = async (req: Request, res: Response): Promise<any> =
     return res.status(500).json({ message: 'Có lỗi xảy ra tại hệ thống Backend!' });
   }
 };
+
+// ==================== 4. API ĐỔI MẬT KHẨU (KHI ĐANG ĐĂNG NHẬP) ====================
+
+export const changePassword = async (req: Request, res: Response): Promise<any> => {
+  try {
+    // Chấp nhận cả 2 kiểu đặt tên biến snake_case hoặc camelCase từ Frontend gửi lên
+    const old_password = req.body.old_password || req.body.oldPassword;
+    const new_password = req.body.new_password || req.body.newPassword;
+    
+    // Lấy user_id bóc tách từ Token sau khi đi qua middleware authenticateToken
+    const userId = (req as any).user?.user_id; 
+
+    if (!userId) {
+      return res.status(401).json({ message: 'Không tìm thấy thông tin phiên đăng nhập!' });
+    }
+
+    if (!old_password || !new_password) {
+      return res.status(400).json({ message: 'Vui lòng nhập đầy đủ mật khẩu cũ và mật khẩu mới!' });
+    }
+
+    // 🚀 ĐÃ FIX: Đổi tên bảng thành 'Users' viết hoa đúng theo cấu trúc DB của bạn
+    const [users]: any = await db.execute('SELECT * FROM Users WHERE user_id = ?', [userId]);
+    const user = users[0];
+
+    if (!user) {
+      return res.status(404).json({ message: 'Tài khoản không tồn tại!' });
+    }
+
+    // So sánh mật khẩu hiện tại (old_password) với hash mật khẩu trong DB
+    const isMatch = await bcrypt.compare(old_password, user.password_hash);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Mật khẩu hiện tại không chính xác!' });
+    }
+
+    // Mã hóa mật khẩu mới bằng Bcrypt
+    const salt = await bcrypt.genSalt(10);
+    const hashedNewPassword = await bcrypt.hash(new_password, salt);
+
+    // 🚀 ĐÃ FIX: Cập nhật mật khẩu mới vào bảng 'Users' viết hoa
+    await db.execute('UPDATE Users SET password_hash = ? WHERE user_id = ?', [hashedNewPassword, userId]);
+
+    return res.status(200).json({ message: 'Đổi mật khẩu tài khoản thành công!' });
+
+  } catch (error) {
+    console.error('Lỗi đổi mật khẩu:', error);
+    return res.status(500).json({ message: 'Có lỗi xảy ra ở hệ thống backend, vui lòng thử lại sau!' });
+  }
+};

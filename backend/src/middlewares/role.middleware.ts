@@ -7,8 +7,11 @@ export const roleMiddleware = (allowedRoles: string[]) => {
       return res.status(401).json({ message: 'Chưa xác thực người dùng!' });
     }
 
-    const userRole = user.role?.toUpperCase();
-    if (!allowedRoles.map(r => r.toUpperCase()).includes(userRole)) {
+    //Chuyển cả role của user và role cho phép thành CHỮ HOA để so sánh chuẩn tuyệt đối
+    const userRole = user.role ? user.role.toUpperCase() : '';
+    const upperAllowedRoles = allowedRoles.map(r => r.toUpperCase());
+
+    if (!upperAllowedRoles.includes(userRole)) {
       return res.status(403).json({ message: 'Bạn không có quyền thực hiện thao tác này!' });
     }
 
