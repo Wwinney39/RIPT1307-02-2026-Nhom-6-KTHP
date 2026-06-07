@@ -22,13 +22,16 @@ export const authenticateToken = (req: AuthenticatedRequest, res: Response, next
   try {
     const secretKey = process.env.JWT_SECRET || 'secret_fallback_key';
     
-    // Giải mã và ép kiểu dữ liệu trả về theo đúng cấu trúc của hệ thống
-    const decoded = jwt.verify(token, secretKey) as { user_id: number; role: 'admin' | 'merchant' | 'staff' | 'customer' };
+    // 1. Giải mã token thực tế dưới dạng any
+    const decoded = jwt.verify(token, secretKey) as any;
     
-    // Gắn thông tin user vào request để các Controller phía sau lôi ra dùng
-    req.user = decoded;
+    // 2. Ép id về 'user_id' VÀ ép role về CHỮ THƯỜNG để đúng logic code hệ thống
+    req.user = {
+      user_id: Number(decoded.user_id || decoded.id || decoded._id),
+      role: decoded.role ? decoded.role.toLowerCase() : 'customer'
+    };
     
-    next(); // Token hợp lệ, cho đi qua cửa thứ nhất
+    next(); 
   } catch (error) {
     return res.status(403).json({ message: "Mã xác thực không hợp lệ hoặc đã hết hạn!" });
   }
