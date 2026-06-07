@@ -198,7 +198,7 @@ function ChangePasswordSection({ onBack }: { onBack: () => void }) {
       const token = storage.get<string>('token', '') || '';
 
       const response = await fetch(
-        'http://localhost:3000/api/auth/change-password',
+        'https://restaurant-manager-gxjj.onrender.com/api/auth/change-password',
         {
           method: 'POST',
           headers: {

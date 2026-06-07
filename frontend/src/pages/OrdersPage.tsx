@@ -71,7 +71,7 @@ export function OrdersListPage() {
           storage.get<string | null>('authToken', null) ||
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           storage.get<any>('currentUser', null)?.token;
-        const API_BASE_URL = 'http://localhost:3000/api';
+        const API_BASE_URL = 'https://restaurant-manager-gxjj.onrender.com/api';
 
         const response = await fetch(`${API_BASE_URL}/orders/my-orders`, {
           method: 'GET',
@@ -99,7 +99,7 @@ export function OrdersListPage() {
   async function executeCancelOrder(orderId: number) {
     try {
       const token = storage.get<string | null>('authToken', null);
-      const API_BASE_URL = 'http://localhost:3000/api';
+      const API_BASE_URL = 'https://restaurant-manager-gxjj.onrender.com/api';
 
       const response = await fetch(`${API_BASE_URL}/orders/${orderId}/cancel`, {
         method: 'PATCH',
@@ -337,7 +337,7 @@ function OrderDetailPage({
           storage.get<any>('currentUser', null)?.token;
 
         const response = await fetch(
-          `http://localhost:3000/api/orders/${orderId}`,
+          `https://restaurant-manager-gxjj.onrender.com/api/orders/${orderId}`,
           {
             method: 'GET',
             headers: {
