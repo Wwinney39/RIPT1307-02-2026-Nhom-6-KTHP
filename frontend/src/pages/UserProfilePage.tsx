@@ -193,22 +193,53 @@ function ChangePasswordSection({ onBack }: { onBack: () => void }) {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 900));
-    setSubmitting(false);
-    setSuccess(true);
-    showToast('Đổi mật khẩu thành công!');
-    setTimeout(() => {
-      setForm({ oldPassword: '', newPassword: '', confirmPassword: '' });
-      setSuccess(false);
-      window.history.replaceState({}, '', '/profile');
-      onBack();
-    }, 1800);
+
+    try {
+      const token = storage.get<string>('token', '') || '';
+
+      const response = await fetch(
+        'http://localhost:3000/api/auth/change-password',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            oldPassword: form.oldPassword,
+            newPassword: form.newPassword,
+          }),
+        },
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Có lỗi xảy ra khi đổi mật khẩu!');
+      }
+
+      setSubmitting(false);
+      setSuccess(true);
+      showToast('Đổi mật khẩu thành công!');
+
+      setTimeout(() => {
+        setForm({ oldPassword: '', newPassword: '', confirmPassword: '' });
+        setSuccess(false);
+        window.history.replaceState({}, '', '/profile');
+        onBack();
+      }, 1800);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      setSubmitting(false);
+      showToast(err.message || 'Kết nối đến máy chủ thất bại!');
+    }
   }
 
   return (
     <div className="bg-white rounded-2xl border border-black/[0.07] overflow-hidden">
       <div className="flex items-center gap-3 px-6 py-4 border-b border-black/[0.06] bg-[#FFFBF7]">
         <button
+          type="button"
           onClick={onBack}
           className="w-8 h-8 rounded-full border border-black/10 flex items-center
                      justify-center text-[#252422] hover:bg-[#F5F0EB] transition-colors
@@ -349,6 +380,7 @@ export function UserProfilePage() {
       <div className="min-h-screen bg-[#FFFBF7] px-4 py-8">
         <div className="max-w-xl mx-auto space-y-5">
           <button
+            type="button"
             onClick={handleBack}
             className="flex items-center gap-2 text-sm text-[#7A7570] hover:text-[#252422] transition-colors"
           >
@@ -370,6 +402,7 @@ export function UserProfilePage() {
     <div className="min-h-screen bg-[#FFFBF7] px-4 py-8">
       <div className="max-w-xl mx-auto space-y-5">
         <button
+          type="button"
           onClick={() => window.history.back()}
           className="flex items-center gap-2 text-sm text-[#7A7570] hover:text-[#252422] transition-colors"
         >
@@ -387,6 +420,7 @@ export function UserProfilePage() {
             </p>
             {!editing && (
               <button
+                type="button"
                 onClick={() => setEditing(true)}
                 className="text-xs text-[#EB5E28] font-semibold hover:underline"
               >
@@ -476,6 +510,7 @@ export function UserProfilePage() {
           ))}
 
           <button
+            type="button"
             onClick={() => setSection('change-password')}
             className="w-full flex items-center justify-between px-5 py-4 hover:bg-[#F5F0EB] transition-colors text-sm font-medium text-[#252422] text-left"
           >
@@ -488,6 +523,7 @@ export function UserProfilePage() {
         </div>
 
         <button
+          type="button"
           onClick={() => {
             storage.remove('user');
             showToast('Đã đăng xuất.');
@@ -582,11 +618,12 @@ function AddressManager() {
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-black/[0.07] p-6">
+    <div className="bg-white rounded-2xl border border-black/[0.07] p-6 relative">
       <div className="flex items-center justify-between mb-4">
         <p className="font-semibold text-sm text-[#252422]">Sổ địa chỉ</p>
         {!adding && (
           <button
+            type="button"
             onClick={() => setAdding(true)}
             className="text-xs text-[#EB5E28] font-semibold hover:underline"
           >
@@ -594,8 +631,49 @@ function AddressManager() {
           </button>
         )}
       </div>
+
+      {addresses.length > 0 && (
+        <div className="space-y-3 mb-4">
+          {addresses.map((addr) => (
+            <div
+              key={addr.address_id}
+              className="text-sm border-b pb-3 last:border-0 last:pb-0 flex justify-between items-start gap-4"
+            >
+              <div className="flex-1">
+                <p className="text-[#252422] font-medium">
+                  {addr.address_text}
+                </p>
+                <div className="flex gap-3 mt-1.5 items-center">
+                  {addr.is_default ? (
+                    <span className="text-[11px] bg-[#EB5E28]/10 text-[#EB5E28] px-2 py-0.5 rounded-md font-semibold">
+                      Mặc định
+                    </span>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handleSetDefault(addr.address_id)}
+                      className="text-xs text-[#7A7570] hover:text-[#EB5E28] hover:underline transition-colors"
+                    >
+                      Thiết lập mặc định
+                    </button>
+                  )}
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setDeleteTargetId(addr.address_id)}
+                className="text-[#7A7570] hover:text-red-500 transition-colors p-1"
+                aria-label="Xoá địa chỉ"
+              >
+                <Trash2 size={16} />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
       {adding && (
-        <form onSubmit={handleAddAddress} className="mb-4 space-y-2">
+        <form onSubmit={handleAddAddress} className="space-y-2 mt-2">
           <input
             value={newAddress}
             onChange={(e) => setNewAddress(e.target.value)}
@@ -620,77 +698,31 @@ function AddressManager() {
           </div>
         </form>
       )}
-      <div className="space-y-3">
-        {addresses.map((addr) => (
-          <div
-            key={addr.address_id}
-            className="flex items-start justify-between gap-4 text-sm py-1"
-          >
-            <p className="text-[#252422] flex-1 leading-relaxed">
-              {addr.address_text}
-            </p>
-
-            <div className="flex items-center gap-3 shrink-0">
-              {addr.is_default ? (
-                <span className="text-xs bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-md font-medium">
-                  Mặc định
-                </span>
-              ) : (
-                <button
-                  onClick={() => handleSetDefault(addr.address_id)}
-                  className="text-xs text-[#7A7570] hover:text-[#EB5E28] transition-colors"
-                >
-                  Đặt mặc định
-                </button>
-              )}
-
-              <button
-                onClick={() => setDeleteTargetId(addr.address_id)}
-                className="text-[#7A7570] hover:text-red-500 p-1 rounded-md transition-colors"
-                title="Xoá địa chỉ"
-              >
-                <Trash2 size={15} />
-              </button>
-            </div>
-          </div>
-        ))}
-
-        {addresses.length === 0 && (
-          <p className="text-xs text-[#7A7570] text-center py-2 italic">
-            Danh sách địa chỉ trống.
-          </p>
-        )}
-      </div>
 
       {deleteTargetId !== null && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-all animate-fade-in">
-          <div className="bg-white rounded-2xl border border-black/[0.07] p-6 max-w-sm w-full shadow-2xl space-y-4 text-center transform scale-100 transition-transform">
-            <div className="w-12 h-12 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto text-xl">
-              ⚠️
-            </div>
-            <div className="space-y-1">
-              <p className="font-display font-bold text-base text-[#252422]">
-                Xác nhận xoá địa chỉ
-              </p>
-              <p className="text-sm text-[#7A7570] px-2 leading-relaxed">
-                Bạn có chắc chắn muốn xoá địa chỉ này không? Hành động này không
-                thể hoàn tác.
-              </p>
-            </div>
-            <div className="flex gap-3 pt-2">
-              <button
-                type="button"
-                onClick={() => setDeleteTargetId(null)}
-                className="flex-1 py-2.5 rounded-full border border-black/10 text-xs font-bold text-[#252422] hover:bg-[#F5F0EB] active:scale-95 transition-all"
-              >
-                Huỷ bỏ
-              </button>
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white w-full max-w-sm rounded-2xl p-6 shadow-xl border border-black/5 animate-in fade-in zoom-in-95 duration-150">
+            <h3 className="font-display font-bold text-lg text-[#252422] mb-2">
+              Xác nhận xoá địa chỉ?
+            </h3>
+            <p className="text-sm text-[#7A7570] mb-5">
+              Hành động này không thể hoàn tác. Bạn có chắc chắn muốn bỏ địa chỉ
+              này khỏi danh sách giao hàng?
+            </p>
+            <div className="flex gap-3">
               <button
                 type="button"
                 onClick={executeDeleteAddress}
-                className="flex-1 py-2.5 rounded-full bg-red-500 text-white text-xs font-bold hover:bg-red-600 active:scale-95 transition-all shadow-md shadow-red-500/10"
+                className="flex-1 py-2.5 rounded-full bg-red-500 hover:bg-red-600 active:scale-95 text-white font-bold text-sm transition-all"
               >
                 Xoá ngay
+              </button>
+              <button
+                type="button"
+                onClick={() => setDeleteTargetId(null)}
+                className="flex-1 py-2.5 rounded-full border border-black/10 text-[#252422] hover:bg-[#F5F0EB] active:scale-95 font-bold text-sm transition-all"
+              >
+                Hủy bỏ
               </button>
             </div>
           </div>

@@ -31,7 +31,7 @@ function AdminGuard() {
 
 function MerchantGuard() {
   const currentUser = storage.get<User | null>('currentUser', null);
-  if (!currentUser || currentUser.role !== 'restaurant_owner') {
+  if (!currentUser || currentUser.role !== 'merchant') {
     window.location.replace('/login');
     return null;
   }
