@@ -160,11 +160,12 @@ export function OrdersListPage() {
 
           <div className="max-w-3xl mx-auto px-4 py-6 space-y-3">
             {orders.map((order: ExtendedOrder) => {
-              const isPreparing = order.status === 'preparing';
-              const isDelivering = order.status === 'out_for_delivery';
-              const isDelivered = order.status === 'delivered';
-              const isCancelled = order.status === 'cancelled';
-              const displayId = order.order_code || order.order_id;
+              const status = String(order.status).toLowerCase();
+              const isPreparing = status === 'preparing' || status === 'pending';
+              const isDelivering = status === 'out_for_delivery';
+              const isDelivered = status === 'delivered';
+              const isCancelled = status === 'cancelled';
+               const displayId = order.order_code || order.order_id;
 
               return (
                 <div
@@ -190,7 +191,7 @@ export function OrdersListPage() {
                           </p>
                         </div>
                       </div>
-                      <StatusPill status={order.status} />
+                      <StatusPill status={String(order.status).toLowerCase() as OrderStatus} />
                     </div>
 
                     <p className="text-sm text-[#7A7570] truncate mb-4 pl-[60px]">
@@ -363,10 +364,11 @@ function OrderDetailPage({
 
   if (!order) return null;
 
-  const isPreparing = order.status === 'preparing' || order.status === 'PENDING';
-  const isDelivering = order.status === 'out_for_delivery';
-  const isDelivered = order.status === 'delivered';
-  const isCancelled = order.status === 'cancelled';
+  const status = String(order.status).toLowerCase();
+  const isPreparing = status === 'preparing' || status === 'pending';
+  const isDelivering = status === 'out_for_delivery';
+  const isDelivered = status === 'delivered';
+  const isCancelled = status === 'cancelled';
 
   const displayId = order.order_code || order.order_id;
 
