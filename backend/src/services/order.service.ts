@@ -1,7 +1,8 @@
 import db from '../config/db';
 
 export const orderService = {
-    createOrderTransaction: async (userId: number, restaurantId: number, addressId: number, voucherCode?: string) => {
+    createOrderTransaction: async (userId: number, restaurantId: number, addressId: number, voucherCode?: string, items?: any[]) => {
+        console.log("DEBUG: Input values:", { userId, restaurantId, addressId, voucherCode, items });
         const connection = await db.getConnection();
         
         try {
@@ -9,14 +10,25 @@ export const orderService = {
             await connection.beginTransaction();
 
             // 1. Lấy giỏ hàng của người dùng ra kiểm tra
-            const [cartItems]: any = await connection.execute(
+            let cartItems: any[] = [];
+
+            if (items && items.length > 0) {
+            cartItems = items.map((item: any) => ({
+                item_id: item.item_id || item.id,
+                quantity: item.quantity,
+                price: item.price,
+            }));
+            } else {
+            const [rows]: any = await connection.execute(
                 `SELECT c.item_id, c.quantity, m.price 
-                 FROM cart c 
-                 JOIN Menu_Items m ON c.item_id = m.item_id 
-                 WHERE c.user_id = ?`, 
+                FROM cart c 
+                JOIN Menu_Items m ON c.item_id = m.item_id 
+                WHERE c.user_id = ?`,
                 [userId]
             );
 
+            cartItems = rows;
+            }
             if (cartItems.length === 0) {
                 throw new Error("Giỏ hàng của bạn đang trống, không thể đặt hàng!");
             }
@@ -122,20 +134,37 @@ export const orderService = {
     },
 
     getOrderById: async (orderId: number, userId: number) => {
-    const [order]: any = await db.execute(
-        'SELECT * FROM Orders WHERE order_id = ? AND user_id = ?',
-        [orderId, userId]
-    );
-    if (order.length === 0) throw new Error('Không tìm thấy đơn hàng!');
+        const [order]: any = await db.execute(
+            `
+            SELECT 
+            o.*,
+            r.name AS restaurant_name,
+            ua.address_text AS delivery_address
+            FROM Orders o
+            LEFT JOIN Restaurants r ON o.restaurant_id = r.restaurant_id
+            LEFT JOIN User_Addresses ua ON o.address_id = ua.address_id
+            WHERE o.order_id = ? AND o.user_id = ?
+            `,
+            [orderId, userId]
+        );
 
-    const [details]: any = await db.execute(
-        `SELECT od.*, m.name, m.price
-        FROM Order_Details od
-        JOIN Menu_Items m ON od.item_id = m.item_id
-        WHERE od.order_id = ?`,
-        [orderId]
-    );
-    return { ...order[0], items: details };
+        if (order.length === 0) throw new Error('Không tìm thấy đơn hàng!');
+
+        const [details]: any = await db.execute(
+            `
+            SELECT 
+            od.*,
+            m.name,
+            m.price,
+            m.image_url
+            FROM Order_Details od
+            JOIN Menu_Items m ON od.item_id = m.item_id
+            WHERE od.order_id = ?
+            `,
+            [orderId]
+        );
+
+        return { ...order[0], items: details };
     },
 
     getAllOrders: async () => {

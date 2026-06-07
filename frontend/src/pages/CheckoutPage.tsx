@@ -89,6 +89,12 @@ export function CheckoutPage() {
     const orderSummary = {
       order_id: uniqueId,
       order_code: randomCode,
+      restaurant_id:
+        (cartItems[0] as any)?.restaurant_id ||
+        (cartItems[0] as any)?.restaurantId ||
+        1,
+
+      address_id: selectedAddressId,
       restaurant_name: cartItems[0]?.restaurant_name || 'Nhà hàng ZestyDash',
       item_summary: cartItems
         .map(

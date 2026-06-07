@@ -22,41 +22,63 @@ const PAYMENT_METHODS: { value: PaymentMethod; label: string; icon: string }[] =
     { value: 'card', label: 'Thẻ tín dụng / Ghi nợ', icon: '💳' },
   ];
 
-export function PaymentPage() {
-  const { showToast } = useToast();
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash');
-  const [loading, setLoading] = useState(false);
-  const [orderSummary] = useState<OrderSummary | null>(() => {
-    return storage.get<OrderSummary | null>('orderSummary', null);
-  });
+  export function PaymentPage() {
+    const { showToast } = useToast();
+    const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash');
+    const [loading, setLoading] = useState(false);
+    const [orderSummary] = useState<OrderSummary | null>(() => {
+      return storage.get<OrderSummary | null>('orderSummary', null);
+    });
 
-  useEffect(() => {
-    const currentUser = storage.get('currentUser', null);
-    if (!currentUser) {
-      window.location.href = '/login';
-      return;
-    }
+    useEffect(() => {
+      const currentUser = storage.get('currentUser', null);
+      if (!currentUser) {
+        window.location.href = '/login';
+        return;
+      }
 
-    if (!orderSummary) {
-      window.location.href = '/checkout';
-    }
-  }, [orderSummary]);
-
-  function handleConfirmPayment() {
+      if (!orderSummary) {
+        window.location.href = '/checkout';
+      }
+    }, [orderSummary]);
+  async function handleConfirmPayment() {
     if (!orderSummary) return;
 
     setLoading(true);
+
     try {
-      const order = {
-        ...orderSummary,
-        payment_method: paymentMethod,
-        payment_status: 'pending',
-        created_at: new Date().toISOString(),
-      };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const orders = storage.get<any[]>('orders', []) || [];
-      orders.push(order);
-      storage.set('orders', orders);
+      const token =
+        storage.get<string>('accessToken', '') ||
+        storage.get<string>('authToken', '') ||
+        storage.get<string>('token', '');
+      if (!token) {
+        showToast('Bạn chưa đăng nhập! Không tìm thấy mã xác thực.');
+        return;
+      }
+
+      console.log('ORDER SUMMARY:', orderSummary);
+
+      const res = await fetch('http://localhost:3000/api/orders/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          restaurant_id: orderSummary.restaurant_id,
+          address_id: orderSummary.address_id,
+          voucher_code: orderSummary.voucher_code || undefined,
+          items: orderSummary.items || [],
+        }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.message || 'Thanh toán thất bại!');
+      }
+
+      const newOrder = result.data;
 
       storage.remove('orderSummary');
       storage.remove('cart');
@@ -64,10 +86,11 @@ export function PaymentPage() {
       showToast('Đơn hàng đã được đặt thành công!');
 
       setTimeout(() => {
-        window.location.href = `/order-confirmation?orderId=${order.order_id}`;
+        window.location.href = `/order-confirmation?orderId=${newOrder.order_id}`;
       }, 500);
-    } catch {
-      showToast('Có lỗi xảy ra, vui lòng thử lại');
+    } catch (error: any) {
+      console.error('PAYMENT ERROR:', error);
+      showToast(error.message || 'Có lỗi xảy ra, vui lòng thử lại');
     } finally {
       setLoading(false);
     }

@@ -324,18 +324,57 @@ function OrderDetailPage({
   onBack,
   onCancel,
 }: OrderDetailPageProps) {
-  const order: ExtendedOrder | undefined = orders.find(
-    (o) => o.order_id === orderId,
+  const [order, setOrder] = useState<any>(
+    orders.find((o) => o.order_id === orderId),
   );
+
+  useEffect(() => {
+    async function fetchOrderDetail() {
+      try {
+        const token =
+          storage.get<string | null>('authToken', null) ||
+          storage.get<any>('currentUser', null)?.token;
+
+        const response = await fetch(
+          `http://localhost:3000/api/orders/${orderId}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        const result = await response.json();
+
+        if (response.ok) {
+          setOrder(result.data);
+        } else {
+          console.error('GET ORDER DETAIL ERROR:', result);
+        }
+      } catch (error) {
+        console.error('GET ORDER DETAIL ERROR:', error);
+      }
+    }
+
+    fetchOrderDetail();
+  }, [orderId, orders]);
 
   if (!order) return null;
 
-  const isPreparing = order.status === 'preparing';
+  const isPreparing = order.status === 'preparing' || order.status === 'PENDING';
   const isDelivering = order.status === 'out_for_delivery';
   const isDelivered = order.status === 'delivered';
   const isCancelled = order.status === 'cancelled';
-  const displaySummary = order.item_summary || order.items_summary;
+
   const displayId = order.order_code || order.order_id;
+
+  const displaySummary =
+    order.item_summary ||
+    order.items_summary ||
+    order.items?.map((item: any) => `${item.name} x${item.quantity}`).join(', ') ||
+    'Chưa có thông tin món';
 
   return (
     <div className="min-h-screen bg-[#FFFBF7]">
@@ -353,7 +392,7 @@ function OrderDetailPage({
             </h1>
             <p className="text-xs text-[#7A7570]">{order.created_at}</p>
           </div>
-          <StatusPill status={order.status} />
+          <StatusPill status={String(order.status).toLowerCase() as OrderStatus} />
         </div>
       </div>
 
@@ -364,7 +403,7 @@ function OrderDetailPage({
           </div>
           <div>
             <p className="font-display font-bold text-[#252422]">
-              {order.restaurant_name}
+              {order.restaurant_name || 'Nhà hàng'}
             </p>
             <p className="text-xs text-[#7A7570] mt-0.5">{displaySummary}</p>
           </div>
@@ -376,10 +415,27 @@ function OrderDetailPage({
               🧾 Các món đã đặt
             </p>
           </div>
-          <div className="px-5 py-4">
-            <p className="text-sm font-medium text-[#252422] leading-relaxed">
-              {displaySummary}
-            </p>
+
+          <div className="px-5 py-4 space-y-2">
+            {order.items?.length > 0 ? (
+              order.items.map((item: any) => (
+                <div
+                  key={item.order_detail_id || item.item_id}
+                  className="flex justify-between text-sm text-[#252422]"
+                >
+                  <span>
+                    {item.name} x{item.quantity}
+                  </span>
+                  <span className="font-semibold">
+                    {Number(item.price).toLocaleString('vi-VN')} đ
+                  </span>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-[#7A7570]">
+                Chưa có thông tin món
+              </p>
+            )}
           </div>
         </div>
 
@@ -388,7 +444,10 @@ function OrderDetailPage({
             📍 Địa chỉ giao hàng
           </p>
           <p className="text-sm text-[#7A7570]">
-            {order.address_text || 'Chưa xác định địa chỉ'}
+            {order.delivery_address ||
+              order.address_text ||
+              order.address ||
+              'Chưa xác định địa chỉ'}
           </p>
         </div>
 
@@ -399,7 +458,10 @@ function OrderDetailPage({
           <div className="flex justify-between text-sm text-[#7A7570]">
             <span>Tổng cộng</span>
             <span className="font-bold text-[#EB5E28]">
-              {order.total_price.toLocaleString('vi-VN')} đ
+              {Number(order.total_price || order.total || 0).toLocaleString(
+                'vi-VN',
+              )}{' '}
+              đ
             </span>
           </div>
         </div>
@@ -438,7 +500,9 @@ function OrderDetailPage({
         {isDelivered && (
           <button
             onClick={() => {
-              const name = encodeURIComponent(order.restaurant_name);
+              const name = encodeURIComponent(
+                order.restaurant_name || 'Nhà hàng',
+              );
               const emoji = encodeURIComponent(order.restaurant_emoji || '🛍️');
               window.location.href = `/reviews?restaurant_name=${name}&restaurant_emoji=${emoji}`;
             }}

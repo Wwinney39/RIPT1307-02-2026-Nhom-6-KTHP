@@ -14,7 +14,7 @@ export const createOrder = async (req: Request, res: Response): Promise<any> => 
               message: "Bạn chưa đăng nhập, không thể đặt hàng!",
             });
         }
-        const { restaurant_id, address_id, voucher_code } = req.body;
+        const { restaurant_id, address_id, voucher_code, items } = req.body;
 
         if (!restaurant_id || !address_id) {
             return res.status(400).json({ message: "Vui lòng chọn nhà hàng và địa chỉ giao hàng!" });
@@ -24,7 +24,8 @@ export const createOrder = async (req: Request, res: Response): Promise<any> => 
             Number(userId), 
             Number(restaurant_id), 
             Number(address_id), 
-            voucher_code
+            voucher_code, 
+            items
         );
 
         // [MẢNG REALTIME TASK 37]: Sau khi lưu DB thành công, phát tín hiệu socket báo đơn mới
