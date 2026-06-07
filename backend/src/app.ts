@@ -3,6 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import db from './config/db';
+import bcrypt from 'bcrypt';
 import authRoutes from './routes/auth.routes';
 import restaurantRoutes from './routes/restaurant.routes';
 import menuRoutes from './routes/menu.routes';
@@ -68,6 +70,27 @@ app.use('/api/user', userRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/delivery', deliveryRoutes);
 app.use('/api/reviews', reviewRoutes); 
+
+
+
+setTimeout(async () => {
+  try {
+    // Tạo sẵn chuỗi mật khẩu đã băm của chữ '123456'
+    const salt = await bcrypt.genSalt(10);
+    const passwordDaBam = await bcrypt.hash('12345678', salt);
+    
+    // Cập nhật lại mật khẩu cho tất cả tài khoản mẫu về thành '123456' dạng băm
+    // Bạn nhớ check lại tên bảng (Users) và tên cột (password hoặc password_hash) xem đúng chưa nhé
+    await db.query(
+      "UPDATE Users SET password_hash = ? WHERE phone IN ('0111222333', '0222333444', '0333444555')",
+      [passwordDaBam]
+    );
+    
+    console.log(">>> ĐÃ ĐỒNG BỘ MẬT KHẨU BĂM CHO ĐỐNG ACC MẪU THÀNH CÔNG! MẬT KHẨU MỚI LÀ: 12345678 <<<");
+  } catch (error) {
+    console.error("Lỗi khi đồng bộ mật khẩu mẫu:", error);
+  }
+}, 3000);
 
 // Cấu hình Port chạy Server
 httpServer.listen(process.env.PORT || 3000, () => {
