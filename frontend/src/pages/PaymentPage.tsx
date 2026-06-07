@@ -58,7 +58,7 @@ const PAYMENT_METHODS: { value: PaymentMethod; label: string; icon: string }[] =
 
       console.log('ORDER SUMMARY:', orderSummary);
 
-      const res = await fetch('http://localhost:3000/api/orders/checkout', {
+      const res = await fetch('https://restaurant-manager-gxjj.onrender.com/api/orders/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
